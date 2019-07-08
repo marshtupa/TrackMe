@@ -2,14 +2,21 @@ package com.triple.trackme;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.graphics.Point;
 import android.util.Log;
+import android.view.Display;
+import android.view.ViewTreeObserver;
 import android.widget.Toast;
+import android.widget.RelativeLayout;
+import android.view.View;
+import android.util.TypedValue;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -26,6 +33,7 @@ import com.google.android.gms.maps.model.MapStyleOptions;
 
 public class MainActivity extends FragmentActivity implements OnMapReadyCallback, OnMapLoadedCallback, LocationListener {
 
+    View view;
     private GoogleMap map;
     private ProgressDialog progressDialog;
 
@@ -50,6 +58,37 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         map.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.style_map));
         map.getUiSettings().setZoomControlsEnabled(true);
         map.getUiSettings().setCompassEnabled(false);
+        map.getUiSettings().setMyLocationButtonEnabled(true);
+
+        ///
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
+
+        Fragment mapFragment = getSupportFragmentManager().findFragmentById(R.id.map);
+        final int ZOOM_CONTROLS_ID = 0x1;
+        view = mapFragment.getView().findViewById(ZOOM_CONTROLS_ID);
+
+        view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                Log.i("tag", " " + view.getHeight()); //height is ready
+            }
+        });
+
+        if (view != null && view.getLayoutParams() instanceof RelativeLayout.LayoutParams)
+        {
+            RelativeLayout.LayoutParams params_zoom = (RelativeLayout.LayoutParams) view.getLayoutParams();
+            params_zoom.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
+            params_zoom.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
+            final int margin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, getResources().getDisplayMetrics());
+            final int marginTop = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, height / 2, getResources().getDisplayMetrics());
+            params_zoom.setMargins(margin, height / 2 - 80, margin, margin);
+        }
+        ///
 
         if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
