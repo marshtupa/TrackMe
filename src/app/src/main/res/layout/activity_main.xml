@@ -12,8 +12,6 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MapsActivity"
-        tools:layout_editor_absoluteX="-33dp"
-        tools:layout_editor_absoluteY="127dp" />
+        tools:context=".MapsActivity" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
