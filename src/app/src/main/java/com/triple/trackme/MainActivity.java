@@ -50,6 +50,7 @@ import android.view.View;
 
 //добавить всплывающее сообщение
 import android.widget.Toast;
+import java.math.*;
 
 public class MainActivity extends FragmentActivity implements OnMapReadyCallback, OnMapLoadedCallback, LocationListener {
 
@@ -303,6 +304,24 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////
+
+    ////////////////////////////////Прочие функции///////////////////////////////////////
+    //функция расчета расстояния по широте и долготе (в километрах). Широта и долгота - в градусах
+    //Северная широта, восточная долгота - положительные значения
+    //Южная широта, западная долгота - отрицательные значения
+    public static double Distance(double latitude1, double longitude1, double latitude2, double longitude2){
+        double r = 6371; //радиус Земли
+        //перевод широты и долготы из градусов в радианы
+        latitude1 = (latitude1*Math.PI)/180;
+        latitude2 = (latitude2*Math.PI)/180;
+        longitude1 = (longitude1*Math.PI)/180;
+        longitude2 = (longitude2*Math.PI)/180;
+        return r*Math.acos(Math.sin(latitude1)*Math.sin(latitude2) +
+                Math.cos(latitude1)*Math.cos(latitude2)*Math.cos(longitude1-longitude2));
+    }
+    //////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
     private void showMyLocation() {
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
