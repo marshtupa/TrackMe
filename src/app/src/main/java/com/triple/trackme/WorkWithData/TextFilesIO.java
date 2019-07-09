@@ -1,4 +1,4 @@
-package com.triple.trackme;
+package com.triple.trackme.WorkWithData;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -7,7 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class WorkWithFiles {
+public class TextFilesIO {
 
     public static void WriteTextToFile(File filesDir, String fileName, String fileText)
     {
