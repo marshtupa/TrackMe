@@ -57,7 +57,11 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     View view;
     private GoogleMap map;
     private ProgressDialog progressDialog;
-////////////////////////////////Константы////////////////////////////////////////////////////
+
+    ////////////////////////////////Глобальные переменные////////////////////////////////////////////////////
+    private Running CurrentRunning;
+
+    ////////////////////////////////Константы////////////////////////////////////////////////////
     final String LOG_TAG = "myLogs";
     final String FILENAME = "file";
 
@@ -76,6 +80,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        CurrentRunning = new Running();
     }
 
     @Override
@@ -192,8 +198,16 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void onClick1(View v){
         String filestr;
-        writeFile(FILENAME,"Something");
-        filestr = readFile(FILENAME);
+        //writeFile(FILENAME,"Something");
+        //filestr = readFile(FILENAME);
+
+        if (CurrentRunning.isStarted()) {
+            CurrentRunning.Stop();
+        }
+        else{
+            CurrentRunning.Start();
+        }
+        filestr = Double.toString(CurrentRunning.getTime());
         Toast toast = Toast.makeText(this, filestr,Toast.LENGTH_LONG);
         toast.show();
     }
@@ -210,7 +224,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
     ////////////////////////////////Функции сохранения и загруки///////////////////////////////////////
 
-    void writeFile(String filename, String Value) {
+    public void writeFile(String filename, String Value) {
         try {
             // отрываем поток для записи
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(
@@ -227,7 +241,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    String readFile(String filename) {
+    public String readFile(String filename) {
         String str = "";
         String str2 = "";
         try {
@@ -247,7 +261,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         return str2;
     }
 
-    void writeFileSD() {
+    public  void writeFileSD(String filenameSD, String SDdir) {
         // проверяем доступность SD
         if (!Environment.getExternalStorageState().equals(
                 Environment.MEDIA_MOUNTED)) {
@@ -257,11 +271,11 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         // получаем путь к SD
         File sdPath = Environment.getExternalStorageDirectory();
         // добавляем свой каталог к пути
-        sdPath = new File(sdPath.getAbsolutePath() + "/" + DIR_SD);
+        sdPath = new File(sdPath.getAbsolutePath() + "/" + SDdir);
         // создаем каталог
         sdPath.mkdirs();
         // формируем объект File, который содержит путь к файлу
-        File sdFile = new File(sdPath, FILENAME_SD);
+        File sdFile = new File(sdPath, filenameSD);
         try {
             // открываем поток для записи
             BufferedWriter bw = new BufferedWriter(new FileWriter(sdFile));
@@ -275,19 +289,20 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    void readFileSD() {
+    public String readFileSD(String filenameSD, String SDdir) {
+        String Readed = "";
         // проверяем доступность SD
         if (!Environment.getExternalStorageState().equals(
                 Environment.MEDIA_MOUNTED)) {
             Log.d(LOG_TAG, "SD-карта не доступна: " + Environment.getExternalStorageState());
-            return;
+            return "";
         }
         // получаем путь к SD
         File sdPath = Environment.getExternalStorageDirectory();
         // добавляем свой каталог к пути
-        sdPath = new File(sdPath.getAbsolutePath() + "/" + DIR_SD);
+        sdPath = new File(sdPath.getAbsolutePath() + "/" + SDdir);
         // формируем объект File, который содержит путь к файлу
-        File sdFile = new File(sdPath, FILENAME_SD);
+        File sdFile = new File(sdPath, filenameSD);
         try {
             // открываем поток для чтения
             BufferedReader br = new BufferedReader(new FileReader(sdFile));
@@ -295,12 +310,14 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             // читаем содержимое
             while ((str = br.readLine()) != null) {
                 Log.d(LOG_TAG, str);
+                Readed += str;
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return Readed;
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////
@@ -374,7 +391,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onLocationChanged(Location location) {
-
+        //запись пути для текущей пробежки, если она началась
+        CurrentRunning.fixPosition(location.getLatitude(),location.getLongitude(),location.getSpeed(),location.getTime());
     }
 
     @Override
