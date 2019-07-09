@@ -181,6 +181,10 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         Log.i(tag, message);
     }
 
+    public void clickProfileButton(View view) {
+        Log.i("buttonClick", "Profile button click!!!");
+    }
+
     @Override
     public void onLocationChanged(Location location) { }
 

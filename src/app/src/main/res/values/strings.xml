@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TrackMe</string>
+    <string name="menu_icon">Menu icon</string>
 </resources>
