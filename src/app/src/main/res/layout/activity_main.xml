@@ -6,7 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <include layout="@layout/map_panel"/>
-    <include layout="@layout/training_panel"/>
+    <include layout="@layout/map_panel" />
+    <include android:id="@+id/training_panel" layout="@layout/training_panel" />
+
+    <ImageButton
+        android:id="@+id/profileButton"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/circle_button"
+        android:src="@drawable/ic_menu_24dp"
+        android:contentDescription="@string/menu_icon"
+        android:onClick="clickProfileButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/training_panel" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
