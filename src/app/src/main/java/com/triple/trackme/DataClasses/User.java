@@ -6,9 +6,9 @@ public class User {
 
     final private int MAX_TRACK_FILES = 3;
 
-    public String login = null;
-    public String name = null;
-    public String surname = null;
-    public String photoFileUrl = null;
-    public ArrayList<String> trackFileUrls = new ArrayList<String>();
+    public String login = "";
+    public String name = "";
+    public String surname = "";
+    public String photoFilePath = "";
+    public ArrayList<String> trackFilePaths = new ArrayList<String>();
 }
