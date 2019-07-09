@@ -1,7 +1,5 @@
 package com.triple.trackme.WorkWithData;
 
-import android.util.Log;
-
 import com.triple.trackme.DataClasses.User;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -12,8 +10,7 @@ public class UserJson {
 
     final static private String USER_JSON_FILE_NAME = "UserData";
 
-    public static void WriteUserToJsonFile(File filesDir, User user)
-    {
+    public static void WriteUserToJsonFile(File filesDir, User user) {
         JSONObject userJson = new JSONObject();
 
         try {
@@ -30,17 +27,13 @@ public class UserJson {
 
             String jsonStr = userJson.toString();
             TextFilesIO.WriteTextToFile(filesDir, USER_JSON_FILE_NAME, jsonStr);
-
-            Log.i("json", jsonStr);
         }
-        catch (JSONException e)
-        {
+        catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    public static User ReadUserFromJsonFile(File filesDir)
-    {
+    public static User ReadUserFromJsonFile(File filesDir) {
         String jsonStr = TextFilesIO.ReadTextFromFile(filesDir, USER_JSON_FILE_NAME);
         User user = new User();
 
