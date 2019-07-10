@@ -9,6 +9,7 @@ import android.app.ProgressDialog;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.view.View;
 import android.location.Location;
@@ -22,6 +23,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.triple.trackme.Information.CurrentTrack;
 
 public class MainActivity extends FragmentActivity implements OnMapReadyCallback, OnMapLoadedCallback, LocationListener {
 
@@ -154,6 +156,10 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onProviderDisabled(String provider) { }
 
+
+    public void clickStartTrackButton(View view) {
+
+    }
 
     public void clickProfileButton(View view) {
         Log.i("buttonClick", "Profile button click!!!");
