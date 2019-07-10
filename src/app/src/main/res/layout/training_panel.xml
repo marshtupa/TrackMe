@@ -6,21 +6,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/time6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="32dp"
-        android:fontFamily="sans-serif-condensed-medium"
-        android:text="12.3456"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColor="@color/colorDark"
-        app:layout_constraintEnd_toEndOf="@+id/view"
-        app:layout_constraintTop_toTopOf="@+id/view" />
-
     <View
-        android:id="@+id/view"
+        android:id="@+id/viewCurrentTrackPanel"
         android:layout_width="0dp"
         android:layout_height="200dp"
         android:layout_marginStart="10dp"
@@ -39,12 +26,12 @@
         android:layout_marginTop="36dp"
         android:layout_marginEnd="32dp"
         android:fontFamily="sans-serif-condensed-medium"
-        android:text="12.3456"
+        android:text="@string/distance_empty_example"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="@color/colorDark"
-        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="@+id/viewCurrentTrackPanel"
         app:layout_constraintStart_toEndOf="@+id/speedVal"
-        app:layout_constraintTop_toTopOf="@+id/view" />
+        app:layout_constraintTop_toTopOf="@+id/viewCurrentTrackPanel" />
 
     <TextView
         android:id="@+id/timeVal"
@@ -54,12 +41,12 @@
         android:layout_marginTop="36dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="sans-serif-condensed-medium"
-        android:text="12:34:56"
+        android:text="@string/time_empty_example"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="@color/colorDark"
         app:layout_constraintEnd_toStartOf="@+id/speedVal"
-        app:layout_constraintStart_toStartOf="@+id/view"
-        app:layout_constraintTop_toTopOf="@+id/view" />
+        app:layout_constraintStart_toStartOf="@+id/viewCurrentTrackPanel"
+        app:layout_constraintTop_toTopOf="@+id/viewCurrentTrackPanel" />
 
     <TextView
         android:id="@+id/timeTitle"
@@ -69,11 +56,11 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="20dp"
         android:fontFamily="sans-serif-light"
-        android:text="Time"
+        android:text="@string/time_label"
         android:textColor="@color/colorLDark"
         app:layout_constraintBottom_toBottomOf="@+id/timeVal"
         app:layout_constraintStart_toStartOf="@+id/timeVal"
-        app:layout_constraintTop_toTopOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/viewCurrentTrackPanel"
         app:layout_constraintVertical_bias="0.473" />
 
     <TextView
@@ -84,11 +71,11 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="20dp"
         android:fontFamily="sans-serif-light"
-        android:text="Km"
+        android:text="@string/distance_km_label"
         android:textColor="@color/colorLDark"
         app:layout_constraintBottom_toBottomOf="@+id/timeVal"
         app:layout_constraintStart_toStartOf="@+id/distanceVal"
-        app:layout_constraintTop_toTopOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/viewCurrentTrackPanel"
         app:layout_constraintVertical_bias="0.457" />
 
     <TextView
@@ -99,27 +86,27 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="24dp"
         android:fontFamily="sans-serif-condensed-medium"
-        android:text="12"
+        android:text="@string/avg_speed_empty_example"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="@color/colorDark"
         android:textSize="68sp"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
-        app:layout_constraintEnd_toStartOf="@+id/view"
+        app:layout_constraintBottom_toBottomOf="@+id/viewCurrentTrackPanel"
+        app:layout_constraintEnd_toStartOf="@+id/viewCurrentTrackPanel"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/view" />
+        app:layout_constraintStart_toEndOf="@+id/viewCurrentTrackPanel" />
 
     <TextView
         android:id="@+id/speedTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-light"
-        android:text="Avg Speed"
+        android:text="@string/avg_speed_label"
         android:textColor="@color/colorLDark"
         app:layout_constraintBottom_toBottomOf="@+id/speedVal"
         app:layout_constraintEnd_toEndOf="@+id/speedVal" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/pauseTrackButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -127,37 +114,37 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/ic_pause"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
-        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintBottom_toBottomOf="@+id/viewCurrentTrackPanel"
+        app:layout_constraintEnd_toEndOf="@+id/viewCurrentTrackPanel"
         app:layout_constraintStart_toEndOf="@+id/speedVal"
         app:layout_constraintTop_toBottomOf="@+id/distanceVal" />
 
     <ImageButton
-        android:id="@+id/imageButton3"
+        android:id="@+id/startTrackButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/ic_triangle"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
-        app:layout_constraintEnd_toEndOf="@+id/view"
+        android:background="@drawable/ic_start"
+        app:layout_constraintBottom_toBottomOf="@+id/viewCurrentTrackPanel"
+        app:layout_constraintEnd_toEndOf="@+id/viewCurrentTrackPanel"
         app:layout_constraintStart_toEndOf="@+id/speedVal"
         app:layout_constraintTop_toBottomOf="@+id/distanceVal" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/stopTrackButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/ic_rectangle"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
+        android:background="@drawable/ic_stop"
+        app:layout_constraintBottom_toBottomOf="@+id/viewCurrentTrackPanel"
         app:layout_constraintEnd_toStartOf="@+id/speedVal"
-        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/viewCurrentTrackPanel"
         app:layout_constraintTop_toBottomOf="@+id/timeVal" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
