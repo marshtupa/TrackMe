@@ -9,7 +9,7 @@
     <include layout="@layout/map_panel" />
     <include android:id="@+id/training_panel" layout="@layout/training_panel" />
 
-    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+<!--    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
@@ -50,7 +50,7 @@
         app:layout_constraintTop_toTopOf="@+id/map"
         tools:src="@android:drawable/ic_menu_myplaces"
         tools:visibility="visible"
-        android:onClick="onClick2" />
+        android:onClick="onClick2" /> -->
 
     <ImageButton
         android:id="@+id/profileButton"
