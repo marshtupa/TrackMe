@@ -16,8 +16,8 @@
         android:layout_marginStart="12dp"
         android:layout_marginTop="12dp"
         android:background="@drawable/circle_button"
-        android:src="@drawable/ic_menu_24dp"
-        android:contentDescription="@string/menu_icon"
+        android:src="@drawable/icon_menu"
+        android:contentDescription="@string/menu_button"
         android:onClick="clickProfileButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/training_panel" />
