@@ -5,8 +5,9 @@
     <string name="stop_button">Stop button</string>
     <string name="start_button">Start button</string>
     <string name="distance_km_label">km</string>
+    <string name="time_label">Time</string>
     <string name="avg_speed_label">Avg Speed</string>
-    <string name="distance_empty_example">32.76</string>
+    <string name="distance_empty_example">32.7632</string>
     <string name="avg_speed_empty_example">25.3</string>
     <string name="time_empty_example">25:59:10</string>
 </resources>
