@@ -20,32 +20,30 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/speedVal"
+        android:id="@+id/distance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="sans-serif-thin"
-        android:text="32.76"
+        android:text="@string/distance_empty_example"
         android:textAlignment="center"
         android:textColor="#222222"
         android:textSize="36sp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/view"
-        app:layout_constraintEnd_toEndOf="@+id/view"
-        app:layout_constraintHorizontal_bias="0.713"
-        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintEnd_toStartOf="@+id/distanceLabel"
         app:layout_constraintTop_toTopOf="@+id/view"
-        app:layout_constraintVertical_bias="0.14" />
+        app:layout_constraintVertical_bias="0.16000003" />
 
     <TextView
-        android:id="@+id/speedVal4"
+        android:id="@+id/distanceLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="sans-serif-thin"
-        android:text="km"
+        android:text="@string/distance_km_label"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="#757575"
@@ -53,105 +51,100 @@
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/view"
         app:layout_constraintEnd_toEndOf="@+id/view"
-        app:layout_constraintHorizontal_bias="0.15"
-        app:layout_constraintStart_toEndOf="@+id/speedVal"
+        app:layout_constraintHorizontal_bias="0.93"
+        app:layout_constraintStart_toStartOf="@+id/view"
         app:layout_constraintTop_toTopOf="@+id/view"
-        app:layout_constraintVertical_bias="0.14" />
+        app:layout_constraintVertical_bias="0.16000003" />
 
     <TextView
-        android:id="@+id/speedVal3"
+        android:id="@+id/avgSpeedLabel"
         android:layout_width="144dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="sans-serif-thin"
-        android:text="Avg Speed"
+        android:text="@string/avg_speed_label"
         android:textAlignment="center"
         android:textColor="#222222"
         android:textSize="21sp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/view"
         app:layout_constraintEnd_toEndOf="@+id/view"
-        app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="@+id/view"
         app:layout_constraintTop_toTopOf="@+id/view"
-        app:layout_constraintVertical_bias="0.896" />
+        app:layout_constraintVertical_bias="0.89" />
 
     <TextView
-        android:id="@+id/speedVal6"
+        android:id="@+id/avgSpeed"
         android:layout_width="144dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="sans-serif-thin"
-        android:text="25.3"
+        android:text="@string/avg_speed_empty_example"
         android:textAlignment="center"
         android:textColor="#222222"
         android:textSize="55sp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/view"
         app:layout_constraintEnd_toEndOf="@+id/view"
-        app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="@+id/view"
         app:layout_constraintTop_toTopOf="@+id/view"
-        app:layout_constraintVertical_bias="0.711" />
+        app:layout_constraintVertical_bias="0.7" />
 
     <TextView
-        android:id="@+id/speedVal5"
+        android:id="@+id/time"
         android:layout_width="144dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="sans-serif-thin"
-        android:text="25:59:10"
+        android:text="@string/time_empty_example"
         android:textAlignment="center"
         android:textColor="#222222"
         android:textSize="36sp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/view"
         app:layout_constraintEnd_toEndOf="@+id/view"
-        app:layout_constraintHorizontal_bias="0.14"
+        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="@+id/view"
         app:layout_constraintTop_toTopOf="@+id/view"
-        app:layout_constraintVertical_bias="0.14" />
+        app:layout_constraintVertical_bias="0.16000003" />
 
     <ImageButton
-        android:id="@+id/profileButton5"
+        android:id="@+id/startButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="296dp"
+        android:layout_marginEnd="50dp"
         android:background="@drawable/icon_start"
-        android:contentDescription="@string/menu_icon"
-        android:onClick="clickProfileButton"
+        android:contentDescription="@string/start_button"
         app:layout_constraintBottom_toBottomOf="@+id/view"
-        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="@+id/view"
         app:layout_constraintTop_toTopOf="@+id/view"
-        app:layout_constraintVertical_bias="0.72" />
+        app:layout_constraintVertical_bias="0.7" />
 
     <ImageButton
-        android:id="@+id/profileButton7"
+        android:id="@+id/stopButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
+        android:layout_marginStart="50dp"
         android:background="@drawable/icon_stop"
-        android:contentDescription="@string/menu_icon"
-        android:onClick="clickProfileButton"
+        android:contentDescription="@string/stop_button"
         app:layout_constraintBottom_toBottomOf="@+id/view"
         app:layout_constraintStart_toStartOf="@+id/view"
         app:layout_constraintTop_toTopOf="@+id/view"
-        app:layout_constraintVertical_bias="0.722" />
+        app:layout_constraintVertical_bias="0.7" />
 
-    <ImageButton
-        android:id="@+id/profileButton6"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="296dp"
-        android:background="@drawable/icon_pause"
-        android:contentDescription="@string/menu_icon"
-        android:onClick="clickProfileButton"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
-        app:layout_constraintStart_toStartOf="@+id/view"
-        app:layout_constraintTop_toTopOf="@+id/view"
-        app:layout_constraintVertical_bias="0.72" />
+    <!--<ImageButton-->
+        <!--android:id="@+id/pauseButton"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginEnd="50dp"-->
+        <!--android:background="@drawable/icon_pause"-->
+        <!--android:contentDescription="@string/pause_button"-->
+        <!--app:layout_constraintBottom_toBottomOf="@+id/view"-->
+        <!--app:layout_constraintEnd_toEndOf="@+id/view"-->
+        <!--app:layout_constraintTop_toTopOf="@+id/view"-->
+        <!--app:layout_constraintVertical_bias="0.7" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
