@@ -9,14 +9,10 @@ import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.graphics.Point;
 import android.util.Log;
-import android.view.Display;
-import android.view.ViewTreeObserver;
 import android.widget.Toast;
 import android.widget.RelativeLayout;
 import android.view.View;
-import android.util.TypedValue;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -53,7 +49,6 @@ import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity implements OnMapReadyCallback, OnMapLoadedCallback, LocationListener {
 
-    View view;
     private GoogleMap map;
     private ProgressDialog progressDialog;
 ////////////////////////////////Константы////////////////////////////////////////////////////
@@ -81,41 +76,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
         map.setOnMapLoadedCallback(this);
-        map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        map.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.style_map));
-        map.getUiSettings().setZoomControlsEnabled(true);
-        map.getUiSettings().setCompassEnabled(false);
-        map.getUiSettings().setMyLocationButtonEnabled(true);
-
-        ///
-        Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        int width = size.x;
-        int height = size.y;
-
-        Fragment mapFragment = getSupportFragmentManager().findFragmentById(R.id.map);
-        final int ZOOM_CONTROLS_ID = 0x1;
-        view = mapFragment.getView().findViewById(ZOOM_CONTROLS_ID);
-
-        view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                Log.i("tag", " " + view.getHeight()); //height is ready
-            }
-        });
-
-        if (view != null && view.getLayoutParams() instanceof RelativeLayout.LayoutParams)
-        {
-            RelativeLayout.LayoutParams params_zoom = (RelativeLayout.LayoutParams) view.getLayoutParams();
-            params_zoom.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
-            params_zoom.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
-            final int margin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, getResources().getDisplayMetrics());
-            final int marginTop = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, height / 2, getResources().getDisplayMetrics());
-            params_zoom.setMargins(margin, height / 2 - 80, margin, margin);
-        }
-        ///
+        settingMap(map);
 
         if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -136,7 +97,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             ActivityCompat.requestPermissions(this, permissions, REQUEST_ID_ACCESS_COURSE_FINE_LOCATION);
             return;
         }
-
         showMyLocation();
     }
 
@@ -148,6 +108,26 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         progressDialog.show();
     }
 
+    private void settingMap(GoogleMap googleMap) {
+        map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        map.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.style_map));
+
+        map.getUiSettings().setZoomControlsEnabled(true);
+        map.getUiSettings().setCompassEnabled(false);
+        map.getUiSettings().setMyLocationButtonEnabled(true);
+        map.getUiSettings().setZoomControlsEnabled(false);
+
+        final int CURRENT_POSITION_BUTTON_ID = 0x2;
+        Fragment mapFragment = getSupportFragmentManager().findFragmentById(R.id.map);
+        View currentPositionButton = mapFragment.getView().findViewById(CURRENT_POSITION_BUTTON_ID);
+        if (currentPositionButton != null && currentPositionButton.getLayoutParams() instanceof RelativeLayout.LayoutParams)
+        {
+            RelativeLayout.LayoutParams params_zoom = (RelativeLayout.LayoutParams) currentPositionButton.getLayoutParams();
+            params_zoom.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
+            params_zoom.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
+        }
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -157,12 +137,11 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 if (grantResults.length > 1
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED
                         && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-
-                    showInfo("MapInfo", "Permission granted!");
+                    showLogInfo("MapInfo", "Permission granted!");
                     this.showMyLocation();
                 }
                 else {
-                    showInfo("MapInfo", "Permission denied!");
+                    showLogInfo("MapInfo", "Permission denied!");
                 }
                 break;
             }
@@ -177,10 +156,9 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         boolean enabled = locationManager.isProviderEnabled(bestProvider);
 
         if (!enabled) {
-            showInfo("MapInfo", "No location provider enabled!");
+            showLogInfo("MapInfo", "No location provider enabled!");
             return null;
         }
-
         return bestProvider;
     }
   
@@ -314,18 +292,16 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
         final long MIN_TIME_BW_UPDATES = 1000;
         final float MIN_DISTANCE_CHANGE_FOR_UPDATES = 1;
-
         Location myLocation = null;
         try {
             locationManager.requestLocationUpdates(
                     locationProvider,
                     MIN_TIME_BW_UPDATES,
                     MIN_DISTANCE_CHANGE_FOR_UPDATES, (LocationListener) this);
-
             myLocation = locationManager.getLastKnownLocation(locationProvider);
         }
         catch (SecurityException e) {
-            showInfo("MapInfo", "Show My Location Error: " + e.getMessage());
+            showLogInfo("MapInfo", "Show My Location Error: " + e.getMessage());
             e.printStackTrace();
             return;
         }
@@ -333,7 +309,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         if (myLocation != null) {
             LatLng latLng = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
             map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 13));
-
             CameraPosition cameraPosition = new CameraPosition.Builder()
                     .target(latLng)
                     .zoom(15)
@@ -342,36 +317,32 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                     .build();
             map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
         } else {
-            showInfo("MapInfo", "Location not found");
+            showLogInfo("MapInfo", "Location not found");
         }
 
     }
 
-    private void showInfo(String tag, String message)
+    private void showLogInfo(String tag, String message)
     {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
         Log.i(tag, message);
     }
 
-    @Override
-    public void onLocationChanged(Location location) {
-
+    public void clickProfileButton(View view) {
+        Log.i("buttonClick", "Profile button click!!!");
     }
 
     @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-
-    }
+    public void onLocationChanged(Location location) { }
 
     @Override
-    public void onProviderEnabled(String provider) {
-
-    }
+    public void onStatusChanged(String provider, int status, Bundle extras) { }
 
     @Override
-    public void onProviderDisabled(String provider) {
+    public void onProviderEnabled(String provider) { }
 
-    }
+    @Override
+    public void onProviderDisabled(String provider) { }
 
 
 }

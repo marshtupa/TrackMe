@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:alpha="0.8"
+        android:background="@drawable/radius_view"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="sans-serif-thin"
+        android:text="@string/distance_empty_example"
+        android:textAlignment="center"
+        android:textColor="#222222"
+        android:textSize="36sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toStartOf="@+id/distanceLabel"
+        app:layout_constraintTop_toTopOf="@+id/view"
+        app:layout_constraintVertical_bias="0.16000003" />
+
+    <TextView
+        android:id="@+id/distanceLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="sans-serif-thin"
+        android:text="@string/distance_km_label"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="#757575"
+        android:textSize="36sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintHorizontal_bias="0.93"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view"
+        app:layout_constraintVertical_bias="0.16000003" />
+
+    <TextView
+        android:id="@+id/avgSpeedLabel"
+        android:layout_width="144dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="sans-serif-thin"
+        android:text="@string/avg_speed_label"
+        android:textAlignment="center"
+        android:textColor="#222222"
+        android:textSize="21sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view"
+        app:layout_constraintVertical_bias="0.89" />
+
+    <TextView
+        android:id="@+id/avgSpeed"
+        android:layout_width="144dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="sans-serif-thin"
+        android:text="@string/avg_speed_empty_example"
+        android:textAlignment="center"
+        android:textColor="#222222"
+        android:textSize="55sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view"
+        app:layout_constraintVertical_bias="0.7" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="144dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="sans-serif-thin"
+        android:text="@string/time_empty_example"
+        android:textAlignment="center"
+        android:textColor="#222222"
+        android:textSize="36sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view"
+        app:layout_constraintVertical_bias="0.16000003" />
+
+    <ImageButton
+        android:id="@+id/startButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="50dp"
+        android:background="@drawable/icon_start"
+        android:contentDescription="@string/start_button"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view"
+        app:layout_constraintVertical_bias="0.7" />
+
+    <ImageButton
+        android:id="@+id/stopButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:background="@drawable/icon_stop"
+        android:contentDescription="@string/stop_button"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintStart_toStartOf="@+id/view"
+        app:layout_constraintTop_toTopOf="@+id/view"
+        app:layout_constraintVertical_bias="0.7" />
+
+    <!--<ImageButton-->
+        <!--android:id="@+id/pauseButton"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginEnd="50dp"-->
+        <!--android:background="@drawable/icon_pause"-->
+        <!--android:contentDescription="@string/pause_button"-->
+        <!--app:layout_constraintBottom_toBottomOf="@+id/view"-->
+        <!--app:layout_constraintEnd_toEndOf="@+id/view"-->
+        <!--app:layout_constraintTop_toTopOf="@+id/view"-->
+        <!--app:layout_constraintVertical_bias="0.7" />-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
