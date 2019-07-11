@@ -50,7 +50,6 @@ public class GoogleMapService {
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         map.setMapStyle(MapStyleOptions.loadRawResourceStyle(context, R.raw.style_map));
 
-        map.getUiSettings().setZoomControlsEnabled(true);
         map.getUiSettings().setCompassEnabled(false);
         map.getUiSettings().setMyLocationButtonEnabled(false);
         map.getUiSettings().setZoomControlsEnabled(false);
