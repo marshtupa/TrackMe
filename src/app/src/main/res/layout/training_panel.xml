@@ -25,6 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
         android:layout_marginBottom="40dp"
+        android:contentDescription="@string/picture"
         android:background="@drawable/ic_timer"
         app:layout_constraintBottom_toBottomOf="@+id/timeVal"
         app:layout_constraintStart_toStartOf="@+id/timeVal" />
@@ -45,7 +46,7 @@
 
     <TextView
         android:id="@+id/timeVal"
-        android:layout_width="125dp"
+        android:layout_width="160dp"
         android:layout_height="45dp"
         android:layout_marginStart="32dp"
         android:layout_marginBottom="40dp"
@@ -63,6 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginBottom="42dp"
+        android:contentDescription="@string/picture"
         android:background="@drawable/ic_speedometer"
         app:layout_constraintBottom_toBottomOf="@+id/speedVal"
         app:layout_constraintStart_toStartOf="@+id/speedVal" />
@@ -87,7 +89,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="40dp"
         android:fontFamily="sans-serif-condensed-medium"
-        android:text="00.1201"
+        android:text="@string/speed_empty_example"
         android:textAlignment="textEnd"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="@color/colorDark"
@@ -100,6 +102,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginBottom="50dp"
+        android:contentDescription="@string/picture"
         android:background="@drawable/ic_dist"
         app:layout_constraintBottom_toBottomOf="@+id/distanceVal"
         app:layout_constraintStart_toStartOf="@+id/distanceVal" />
@@ -119,7 +122,7 @@
 
     <TextView
         android:id="@+id/distanceVal"
-        android:layout_width="130dp"
+        android:layout_width="190dp"
         android:layout_height="65dp"
         android:layout_marginTop="32dp"
         android:fontFamily="sans-serif-condensed-medium"
@@ -141,6 +144,8 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="5dp"
         android:background="@drawable/ic_ps"
+        android:contentDescription="@string/pause_button"
+        android:onClick="clickPauseTrackButton"
         app:layout_constraintBottom_toBottomOf="@+id/distanceVal"
         app:layout_constraintEnd_toEndOf="@+id/viewCurrentTrackPanel"
         app:layout_constraintStart_toEndOf="@+id/distanceVal" />
@@ -153,6 +158,8 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="5dp"
         android:background="@drawable/ic_stop"
+        android:contentDescription="@string/stop_button"
+        android:onClick="clickStopTrackButton"
         app:layout_constraintBottom_toBottomOf="@+id/distanceVal"
         app:layout_constraintEnd_toStartOf="@+id/distanceVal"
         app:layout_constraintStart_toStartOf="@+id/viewCurrentTrackPanel" />
@@ -165,6 +172,8 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="5dp"
         android:background="@drawable/ic_triangle"
+        android:contentDescription="@string/play_button"
+        android:onClick="clickStartTrackButton"
         app:layout_constraintBottom_toBottomOf="@+id/distanceVal"
         app:layout_constraintEnd_toEndOf="@+id/viewCurrentTrackPanel"
         app:layout_constraintStart_toEndOf="@+id/distanceVal" />
