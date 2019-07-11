@@ -52,7 +52,7 @@ public class GoogleMapService {
 
         map.getUiSettings().setZoomControlsEnabled(true);
         map.getUiSettings().setCompassEnabled(false);
-        map.getUiSettings().setMyLocationButtonEnabled(true);
+        map.getUiSettings().setMyLocationButtonEnabled(false);
         map.getUiSettings().setZoomControlsEnabled(false);
 
         final int CURRENT_POSITION_BUTTON_ID = 0x2;
