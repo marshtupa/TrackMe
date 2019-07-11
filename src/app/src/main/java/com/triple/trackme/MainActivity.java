@@ -61,8 +61,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         CurrentTrackView.initialize(this, (TextView) findViewById(R.id.timeVal),
-                (TextView) findViewById(R.id.speedVal), (TextView) findViewById(R.id.spedVal),
-                (ImageButton) findViewById(R.id.pauseTrackButton), (ImageButton) findViewById(R.id.startTrackButton));
+                (TextView) findViewById(R.id.speedVal), (TextView) findViewById(R.id.speedVal),
+                (ImageButton) findViewById(R.id.buttonPause), (ImageButton) findViewById(R.id.buttonPlay));
     }
 
     public static void setWindowFlag(Activity activity, final int bits, boolean on) {
