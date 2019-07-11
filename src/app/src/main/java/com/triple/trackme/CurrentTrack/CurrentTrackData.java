@@ -1,61 +1,63 @@
 package com.triple.trackme.CurrentTrack;
 
+import android.annotation.SuppressLint;
 import android.location.Location;
 
 import com.triple.trackme.GoogleMapService;
 
 import java.util.ArrayList;
 
-public class CurrentTrackData {
+class CurrentTrackData {
 
     private int trackSeconds;
     private double trackDistance;
     private double trackSpeed;
     private ArrayList<Location> positions;
 
-
-    public CurrentTrackData() {
+    CurrentTrackData() {
         initializeEmptyData();
     }
 
-    public void initializeEmptyData() {
-        this.trackSeconds = 0;
-        this.trackDistance = 0.0;
-        this.trackSpeed = 0.0;
-        this.positions = new ArrayList<Location>();
+    void initializeEmptyData() {
+        trackSeconds = 0;
+        trackDistance = 0.0;
+        trackSpeed = 0.0;
+        positions = new ArrayList<Location>();
     }
 
-    public void incrementTrackTime() {
-        this.trackSeconds++;
+    void incrementTrackTime() {
+        trackSeconds++;
     }
 
-    public void newLocation(Location newLocation) {
-        this.trackSpeed = newLocation.getSpeed();
+    void newLocation(Location newLocation) {
+        trackSpeed = newLocation.getSpeed();
+        updateDistance(newLocation);
         positions.add(newLocation);
-        this.updateDistance(newLocation);
     }
 
     private void updateDistance(Location newLocation) {
         if (positions.size() > 1) {
             Location prevLocation = positions.get(positions.size() - 1);
-            this.trackDistance += GoogleMapService.distanceBetweenCoordinates(prevLocation, newLocation);
+            trackDistance += GoogleMapService.distanceBetweenCoordinates(prevLocation, newLocation);
         }
     }
 
-
-    public String getTrackTimeStr() {
+    @SuppressLint("DefaultLocale")
+    String getTrackTimeStr() {
         int hours = trackSeconds / 3600;
         int minutes = (trackSeconds - hours * 3600) / 60;
         int seconds = trackSeconds % 60;
 
-        return String.format("%02d", hours) + ":" + String.format("%02d", minutes) + ":" + String.format("%02d", seconds);
+        return String.format("%s:%s:%s", String.format("%02d", hours), String.format("%02d", minutes), String.format("%02d", seconds));
     }
 
-    public String getTrackDistanceStr() {
-        return String.format("%.2f", this.trackDistance/1000);
+    @SuppressLint("DefaultLocale")
+    String getTrackDistanceStr() {
+        return String.format("%.2f", trackDistance / 1000);
     }
 
-    public String getTrackSpeedStr() {
-        return String.format("%.1f", this.trackSpeed);
+    @SuppressLint("DefaultLocale")
+    String getTrackSpeedStr() {
+        return String.format("%.1f", trackSpeed);
     }
 }

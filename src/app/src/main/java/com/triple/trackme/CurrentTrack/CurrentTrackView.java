@@ -26,7 +26,6 @@ public class CurrentTrackView {
 
     private static Timer trackTimer;
 
-
     public static void initialize(Context context, TextView timeTextView, TextView distanceTextView,
                                   TextView speedTextView, ImageButton pauseButton, ImageButton startButton) {
         isStart = false;
@@ -72,7 +71,6 @@ public class CurrentTrackView {
         currentTrackData.newLocation(newLocation);
     }
 
-
     private static void initializeDataStart() {
         isStart = true;
         isInProcess = true;
@@ -113,7 +111,6 @@ public class CurrentTrackView {
         trackTimer.cancel();
     }
 
-
     private static void updateDataUI() {
         ((MainActivity)context).setText(timeTextView, currentTrackData.getTrackTimeStr());
         ((MainActivity)context).setText(distanceTextView, currentTrackData.getTrackDistanceStr());
@@ -137,5 +134,4 @@ public class CurrentTrackView {
         trackTimer = new Timer("TrackTimer");
         trackTimer.scheduleAtFixedRate(repeatedTimerTask, 1000, 1000);
     }
-
 }
