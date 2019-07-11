@@ -33,7 +33,7 @@ public class GoogleMapService {
         return distance;
     }
 
-    public static String getEnabledLocationProvider(LocationManager locationManager, Context context) {
+    static String getEnabledLocationProvider(LocationManager locationManager, Context context) {
         Criteria criteria = new Criteria();
         String bestProvider = locationManager.getBestProvider(criteria, true);
         boolean enabled = locationManager.isProviderEnabled(bestProvider);
@@ -46,7 +46,7 @@ public class GoogleMapService {
         return bestProvider;
     }
 
-    public static void settingMap(GoogleMap map, FragmentManager fragmentManager, Context context) {
+    static void settingMap(GoogleMap map, FragmentManager fragmentManager, Context context) {
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         map.setMapStyle(MapStyleOptions.loadRawResourceStyle(context, R.raw.style_map));
 

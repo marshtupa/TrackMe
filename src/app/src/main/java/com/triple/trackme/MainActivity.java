@@ -37,6 +37,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
     public static final int REQUEST_ID_ACCESS_COURSE_FINE_LOCATION = 100;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -193,9 +194,12 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         CurrentTrackView.stop();
     }
 
-    public void clickProfileButton(View view) {
-        Log.i("buttonClick", "Profile button click!!!");
+    public void clickProfileButton(View view) { }
+
+    public void clickCurrentPositionButton(View view) {
+        showMyLocation();
     }
+
 
     public void setText(final TextView text, final String value){
         runOnUiThread(new Runnable() {

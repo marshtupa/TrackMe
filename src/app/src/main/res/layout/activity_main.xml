@@ -15,20 +15,20 @@
         tools:layout_editor_absoluteY="0dp" />
 
     <ImageButton
-        android:id="@+id/profileButton"
+        android:id="@+id/currentPositionButton"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginTop="35dp"
         android:layout_marginEnd="12dp"
         android:background="@drawable/circle_button"
         android:contentDescription="@string/menu_button"
-        android:onClick="clickProfileButton"
+        android:onClick="clickCurrentPositionButton"
         android:src="@drawable/ic_compas"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/training_panel" />
 
     <ImageButton
-        android:id="@+id/profileButton2"
+        android:id="@+id/profileButton"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginStart="12dp"
