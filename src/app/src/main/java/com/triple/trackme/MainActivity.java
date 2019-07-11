@@ -9,6 +9,7 @@ import android.app.ProgressDialog;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.view.View;
@@ -23,7 +24,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
-import com.triple.trackme.Information.CurrentTrack;
+import com.triple.trackme.CurrentTrack.CurrentTrackView;
 
 public class MainActivity extends FragmentActivity implements OnMapReadyCallback, OnMapLoadedCallback, LocationListener {
 
@@ -42,6 +43,10 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        CurrentTrackView.initialize(this, (TextView) findViewById(R.id.timeVal),
+                (TextView) findViewById(R.id.distanceVal), (TextView) findViewById(R.id.speedVal),
+                (ImageButton) findViewById(R.id.pauseTrackButton), (ImageButton) findViewById(R.id.startTrackButton));
     }
 
     private void showMapLoadProgress() {
@@ -145,7 +150,9 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     @Override
-    public void onLocationChanged(Location location) { }
+    public void onLocationChanged(Location location) {
+        CurrentTrackView.newLocation(location);
+    }
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) { }
@@ -158,11 +165,37 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     public void clickStartTrackButton(View view) {
+        CurrentTrackView.start();
+    }
 
+    public void clickPauseTrackButton(View view) {
+        CurrentTrackView.pause();
+    }
+
+    public void clickStopTrackButton(View view) {
+        CurrentTrackView.stop();
     }
 
     public void clickProfileButton(View view) {
         Log.i("buttonClick", "Profile button click!!!");
+    }
+
+    public void setText(final TextView text, final String value){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                text.setText(value);
+            }
+        });
+    }
+
+    public void enableButton(final ImageButton button, final boolean enable){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                button.setVisibility(enable ? View.VISIBLE : View.INVISIBLE);
+            }
+        });
     }
 
 }
