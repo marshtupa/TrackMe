@@ -8,6 +8,6 @@
     <string name="time_label">Time</string>
     <string name="speed_label">Speed</string>
     <string name="distance_empty_example">32.7632</string>
-    <string name="speed_empty_example">25.3</string>
-    <string name="time_empty_example">25:59:10</string>
+    <string name="speed_empty_example">25.3210</string>
+    <string name="time_empty_example">00:21:10</string>
 </resources>
