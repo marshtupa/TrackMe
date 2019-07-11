@@ -1,4 +1,4 @@
-package com.triple.trackme.WorkWithData;
+package com.triple.trackme.Data.Work;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

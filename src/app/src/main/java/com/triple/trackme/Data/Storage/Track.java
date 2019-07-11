@@ -1,4 +1,4 @@
-package com.triple.trackme.DataClasses;
+package com.triple.trackme.Data.Storage;
 
 import java.util.ArrayList;
 

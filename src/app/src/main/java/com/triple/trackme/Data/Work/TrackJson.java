@@ -1,7 +1,7 @@
-package com.triple.trackme.WorkWithData;
+package com.triple.trackme.Data.Work;
 
-import com.triple.trackme.DataClasses.Position;
-import com.triple.trackme.DataClasses.Track;
+import com.triple.trackme.Data.Storage.Position;
+import com.triple.trackme.Data.Storage.Track;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -1,6 +1,6 @@
-package com.triple.trackme.WorkWithData;
+package com.triple.trackme.Data.Work;
 
-import com.triple.trackme.DataClasses.User;
+import com.triple.trackme.Data.Storage.User;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;
