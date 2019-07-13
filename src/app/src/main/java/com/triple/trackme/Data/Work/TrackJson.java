@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class TrackJson {
 
-    public static void WriteTrackToJsonFile(File filesDir, String trackJsonFileName, Track track) {
+    public static void writeTrackToJsonFile(File filesDir, String trackJsonFileName, Track track) {
         JSONObject trackJson = new JSONObject();
 
         try {
@@ -28,15 +28,15 @@ public class TrackJson {
             trackJson.put("positions", positionsJson);
 
             String jsonStr = trackJson.toString();
-            TextFilesIO.WriteTextToFile(filesDir, trackJsonFileName, jsonStr);
+            TextFilesIO.writeTextToFile(filesDir, trackJsonFileName, jsonStr);
         }
         catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    public static Track ReadTrackFromJsonFile(File filesDir, String trackJsonFileName) {
-        String jsonStr = TextFilesIO.ReadTextFromFile(filesDir, trackJsonFileName);
+    public static Track readTrackFromJsonFile(File filesDir, String trackJsonFileName) {
+        String jsonStr = TextFilesIO.readTextFromFile(filesDir, trackJsonFileName);
         Track track = new Track();
 
         try {
