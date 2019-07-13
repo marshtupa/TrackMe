@@ -8,6 +8,7 @@
     <string name="distance_km_label">km</string>
     <string name="time_label">Time</string>
     <string name="speed_label">Speed</string>
+    <string name="speed_CI">km/h</string>
     <string name="distance_label">Km</string>
     <string name="distance_empty_example">21.42</string>
     <string name="speed_empty_example">15.32</string>
