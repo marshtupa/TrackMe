@@ -7,10 +7,19 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class TextFilesIO {
+class TextFilesIO {
 
-    public static void WriteTextToFile(File filesDir, String fileName, String fileText)
-    {
+    static void deleteFile(File filesDir, String fileName) {
+        File file = new File(filesDir, fileName);
+        file.delete();
+    }
+
+    static boolean fileExists(File filesDir, String fileName) {
+        File file = new File(filesDir, fileName);
+        return file.exists();
+    }
+
+    static void writeTextToFile(File filesDir, String fileName, String fileText) {
         File file = new File(filesDir, fileName);
 
         try {
@@ -29,8 +38,7 @@ public class TextFilesIO {
         }
     }
 
-    public static String ReadTextFromFile(File filesDir, String fileName)
-    {
+    static String readTextFromFile(File filesDir, String fileName) {
         File file = new File(filesDir, fileName);
 
         String fileText = "";

@@ -29,6 +29,9 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.triple.trackme.CurrentTrack.CurrentTrackView;
+import com.triple.trackme.CurrentUser.CurrentUserData;
+
+import java.io.File;
 
 public class MainActivity extends FragmentActivity implements OnMapReadyCallback, OnMapLoadedCallback, LocationListener {
 
@@ -36,7 +39,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     private ProgressDialog progressDialog;
 
     public static final int REQUEST_ID_ACCESS_COURSE_FINE_LOCATION = 100;
-
+    public static File filesDir;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        filesDir = getFilesDir();
+        CurrentUserData.initializeUserData(getFilesDir());
         CurrentTrackView.initialize(this, (TextView) findViewById(R.id.timeVal),
                 (TextView) findViewById(R.id.distanceVal), (TextView) findViewById(R.id.speedVal),
                 (ImageButton) findViewById(R.id.buttonPause), (ImageButton) findViewById(R.id.buttonPlay));
