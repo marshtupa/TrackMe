@@ -3,13 +3,14 @@
     <string name="menu_button">Menu button</string>
     <string name="pause_button">Pause button</string>
     <string name="stop_button">Stop button</string>
-    <string name="start_button">Start button</string>
+    <string name="play_button">Play button</string>
+    <string name="picture">Picture</string>
     <string name="distance_km_label">km</string>
     <string name="time_label">Time</string>
     <string name="speed_label">Speed</string>
     <string name="speed_CI">km/h</string>
     <string name="distance_label">Km</string>
     <string name="distance_empty_example">21.42</string>
-    <string name="speed_empty_example">25.12</string>
+    <string name="speed_empty_example">15.32</string>
     <string name="time_empty_example">00:21:10</string>
 </resources>

@@ -5,6 +5,7 @@ import android.location.Location;
 
 import com.triple.trackme.GoogleMapService;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 class CurrentTrackData {
@@ -53,11 +54,13 @@ class CurrentTrackData {
 
     @SuppressLint("DefaultLocale")
     String getTrackDistanceStr() {
-        return String.format("%.2f", trackDistance / 1000);
+        String trackDistanceStr = new DecimalFormat("00.00").format(trackDistance / 1000);
+        return trackDistanceStr;
     }
 
     @SuppressLint("DefaultLocale")
     String getTrackSpeedStr() {
-        return String.format("%.1f", trackSpeed);
+        String trackSpeedStr = new DecimalFormat("00.00").format(trackSpeed);
+        return trackSpeedStr;
     }
 }

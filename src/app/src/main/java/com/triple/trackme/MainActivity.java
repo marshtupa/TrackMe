@@ -9,13 +9,11 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.view.View;
@@ -36,8 +34,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
     private GoogleMap map;
     private ProgressDialog progressDialog;
-    private ImageView imgMyLocation;
-
 
     public static final int REQUEST_ID_ACCESS_COURSE_FINE_LOCATION = 100;
 
@@ -45,27 +41,26 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (Build.VERSION.SDK_INT >= 19 && Build.VERSION.SDK_INT < 21) {
-            setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, true);
-        }
-        if (Build.VERSION.SDK_INT >= 19) {
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-        }
-        if (Build.VERSION.SDK_INT >= 21) {
-            setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false);
-            getWindow().setStatusBarColor(Color.TRANSPARENT);
-        }
+        updateWindow();
         setContentView(R.layout.activity_main);
+
         showMapLoadProgress();
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
         CurrentTrackView.initialize(this, (TextView) findViewById(R.id.timeVal),
-                (TextView) findViewById(R.id.speedVal), (TextView) findViewById(R.id.speedVal),
+                (TextView) findViewById(R.id.distanceVal), (TextView) findViewById(R.id.speedVal),
                 (ImageButton) findViewById(R.id.buttonPause), (ImageButton) findViewById(R.id.buttonPlay));
     }
 
-    public static void setWindowFlag(Activity activity, final int bits, boolean on) {
+    private void updateWindow() {
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false);
+        getWindow().setStatusBarColor(Color.TRANSPARENT);
+    }
+
+    private void setWindowFlag(Activity activity, final int bits, boolean on) {
         Window win = activity.getWindow();
         WindowManager.LayoutParams winParams = win.getAttributes();
         if (on) {
@@ -116,20 +111,16 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        switch (requestCode) {
-            case REQUEST_ID_ACCESS_COURSE_FINE_LOCATION: {
-                if (grantResults.length > 1
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED
-                        && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(this, "Permission denied!", Toast.LENGTH_LONG).show();
-                    Log.i("MapInfo", "Permission denied!");
-                    this.showMyLocation();
-                }
-                else {
-                    Toast.makeText(this, "Permission denied!", Toast.LENGTH_LONG).show();
-                    Log.i("MapInfo", "Permission denied!");
-                }
-                break;
+        if (requestCode == REQUEST_ID_ACCESS_COURSE_FINE_LOCATION) {
+            if (grantResults.length > 1
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                    && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Permission denied!", Toast.LENGTH_LONG).show();
+                Log.i("MapInfo", "Permission denied!");
+                this.showMyLocation();
+            } else {
+                Toast.makeText(this, "Permission denied!", Toast.LENGTH_LONG).show();
+                Log.i("MapInfo", "Permission denied!");
             }
         }
     }
@@ -143,12 +134,12 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
         final long MIN_TIME_BW_UPDATES = 1000;
         final float MIN_DISTANCE_CHANGE_FOR_UPDATES = 1;
-        Location myLocation = null;
+        Location myLocation;
         try {
             locationManager.requestLocationUpdates(
                     locationProvider,
                     MIN_TIME_BW_UPDATES,
-                    MIN_DISTANCE_CHANGE_FOR_UPDATES, (LocationListener) this);
+                    MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
             myLocation = locationManager.getLastKnownLocation(locationProvider);
         }
         catch (SecurityException e) {
@@ -203,9 +194,12 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         CurrentTrackView.stop();
     }
 
-    public void clickProfileButton(View view) {
-        Log.i("buttonClick", "Profile button click!!!");
+    public void clickProfileButton(View view) { }
+
+    public void clickCurrentPositionButton(View view) {
+        showMyLocation();
     }
+
 
     public void setText(final TextView text, final String value){
         runOnUiThread(new Runnable() {
