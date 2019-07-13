@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+  <item
+      android:top="0.5dp"
+      android:right="0.5dp"
+      android:left="0.5dp"
+      android:bottom="0.5dp">
+    <shape android:shape="rectangle">
+      <gradient
+          android:startColor="#FEE305"
+          android:endColor="#F77C01"
+          android:angle="135"
+          android:type="linear" />
+    </shape>
+  </item>
+  <item android:drawable="@drawable/ic_pause_temp" />
+</layer-list>

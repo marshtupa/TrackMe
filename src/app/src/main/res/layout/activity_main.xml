@@ -23,7 +23,7 @@
         android:background="@drawable/circle_button"
         android:contentDescription="@string/menu_button"
         android:onClick="clickCurrentPositionButton"
-        android:src="@drawable/ic_compas"
+        android:src="@drawable/ic_compass_outline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/training_panel" />
 
