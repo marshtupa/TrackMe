@@ -10,7 +10,12 @@ public class UserJson {
 
     final static private String USER_JSON_FILE_NAME = "UserData";
 
-    public static void WriteUserToJsonFile(File filesDir, User user) {
+    public static boolean isUserFileInitialize(File filesDir) {
+        boolean isUserFileInitialize = TextFilesIO.fileExists(filesDir, USER_JSON_FILE_NAME);
+        return isUserFileInitialize;
+    }
+
+    public static void writeUserToJsonFile(File filesDir, User user) {
         JSONObject userJson = new JSONObject();
 
         try {
@@ -26,15 +31,15 @@ public class UserJson {
             userJson.put("trackFilePaths", trackFilePathsJson);
 
             String jsonStr = userJson.toString();
-            TextFilesIO.WriteTextToFile(filesDir, USER_JSON_FILE_NAME, jsonStr);
+            TextFilesIO.writeTextToFile(filesDir, USER_JSON_FILE_NAME, jsonStr);
         }
         catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    public static User ReadUserFromJsonFile(File filesDir) {
-        String jsonStr = TextFilesIO.ReadTextFromFile(filesDir, USER_JSON_FILE_NAME);
+    public static User readUserFromJsonFile(File filesDir) {
+        String jsonStr = TextFilesIO.readTextFromFile(filesDir, USER_JSON_FILE_NAME);
         User user = new User();
 
         try {

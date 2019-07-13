@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.triple.trackme.MainActivity;
 
+import java.io.File;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -63,6 +64,7 @@ public class CurrentTrackView {
 
     public static void stop() {
         if (isStart) {
+            currentTrackData.saveCurrentTrackToFile();
             initializeDataStop();
         }
     }
