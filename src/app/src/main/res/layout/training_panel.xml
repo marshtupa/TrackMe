@@ -49,14 +49,16 @@
         android:layout_width="130dp"
         android:layout_height="45dp"
         android:layout_marginStart="32dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:fontFamily="sans-serif-condensed-medium"
         android:text="@string/time_empty_example"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="@color/colorDark"
         app:layout_constraintBottom_toBottomOf="@+id/viewCurrentTrackPanel"
-        app:layout_constraintStart_toStartOf="@+id/viewCurrentTrackPanel" />
+        app:layout_constraintStart_toStartOf="@+id/viewCurrentTrackPanel"
+        app:layout_constraintTop_toBottomOf="@+id/distanceVal" />
 
     <ImageView
         android:id="@+id/speedPic"
@@ -98,15 +100,17 @@
         android:id="@+id/speedVal"
         android:layout_width="85dp"
         android:layout_height="45dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="72dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="8dp"
         android:fontFamily="sans-serif-condensed-medium"
         android:text="@string/speed_empty_example"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="@color/colorDark"
         app:layout_constraintBottom_toBottomOf="@+id/viewCurrentTrackPanel"
-        app:layout_constraintEnd_toEndOf="@+id/viewCurrentTrackPanel" />
+        app:layout_constraintEnd_toEndOf="@+id/viewCurrentTrackPanel"
+        app:layout_constraintTop_toBottomOf="@+id/distanceVal" />
 
     <ImageView
         android:id="@+id/distancePic"
