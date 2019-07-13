@@ -57,6 +57,8 @@ public class CurrentUserData {
         String fileName = getNextName();
         TrackJson.writeTrackToJsonFile(MainActivity.filesDir, fileName, track);
         trackFilePaths.add(fileName);
+
+        saveUserData(MainActivity.filesDir);
     }
 
     private static void deleteTrack() {
@@ -75,7 +77,7 @@ public class CurrentUserData {
         }
         else {
             String lastName = trackFilePaths.get(trackFilePaths.size() - 1);
-            nextFileNumber = Integer.parseInt(lastName.substring(lastName.indexOf(divider) + 1));
+            nextFileNumber = Integer.parseInt(lastName.substring(lastName.indexOf(divider) + 1)) + 1;
         }
 
         return fileNameTemplate + nextFileNumber;
