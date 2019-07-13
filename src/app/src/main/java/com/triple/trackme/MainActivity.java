@@ -90,7 +90,6 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             return;
         }
         map.setMyLocationEnabled(true);
-
     }
 
     @Override
