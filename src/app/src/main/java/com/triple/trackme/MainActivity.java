@@ -29,6 +29,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.triple.trackme.CurrentTrack.CurrentTrackView;
+import com.triple.trackme.CurrentUser.CurrentUserData;
 
 public class MainActivity extends FragmentActivity implements OnMapReadyCallback, OnMapLoadedCallback, LocationListener {
 
@@ -49,6 +50,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        CurrentUserData.initializeUserData(getFilesDir());
         CurrentTrackView.initialize(this, (TextView) findViewById(R.id.timeVal),
                 (TextView) findViewById(R.id.distanceVal), (TextView) findViewById(R.id.speedVal),
                 (ImageButton) findViewById(R.id.buttonPause), (ImageButton) findViewById(R.id.buttonPlay));
