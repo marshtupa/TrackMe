@@ -12,7 +12,6 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.triple.trackme.MainActivity;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -73,33 +72,35 @@ public class CurrentTrackView {
     public static void stop() {
         if (isStart) {
             currentTrackData.saveCurrentTrackToFile();
-            initializeDataStop();
             cleanRoute();
+            initializeDataStop();
         }
     }
 
     public static void newLocation(Location newLoc, GoogleMap map) {
-        Location lastLoc = currentTrackData.getLastLocation();
-        currentTrackData.newLocation(newLoc);
-        if (lastLoc != null) {
-            drawRoute(map, lastLoc, newLoc);
+        if (isStart && isInProcess) {
+            Location lastLoc = currentTrackData.getLastLocation();
+            currentTrackData.newLocation(newLoc);
+            if (lastLoc != null) {
+                drawRoute(map, lastLoc, newLoc);
+            }
         }
     }
 
     private static void drawRoute(GoogleMap map, Location lastLoc, Location newLoc) {
-        polylines.add(
-                map.addPolyline(new PolylineOptions()
-                        .add(new LatLng(51.5, -0.1), new LatLng(40.7, -74.0))
-                        .width(20)
-                        .color(Color.argb(90, 0, 130, 255)))
+        Polyline polyline = map.addPolyline(new PolylineOptions()
+                .add(new LatLng(lastLoc.getLatitude(), lastLoc.getLongitude()), new LatLng(newLoc.getLatitude(), newLoc.getLongitude()))
+                .width(20)
+                .color(Color.argb(90, 0, 130, 255))
         );
+        polylines.add(polyline);
     }
 
     private static void cleanRoute() {
-        for(Polyline line : polylines)
-        {
+        for(Polyline line : polylines) {
             line.remove();
         }
+        polylines = new ArrayList<Polyline>();
     }
 
     private static void initializeDataStart() {
