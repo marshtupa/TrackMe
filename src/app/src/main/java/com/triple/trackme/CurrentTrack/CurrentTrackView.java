@@ -1,14 +1,19 @@
 package com.triple.trackme.CurrentTrack;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.location.Location;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.triple.trackme.MainActivity;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -17,6 +22,7 @@ public class CurrentTrackView {
     private static boolean isStart;
     private static boolean isInProcess;
 
+    private static ArrayList<Polyline> polylines;
     private static CurrentTrackData currentTrackData;
 
     private static Context context;
@@ -34,6 +40,7 @@ public class CurrentTrackView {
         isInProcess = false;
 
         currentTrackData = new CurrentTrackData();
+        polylines = new ArrayList<Polyline>();
 
         CurrentTrackView.context = context;
         CurrentTrackView.timeTextView = timeTextView;
@@ -67,6 +74,7 @@ public class CurrentTrackView {
         if (isStart) {
             currentTrackData.saveCurrentTrackToFile();
             initializeDataStop();
+            cleanRoute();
         }
     }
 
@@ -79,7 +87,19 @@ public class CurrentTrackView {
     }
 
     private static void drawRoute(GoogleMap map, Location lastLoc, Location newLoc) {
+        polylines.add(
+                map.addPolyline(new PolylineOptions()
+                        .add(new LatLng(51.5, -0.1), new LatLng(40.7, -74.0))
+                        .width(20)
+                        .color(Color.argb(90, 0, 130, 255)))
+        );
+    }
 
+    private static void cleanRoute() {
+        for(Polyline line : polylines)
+        {
+            line.remove();
+        }
     }
 
     private static void initializeDataStart() {
