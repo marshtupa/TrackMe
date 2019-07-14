@@ -2,8 +2,6 @@ package com.triple.trackme.CurrentTrack;
 
 import android.content.Context;
 import android.location.Location;
-import android.view.View;
-import android.view.animation.Animation;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
