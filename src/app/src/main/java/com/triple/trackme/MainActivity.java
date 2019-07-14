@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -53,12 +54,23 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        setViewTrackPanelNotClickable();
 
         filesDir = getFilesDir();
         CurrentUserData.initializeUserData(getFilesDir());
         CurrentTrackView.initialize(this, (TextView) findViewById(R.id.timeVal),
                 (TextView) findViewById(R.id.distanceVal), (TextView) findViewById(R.id.speedVal),
                 (ImageButton) findViewById(R.id.buttonPause), (ImageButton) findViewById(R.id.buttonPlay));
+    }
+
+    private void setViewTrackPanelNotClickable() {
+        View view = findViewById(R.id.viewCurrentTrackPanel);
+        view.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return true;
+            }
+        });
     }
 
     private void updateWindow() {
