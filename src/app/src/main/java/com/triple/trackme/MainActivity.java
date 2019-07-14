@@ -169,7 +169,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         if (myLocation != null) {
-            LatLng latLng = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
+            LatLng latLng = new LatLng(myLocation.getLatitude(), myLocation.getLongitude() - 0.005);
             map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 13));
             CameraPosition cameraPosition = new CameraPosition.Builder()
                     .target(latLng)
