@@ -40,6 +40,14 @@ class CurrentTrackData {
         positions.add(newLocation);
     }
 
+    Location getLastLocation() {
+        Location lastLocation = null;
+        if (positions.size() > 0) {
+            lastLocation = positions.get(positions.size() - 1);
+        }
+        return lastLocation;
+    }
+
     private void updateDistance(Location newLocation) {
         if (positions.size() > 1) {
             Location prevLocation = positions.get(positions.size() - 1);

@@ -70,7 +70,11 @@ public class CurrentTrackView {
     }
 
     public static void newLocation(Location newLocation) {
+        Location lastLocation = currentTrackData.getLastLocation();
         currentTrackData.newLocation(newLocation);
+        if (lastLocation != null) {
+            
+        }
     }
 
     private static void initializeDataStart() {
