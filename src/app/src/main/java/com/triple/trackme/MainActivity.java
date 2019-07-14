@@ -176,7 +176,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onLocationChanged(Location location) {
-        CurrentTrackView.newLocation(location);
+        CurrentTrackView.newLocation(location, map);
     }
 
     @Override

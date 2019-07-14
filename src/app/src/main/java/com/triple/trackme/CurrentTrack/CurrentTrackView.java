@@ -5,6 +5,7 @@ import android.location.Location;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.GoogleMap;
 import com.triple.trackme.MainActivity;
 
 import java.io.File;
@@ -69,8 +70,16 @@ public class CurrentTrackView {
         }
     }
 
-    public static void newLocation(Location newLocation) {
-        currentTrackData.newLocation(newLocation);
+    public static void newLocation(Location newLoc, GoogleMap map) {
+        Location lastLoc = currentTrackData.getLastLocation();
+        currentTrackData.newLocation(newLoc);
+        if (lastLoc != null) {
+            drawRoute(map, lastLoc, newLoc);
+        }
+    }
+
+    private static void drawRoute(GoogleMap map, Location lastLoc, Location newLoc) {
+
     }
 
     private static void initializeDataStart() {
