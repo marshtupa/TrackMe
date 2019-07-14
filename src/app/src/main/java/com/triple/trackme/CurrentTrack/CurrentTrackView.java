@@ -149,9 +149,25 @@ public class CurrentTrackView {
         ((MainActivity)context).setText(speedTextView, currentTrackData.getTrackSpeedStr());
     }
 
-    private static void updateButtonsUI(boolean startButtonEnable, boolean pauseButtonEnable) {
-        ((MainActivity)context).enableButton(startButton, startButtonEnable);
-        ((MainActivity)context).enableButton(pauseButton, pauseButtonEnable);
+    private static void updateButtonsUI(final boolean startButtonEnable, final boolean pauseButtonEnable) {
+        if (startButtonEnable) {
+            startButton.setClickable(true);
+            pauseButton.setClickable(false);
+        }
+        else {
+            startButton.setClickable(false);
+            pauseButton.setClickable(true);
+        }
+
+        TimerTask changeButtonsTask = new TimerTask() {
+            @Override
+            public void run() {
+                ((MainActivity)context).enableButton(startButton, startButtonEnable);
+                ((MainActivity)context).enableButton(pauseButton, pauseButtonEnable);
+            }
+        };
+        Timer changeButtonsTimer = new Timer();
+        changeButtonsTimer.schedule(changeButtonsTask, 290);
     }
 
     private static void startTimer() {
