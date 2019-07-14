@@ -13,6 +13,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -188,20 +190,31 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     public void clickStartTrackButton(View view) {
+        final Animation animScale = AnimationUtils.loadAnimation(this, R.anim.scale);
+        view.startAnimation(animScale);
         CurrentTrackView.start();
     }
 
     public void clickPauseTrackButton(View view) {
+        final Animation animScale = AnimationUtils.loadAnimation(this, R.anim.scale);
+        view.startAnimation(animScale);
         CurrentTrackView.pause();
     }
 
     public void clickStopTrackButton(View view) {
+        final Animation animScale = AnimationUtils.loadAnimation(this, R.anim.scale);
+        view.startAnimation(animScale);
         CurrentTrackView.stop();
     }
 
-    public void clickProfileButton(View view) { }
+    public void clickProfileButton(View view) {
+        final Animation animScale = AnimationUtils.loadAnimation(this, R.anim.scale_interface);
+        view.startAnimation(animScale);
+    }
 
     public void clickCurrentPositionButton(View view) {
+        final Animation animScale = AnimationUtils.loadAnimation(this, R.anim.scale_interface);
+        view.startAnimation(animScale);
         showMyLocation();
     }
 
