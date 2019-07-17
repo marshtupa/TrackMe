@@ -4,10 +4,9 @@ import com.triple.trackme.Data.Storage.Track;
 import com.triple.trackme.Data.Storage.User;
 import com.triple.trackme.Data.Work.TrackJson;
 import com.triple.trackme.Data.Work.UserJson;
-import com.triple.trackme.MainActivity;
+import com.triple.trackme.Data.Work.WorkWithDataException;
 
 import java.util.ArrayList;
-import java.io.File;
 
 public class CurrentUserData {
 
@@ -20,12 +19,12 @@ public class CurrentUserData {
     private static String photoFilePath;
     private static ArrayList<String> trackFilePaths;
 
-    public static void initializeUserData(File filesDir) {
-        boolean isUserFileInitialize = UserJson.isUserFileInitialize(filesDir);
+    public static void initializeUserData() {
+        boolean isUserFileInitialize = UserJson.isUserFileInitialize();
         isInitialize = isUserFileInitialize;
 
         if (isInitialize) {
-            initializeUserDataFromFile(filesDir);
+            initializeUserDataFromFile();
         }
         else {
             initializeUserEmptyData();
@@ -40,8 +39,14 @@ public class CurrentUserData {
         trackFilePaths = new ArrayList<String>();
     }
 
-    private static void initializeUserDataFromFile(File filesDir) {
-        User user = UserJson.readUserFromJsonFile(filesDir);
+    private static void initializeUserDataFromFile() {
+        User user = new User();
+        try {
+            user = UserJson.readUserFromJsonFile();
+        }
+        catch (WorkWithDataException exception) {
+
+        }
         login = user.login;
         name = user.name;
         surname = user.surname;
@@ -55,10 +60,15 @@ public class CurrentUserData {
         }
 
         String fileName = getNextName();
-        TrackJson.writeTrackToJsonFile(MainActivity.filesDir, fileName, track);
+        try {
+            TrackJson.writeTrackToJsonFile(fileName, track);
+        }
+        catch (WorkWithDataException exception) {
+
+        }
         trackFilePaths.add(fileName);
 
-        saveUserData(MainActivity.filesDir);
+        saveUserData();
     }
 
     private static void deleteTrack() {
@@ -83,13 +93,18 @@ public class CurrentUserData {
         return fileNameTemplate + nextFileNumber;
     }
 
-    public static void saveUserData(File fileDir) {
+    public static void saveUserData() {
         User user = new User();
         user.login = login;
         user.name = name;
         user.surname = surname;
         user.photoFilePath = photoFilePath;
         user.trackFilePaths = trackFilePaths;
-        UserJson.writeUserToJsonFile(fileDir, user);
+        try {
+            UserJson.writeUserToJsonFile(user);
+        }
+        catch (WorkWithDataException exception) {
+
+        }
     }
 }
