@@ -28,13 +28,16 @@ public class CurrentTrackView {
     private static TextView timeTextView;
     private static TextView distanceTextView;
     private static TextView speedTextView;
+    private static ImageButton stopButton;
     private static ImageButton pauseButton;
     private static ImageButton startButton;
 
     private static Timer trackTimer;
 
-    public static void initialize(Context context, TextView timeTextView, TextView distanceTextView,
-                                  TextView speedTextView, ImageButton pauseButton, ImageButton startButton) {
+    public static void initialize(Context context,
+                                  TextView timeTextView, TextView distanceTextView, TextView speedTextView,
+                                  ImageButton stopButton, ImageButton pauseButton, ImageButton startButton) {
+
         trackState = CurrentTrackState.STOP;
 
         currentTrackData = new CurrentTrackData();
@@ -44,6 +47,7 @@ public class CurrentTrackView {
         CurrentTrackView.timeTextView = timeTextView;
         CurrentTrackView.distanceTextView = distanceTextView;
         CurrentTrackView.speedTextView = speedTextView;
+        CurrentTrackView.stopButton = stopButton;
         CurrentTrackView.pauseButton = pauseButton;
         CurrentTrackView.startButton = startButton;
 

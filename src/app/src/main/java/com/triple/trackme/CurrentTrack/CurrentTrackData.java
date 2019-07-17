@@ -1,6 +1,5 @@
 package com.triple.trackme.CurrentTrack;
 
-import android.annotation.SuppressLint;
 import android.location.Location;
 
 import com.triple.trackme.CurrentUser.CurrentUserData;
@@ -75,7 +74,6 @@ class CurrentTrackData {
         return track;
     }
 
-    @SuppressLint("DefaultLocale")
     String timeToFormatString() {
         int hours = allTimeInSeconds / 3600;
         int minutes = (allTimeInSeconds - hours * 3600) / 60;
@@ -85,13 +83,11 @@ class CurrentTrackData {
         return timeString;
     }
 
-    @SuppressLint("DefaultLocale")
     String distanceToFormatString() {
         String distanceString = new DecimalFormat("00.00").format(allDistanceInMetres / 1000);
         return distanceString;
     }
 
-    @SuppressLint("DefaultLocale")
     String speedToFormatString() {
         String speedString = new DecimalFormat("00.00").format(currentSpeedInKmH);
         return speedString;

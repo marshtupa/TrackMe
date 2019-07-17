@@ -60,7 +60,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         CurrentUserData.initializeUserData();
         CurrentTrackView.initialize(this, (TextView) findViewById(R.id.timeVal),
                 (TextView) findViewById(R.id.distanceVal), (TextView) findViewById(R.id.speedVal),
-                (ImageButton) findViewById(R.id.buttonPause), (ImageButton) findViewById(R.id.buttonPlay));
+                (ImageButton) findViewById(R.id.buttonStop), (ImageButton) findViewById(R.id.buttonPause),
+                (ImageButton) findViewById(R.id.buttonPlay));
     }
 
     private void setViewTrackPanelNotClickable() {
