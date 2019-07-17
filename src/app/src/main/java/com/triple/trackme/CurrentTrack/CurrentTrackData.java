@@ -8,91 +8,92 @@ import com.triple.trackme.Data.Storage.Position;
 import com.triple.trackme.Data.Storage.Track;
 import com.triple.trackme.GoogleMapService;
 
-import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 class CurrentTrackData {
 
-    private int trackSeconds;
-    private double trackDistance;
-    private double trackSpeed;
-    private ArrayList<Location> positions;
+    private int allTimeInSeconds;
+    private double allDistanceInMetres;
+    private double currentSpeedInKmH;
+    private ArrayList<Location> allPositions;
 
     CurrentTrackData() {
-        initializeEmptyData();
+        allTimeInSeconds = 0;
+        allDistanceInMetres = 0.0;
+        currentSpeedInKmH = 0.0;
+        allPositions = new ArrayList<Location>();
     }
 
-    void initializeEmptyData() {
-        trackSeconds = 0;
-        trackDistance = 0.0;
-        trackSpeed = 0.0;
-        positions = new ArrayList<Location>();
+    void addSeconds(int seconds) {
+        allTimeInSeconds += seconds;
     }
 
-    void incrementTrackTime() {
-        trackSeconds++;
+    void newPosition(Location newPosition) {
+        updateSpeed(newPosition);
+        updateDistance(newPosition);
+        allPositions.add(newPosition);
     }
 
-    void newLocation(Location newLocation) {
-        trackSpeed = newLocation.getSpeed();
-        updateDistance(newLocation);
-        positions.add(newLocation);
+    private void updateSpeed(Location newPosition) {
+        currentSpeedInKmH = newPosition.getSpeed();
     }
 
-    Location getLastLocation() {
-        Location lastLocation = null;
-        if (positions.size() > 0) {
-            lastLocation = positions.get(positions.size() - 1);
-        }
-        return lastLocation;
-    }
-
-    private void updateDistance(Location newLocation) {
-        if (positions.size() > 1) {
-            Location prevLocation = positions.get(positions.size() - 1);
-            trackDistance += GoogleMapService.distanceBetweenCoordinates(prevLocation, newLocation);
+    private void updateDistance(Location newPosition) {
+        Location lastPosition = getLastPosition();
+        if (lastPosition != null) {
+            double newDistance = GoogleMapService.distanceBetweenCoordinates(lastPosition, newPosition);
+            allDistanceInMetres += newDistance;
         }
     }
 
-    void saveCurrentTrackToFile() {
-        Track track = currentTrackToTrackData();
+    Location getLastPosition() {
+        Location lastPosition = null;
+        if (allPositions.size() > 0) {
+            lastPosition = allPositions.get(allPositions.size() - 1);
+        }
+        return lastPosition;
+    }
+
+    void saveData() {
+        Track track = toTrackData();
         CurrentUserData.addTrack(track);
     }
 
-    private Track currentTrackToTrackData() {
+    private Track toTrackData() {
         Track track = new Track();
-        track.distance = trackDistance;
-        track.time = trackSeconds;
-        double avgSpeed = (trackDistance / trackSeconds) * 3.6;
+        track.distance = allDistanceInMetres;
+        track.time = allTimeInSeconds;
+        double avgSpeed = (allDistanceInMetres / allTimeInSeconds) * 3.6;
         track.avgSpeed = avgSpeed;
-        for (Location loc : positions) {
-            Position pos = new Position();
-            pos.latitude = loc.getLatitude();
-            pos.longitude = loc.getLongitude();
-            track.positions.add(pos);
+        for (Location pos : allPositions) {
+            Position position = new Position();
+            position.latitude = pos.getLatitude();
+            position.longitude = pos.getLongitude();
+            track.positions.add(position);
         }
         return track;
     }
 
     @SuppressLint("DefaultLocale")
-    String getTrackTimeStr() {
-        int hours = trackSeconds / 3600;
-        int minutes = (trackSeconds - hours * 3600) / 60;
-        int seconds = trackSeconds % 60;
+    String timeToFormatString() {
+        int hours = allTimeInSeconds / 3600;
+        int minutes = (allTimeInSeconds - hours * 3600) / 60;
+        int seconds = allTimeInSeconds % 60;
 
-        return String.format("%s:%s:%s", String.format("%02d", hours), String.format("%02d", minutes), String.format("%02d", seconds));
+        String timeString = String.format("%s:%s:%s", String.format("%02d", hours), String.format("%02d", minutes), String.format("%02d", seconds));
+        return timeString;
     }
 
     @SuppressLint("DefaultLocale")
-    String getTrackDistanceStr() {
-        String trackDistanceStr = new DecimalFormat("00.00").format(trackDistance / 1000);
-        return trackDistanceStr;
+    String distanceToFormatString() {
+        String distanceString = new DecimalFormat("00.00").format(allDistanceInMetres / 1000);
+        return distanceString;
     }
 
     @SuppressLint("DefaultLocale")
-    String getTrackSpeedStr() {
-        String trackSpeedStr = new DecimalFormat("00.00").format(trackSpeed);
-        return trackSpeedStr;
+    String speedToFormatString() {
+        String speedString = new DecimalFormat("00.00").format(currentSpeedInKmH);
+        return speedString;
     }
 }

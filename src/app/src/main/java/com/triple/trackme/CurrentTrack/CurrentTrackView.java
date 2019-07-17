@@ -18,8 +18,8 @@ import java.util.TimerTask;
 
 public class CurrentTrackView {
 
-    private static boolean isStart;
-    private static boolean isInProcess;
+    public enum CurrentTrackState { STOP, START, PAUSE }
+    private static CurrentTrackState trackState;
 
     private static ArrayList<Polyline> polylines;
     private static CurrentTrackData currentTrackData;
@@ -35,8 +35,7 @@ public class CurrentTrackView {
 
     public static void initialize(Context context, TextView timeTextView, TextView distanceTextView,
                                   TextView speedTextView, ImageButton pauseButton, ImageButton startButton) {
-        isStart = false;
-        isInProcess = false;
+        trackState = CurrentTrackState.STOP;
 
         currentTrackData = new CurrentTrackData();
         polylines = new ArrayList<Polyline>();
@@ -53,10 +52,8 @@ public class CurrentTrackView {
     }
 
     public static void start() {
-        if (isStart) {
-            if (!isInProcess) {
-                initializeDataResume();
-            }
+        if (trackState == CurrentTrackState.PAUSE) {
+            initializeDataResume();
         }
         else {
             initializeDataStart();
@@ -64,23 +61,23 @@ public class CurrentTrackView {
     }
 
     public static void pause() {
-        if (isStart && isInProcess) {
+        if (trackState == CurrentTrackState.START) {
             initializeDataPause();
         }
     }
 
     public static void stop() {
-        if (isStart) {
-            currentTrackData.saveCurrentTrackToFile();
+        if (trackState == CurrentTrackState.START || trackState == CurrentTrackState.PAUSE) {
+            currentTrackData.saveData();
             cleanRoute();
             initializeDataStop();
         }
     }
 
     public static void newLocation(Location newLoc, GoogleMap map) {
-        if (isStart && isInProcess) {
-            Location lastLoc = currentTrackData.getLastLocation();
-            currentTrackData.newLocation(newLoc);
+        if (trackState == CurrentTrackState.START) {
+            Location lastLoc = currentTrackData.getLastPosition();
+            currentTrackData.newPosition(newLoc);
             if (lastLoc != null) {
                 drawRoute(map, lastLoc, newLoc);
             }
@@ -104,10 +101,9 @@ public class CurrentTrackView {
     }
 
     private static void initializeDataStart() {
-        isStart = true;
-        isInProcess = true;
+        trackState = CurrentTrackState.START;
 
-        currentTrackData.initializeEmptyData();
+        currentTrackData = new CurrentTrackData();
 
         updateDataUI();
         updateButtonsUI(false, true);
@@ -115,8 +111,7 @@ public class CurrentTrackView {
     }
 
     private static void initializeDataPause() {
-        isStart = true;
-        isInProcess = false;
+        trackState = CurrentTrackState.PAUSE;
 
         updateDataUI();
         updateButtonsUI(true, false);
@@ -124,8 +119,7 @@ public class CurrentTrackView {
     }
 
     private static void initializeDataResume() {
-        isStart = true;
-        isInProcess = true;
+        trackState = CurrentTrackState.START;
 
         updateDataUI();
         updateButtonsUI(false, true);
@@ -133,10 +127,9 @@ public class CurrentTrackView {
     }
 
     private static void initializeDataStop() {
-        isStart = false;
-        isInProcess = false;
+        trackState = CurrentTrackState.STOP;
 
-        currentTrackData.initializeEmptyData();
+        currentTrackData = new CurrentTrackData();
 
         updateDataUI();
         updateButtonsUI(true, false);
@@ -144,9 +137,9 @@ public class CurrentTrackView {
     }
 
     private static void updateDataUI() {
-        ((MainActivity)context).setText(timeTextView, currentTrackData.getTrackTimeStr());
-        ((MainActivity)context).setText(distanceTextView, currentTrackData.getTrackDistanceStr());
-        ((MainActivity)context).setText(speedTextView, currentTrackData.getTrackSpeedStr());
+        ((MainActivity)context).setText(timeTextView, currentTrackData.timeToFormatString());
+        ((MainActivity)context).setText(distanceTextView, currentTrackData.distanceToFormatString());
+        ((MainActivity)context).setText(speedTextView, currentTrackData.speedToFormatString());
     }
 
     private static void updateButtonsUI(final boolean startButtonEnable, final boolean pauseButtonEnable) {
@@ -173,8 +166,8 @@ public class CurrentTrackView {
     private static void startTimer() {
         TimerTask repeatedTimerTask = new TimerTask() {
             public void run() {
-                if (isStart) {
-                    currentTrackData.incrementTrackTime();
+                if (trackState == CurrentTrackState.START) {
+                    currentTrackData.addSeconds(1);
                     updateDataUI();
                 }
             }
