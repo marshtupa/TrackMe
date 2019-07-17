@@ -14,52 +14,39 @@ class TextFilesIO {
         file.delete();
     }
 
-    static boolean fileExists(File filesDir, String fileName) {
+    static boolean isFileExists(File filesDir, String fileName) {
         File file = new File(filesDir, fileName);
         return file.exists();
     }
 
-    static void writeTextToFile(File filesDir, String fileName, String fileText) {
+    static void writeTextToFile(File filesDir, String fileName, String fileText) throws IOException {
         File file = new File(filesDir, fileName);
 
-        try {
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-
-            FileWriter fileWriter = new FileWriter(file.getAbsoluteFile());
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-
-            bufferedWriter.write(fileText);
-            bufferedWriter.close();
+        if (!file.exists()) {
+            file.createNewFile();
         }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+
+        FileWriter fileWriter = new FileWriter(file.getAbsoluteFile());
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        bufferedWriter.write(fileText);
+        bufferedWriter.close();
     }
 
-    static String readTextFromFile(File filesDir, String fileName) {
+    static String readTextFromFile(File filesDir, String fileName) throws IOException {
         File file = new File(filesDir, fileName);
 
-        String fileText = "";
-        StringBuffer output = new StringBuffer();
-        try {
-            FileReader fileReader = new FileReader(file.getAbsoluteFile());
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
+        StringBuilder fileText = new StringBuilder();
 
-            String line = "";
-            while ((line = bufferedReader.readLine()) != null) {
-                output.append(line + "\n");
-            }
+        FileReader fileReader = new FileReader(file.getAbsoluteFile());
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
 
-            fileText = output.toString();
-            bufferedReader.close();
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
+        String line = "";
+        while ((line = bufferedReader.readLine()) != null) {
+            fileText.append(line + "\n");
         }
 
-        return fileText;
+        bufferedReader.close();
+
+        return fileText.toString();
     }
 }

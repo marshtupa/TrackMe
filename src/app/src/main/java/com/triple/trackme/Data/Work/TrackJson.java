@@ -8,6 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class TrackJson {
@@ -16,7 +17,7 @@ public class TrackJson {
         TextFilesIO.deleteFile(MainActivity.filesDir, trackJsonFileName);
     }
 
-    public static void writeTrackToJsonFile(File filesDir, String trackJsonFileName, Track track) {
+    public static void writeTrackToJsonFile(File filesDir, String trackJsonFileName, Track track) throws IOException {
         JSONObject trackJson = new JSONObject();
 
         try {
@@ -41,7 +42,7 @@ public class TrackJson {
         }
     }
 
-    public static Track readTrackFromJsonFile(File filesDir, String trackJsonFileName) {
+    public static Track readTrackFromJsonFile(File filesDir, String trackJsonFileName) throws IOException {
         String jsonStr = TextFilesIO.readTextFromFile(filesDir, trackJsonFileName);
         Track track = new Track();
 

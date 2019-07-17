@@ -1,21 +1,28 @@
 package com.triple.trackme.Data.Work;
 
 import com.triple.trackme.Data.Storage.User;
+import com.triple.trackme.MainActivity;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;
 import java.io.File;
+import java.io.IOException;
 
 public class UserJson {
 
     final static private String USER_JSON_FILE_NAME = "UserData";
 
     public static boolean isUserFileInitialize(File filesDir) {
-        boolean isUserFileInitialize = TextFilesIO.fileExists(filesDir, USER_JSON_FILE_NAME);
+        boolean isUserFileInitialize = TextFilesIO.isFileExists(filesDir, USER_JSON_FILE_NAME);
         return isUserFileInitialize;
     }
 
-    public static void writeUserToJsonFile(File filesDir, User user) {
+    public static void deleteUserFile() {
+        TextFilesIO.deleteFile(MainActivity.filesDir, USER_JSON_FILE_NAME);
+    }
+
+    public static void writeUserToJsonFile(File filesDir, User user) throws IOException {
         JSONObject userJson = new JSONObject();
 
         try {
@@ -38,7 +45,7 @@ public class UserJson {
         }
     }
 
-    public static User readUserFromJsonFile(File filesDir) {
+    public static User readUserFromJsonFile(File filesDir) throws IOException {
         String jsonStr = TextFilesIO.readTextFromFile(filesDir, USER_JSON_FILE_NAME);
         User user = new User();
 
