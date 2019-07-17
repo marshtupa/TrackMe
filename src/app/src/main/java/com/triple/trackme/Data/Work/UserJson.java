@@ -1,28 +1,25 @@
 package com.triple.trackme.Data.Work;
 
 import com.triple.trackme.Data.Storage.User;
-import com.triple.trackme.MainActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;
-import java.io.File;
 import java.io.IOException;
 
 public class UserJson {
 
     final static private String USER_JSON_FILE_NAME = "UserData";
 
-    public static boolean isUserFileInitialize(File filesDir) {
-        boolean isUserFileInitialize = TextFilesIO.isFileExists(filesDir, USER_JSON_FILE_NAME);
-        return isUserFileInitialize;
+    public static boolean isUserFileInitialize() {
+        return TextFilesIO.isFileExists(USER_JSON_FILE_NAME);
     }
 
     public static void deleteUserFile() {
-        TextFilesIO.deleteFile(MainActivity.filesDir, USER_JSON_FILE_NAME);
+        TextFilesIO.deleteFile(USER_JSON_FILE_NAME);
     }
 
-    public static void writeUserToJsonFile(File filesDir, User user) throws IOException {
+    public static void writeUserToJsonFile(User user) throws WorkWithDataException {
         JSONObject userJson = new JSONObject();
 
         try {
@@ -37,20 +34,21 @@ public class UserJson {
             }
             userJson.put("trackFilePaths", trackFilePathsJson);
 
-            String jsonStr = userJson.toString();
-            TextFilesIO.writeTextToFile(filesDir, USER_JSON_FILE_NAME, jsonStr);
+            String jsonString = userJson.toString();
+            TextFilesIO.writeTextToFile(USER_JSON_FILE_NAME, jsonString);
         }
-        catch (JSONException e) {
-            e.printStackTrace();
+        catch (IOException | JSONException exception) {
+            exception.printStackTrace();
+            throw new WorkWithDataException(exception.getMessage());
         }
     }
 
-    public static User readUserFromJsonFile(File filesDir) throws IOException {
-        String jsonStr = TextFilesIO.readTextFromFile(filesDir, USER_JSON_FILE_NAME);
+    public static User readUserFromJsonFile() throws WorkWithDataException {
         User user = new User();
 
         try {
-            JSONObject userJson = new JSONObject(jsonStr);
+            String jsonString = TextFilesIO.readTextFromFile(USER_JSON_FILE_NAME);
+            JSONObject userJson = new JSONObject(jsonString);
 
             user.login = userJson.getString("login");
             user.name = userJson.getString("name");
@@ -63,8 +61,9 @@ public class UserJson {
                 user.trackFilePaths.add(trackFilePath);
             }
         }
-        catch (JSONException e) {
-            e.printStackTrace();
+        catch (IOException | JSONException exception) {
+            exception.printStackTrace();
+            throw new WorkWithDataException(exception.getMessage());
         }
 
         return user;

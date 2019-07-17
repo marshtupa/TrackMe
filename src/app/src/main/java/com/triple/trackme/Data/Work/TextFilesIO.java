@@ -1,5 +1,7 @@
 package com.triple.trackme.Data.Work;
 
+import com.triple.trackme.MainActivity;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -9,18 +11,18 @@ import java.io.IOException;
 
 class TextFilesIO {
 
-    static void deleteFile(File filesDir, String fileName) {
-        File file = new File(filesDir, fileName);
+    static void deleteFile(String fileName) {
+        File file = new File(MainActivity.filesDir, fileName);
         file.delete();
     }
 
-    static boolean isFileExists(File filesDir, String fileName) {
-        File file = new File(filesDir, fileName);
+    static boolean isFileExists(String fileName) {
+        File file = new File(MainActivity.filesDir, fileName);
         return file.exists();
     }
 
-    static void writeTextToFile(File filesDir, String fileName, String fileText) throws IOException {
-        File file = new File(filesDir, fileName);
+    static void writeTextToFile(String fileName, String fileText) throws IOException {
+        File file = new File(MainActivity.filesDir, fileName);
 
         if (!file.exists()) {
             file.createNewFile();
@@ -32,8 +34,8 @@ class TextFilesIO {
         bufferedWriter.close();
     }
 
-    static String readTextFromFile(File filesDir, String fileName) throws IOException {
-        File file = new File(filesDir, fileName);
+    static String readTextFromFile(String fileName) throws IOException {
+        File file = new File(MainActivity.filesDir, fileName);
 
         StringBuilder fileText = new StringBuilder();
 
