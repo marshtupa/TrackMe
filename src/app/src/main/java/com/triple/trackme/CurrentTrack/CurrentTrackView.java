@@ -19,12 +19,13 @@ import java.util.TimerTask;
 public class CurrentTrackView {
 
     public enum CurrentTrackState { STOP, START, PAUSE }
-    private static CurrentTrackState trackState;
 
-    private static ArrayList<Polyline> polylines;
     private static CurrentTrackData currentTrackData;
+    private static CurrentTrackState trackState;
+    private static ArrayList<Polyline> polylines;
+    private static Timer trackTimer;
 
-    private static Context context;
+    private static Context mainActivityContext;
     private static TextView timeTextView;
     private static TextView distanceTextView;
     private static TextView speedTextView;
@@ -32,18 +33,11 @@ public class CurrentTrackView {
     private static ImageButton pauseButton;
     private static ImageButton startButton;
 
-    private static Timer trackTimer;
+    public static void initializeTrack(Context context,
+                                       TextView timeTextView, TextView distanceTextView, TextView speedTextView,
+                                       ImageButton stopButton, ImageButton pauseButton, ImageButton startButton) {
 
-    public static void initialize(Context context,
-                                  TextView timeTextView, TextView distanceTextView, TextView speedTextView,
-                                  ImageButton stopButton, ImageButton pauseButton, ImageButton startButton) {
-
-        trackState = CurrentTrackState.STOP;
-
-        currentTrackData = new CurrentTrackData();
-        polylines = new ArrayList<Polyline>();
-
-        CurrentTrackView.context = context;
+        CurrentTrackView.mainActivityContext = context;
         CurrentTrackView.timeTextView = timeTextView;
         CurrentTrackView.distanceTextView = distanceTextView;
         CurrentTrackView.speedTextView = speedTextView;
@@ -51,123 +45,105 @@ public class CurrentTrackView {
         CurrentTrackView.pauseButton = pauseButton;
         CurrentTrackView.startButton = startButton;
 
-        updateDataUI();
-        updateButtonsUI(true, false);
+        setTrackState(CurrentTrackState.STOP);
     }
 
-    public static void start() {
-        if (trackState == CurrentTrackState.PAUSE) {
-            initializeDataResume();
-        }
-        else {
-            initializeDataStart();
+    public static void startTrack() {
+        setTrackState(CurrentTrackState.START);
+    }
+
+    public static void pauseTrack() {
+        setTrackState(CurrentTrackState.PAUSE);
+    }
+
+    public static void stopTrack() {
+        currentTrackData.saveData();
+        setTrackState(CurrentTrackState.STOP);
+    }
+
+    private static void setTrackState(CurrentTrackState trackState) {
+        CurrentTrackView.trackState = trackState;
+
+        switch (trackState) {
+            case START:
+                startTrackTimer();
+                updateDataUI();
+                updateButtonsUI(false, true, true);
+                break;
+            case PAUSE:
+                stopTrackTimer();
+                updateDataUI();
+                updateButtonsUI(true, false, true);
+                break;
+            case STOP:
+                cleanTrackData();
+                cleanRoute();
+                stopTrackTimer();
+                updateDataUI();
+                updateButtonsUI(true, false, false);
+                break;
         }
     }
 
-    public static void pause() {
+    public static void newPosition(Location newPosition, GoogleMap map) {
         if (trackState == CurrentTrackState.START) {
-            initializeDataPause();
-        }
-    }
-
-    public static void stop() {
-        if (trackState == CurrentTrackState.START || trackState == CurrentTrackState.PAUSE) {
-            currentTrackData.saveData();
-            cleanRoute();
-            initializeDataStop();
-        }
-    }
-
-    public static void newLocation(Location newLoc, GoogleMap map) {
-        if (trackState == CurrentTrackState.START) {
-            Location lastLoc = currentTrackData.getLastPosition();
-            currentTrackData.newPosition(newLoc);
-            if (lastLoc != null) {
-                drawRoute(map, lastLoc, newLoc);
+            Location lastPosition = currentTrackData.getLastPosition();
+            currentTrackData.newPosition(newPosition);
+            if (lastPosition != null) {
+                drawRoute(map, lastPosition, newPosition);
             }
         }
     }
 
-    private static void drawRoute(GoogleMap map, Location lastLoc, Location newLoc) {
+    private static void drawRoute(GoogleMap map, Location lastPosition, Location newPosition) {
         Polyline polyline = map.addPolyline(new PolylineOptions()
-                .add(new LatLng(lastLoc.getLatitude(), lastLoc.getLongitude()), new LatLng(newLoc.getLatitude(), newLoc.getLongitude()))
+                .add(new LatLng(lastPosition.getLatitude(), lastPosition.getLongitude()),
+                        new LatLng(newPosition.getLatitude(), newPosition.getLongitude()))
                 .width(20)
                 .color(Color.argb(90, 0, 130, 255))
         );
         polylines.add(polyline);
     }
 
+    private static void cleanTrackData() {
+        currentTrackData = new CurrentTrackData();
+    }
+
     private static void cleanRoute() {
-        for(Polyline line : polylines) {
-            line.remove();
+        if (polylines != null) {
+            for(Polyline line : polylines) {
+                line.remove();
+            }
         }
         polylines = new ArrayList<Polyline>();
     }
 
-    private static void initializeDataStart() {
-        trackState = CurrentTrackState.START;
-
-        currentTrackData = new CurrentTrackData();
-
-        updateDataUI();
-        updateButtonsUI(false, true);
-        startTimer();
-    }
-
-    private static void initializeDataPause() {
-        trackState = CurrentTrackState.PAUSE;
-
-        updateDataUI();
-        updateButtonsUI(true, false);
-        trackTimer.cancel();
-    }
-
-    private static void initializeDataResume() {
-        trackState = CurrentTrackState.START;
-
-        updateDataUI();
-        updateButtonsUI(false, true);
-        startTimer();
-    }
-
-    private static void initializeDataStop() {
-        trackState = CurrentTrackState.STOP;
-
-        currentTrackData = new CurrentTrackData();
-
-        updateDataUI();
-        updateButtonsUI(true, false);
-        trackTimer.cancel();
-    }
-
     private static void updateDataUI() {
-        ((MainActivity)context).setText(timeTextView, currentTrackData.timeToFormatString());
-        ((MainActivity)context).setText(distanceTextView, currentTrackData.distanceToFormatString());
-        ((MainActivity)context).setText(speedTextView, currentTrackData.speedToFormatString());
+        ((MainActivity)mainActivityContext).setText(timeTextView, currentTrackData.timeToFormatString());
+        ((MainActivity)mainActivityContext).setText(distanceTextView, currentTrackData.distanceToFormatString());
+        ((MainActivity)mainActivityContext).setText(speedTextView, currentTrackData.speedToFormatString());
     }
 
-    private static void updateButtonsUI(final boolean startButtonEnable, final boolean pauseButtonEnable) {
-        if (startButtonEnable) {
-            startButton.setClickable(true);
-            pauseButton.setClickable(false);
-        }
-        else {
-            startButton.setClickable(false);
-            pauseButton.setClickable(true);
-        }
+    private static void updateButtonsUI(final boolean startButtonEnable, final boolean pauseButtonEnable, final boolean stopButtonEnable) {
+        final int CHANGE_BUTTONS_DELAY = 290;
+
+        startButton.setClickable(startButtonEnable);
+        pauseButton.setClickable(pauseButtonEnable);
+        stopButton.setClickable(stopButtonEnable);
 
         TimerTask changeButtonsTask = new TimerTask() {
             @Override
             public void run() {
-                ((MainActivity)context).enableButton(startButton, startButtonEnable);
-                ((MainActivity)context).enableButton(pauseButton, pauseButtonEnable);
+                ((MainActivity)mainActivityContext).enableButton(startButton, startButtonEnable);
+                ((MainActivity)mainActivityContext).enableButton(pauseButton, pauseButtonEnable);
+                ((MainActivity)mainActivityContext).enableButton(stopButton, stopButtonEnable);
             }
         };
         Timer changeButtonsTimer = new Timer();
-        changeButtonsTimer.schedule(changeButtonsTask, 290);
+        changeButtonsTimer.schedule(changeButtonsTask, CHANGE_BUTTONS_DELAY);
     }
 
-    private static void startTimer() {
+    private static void startTrackTimer() {
         TimerTask repeatedTimerTask = new TimerTask() {
             public void run() {
                 if (trackState == CurrentTrackState.START) {
@@ -178,5 +154,11 @@ public class CurrentTrackView {
         };
         trackTimer = new Timer("TrackTimer");
         trackTimer.scheduleAtFixedRate(repeatedTimerTask, 1000, 1000);
+    }
+
+    private static void stopTrackTimer() {
+        if (trackTimer != null) {
+            trackTimer.cancel();
+        }
     }
 }

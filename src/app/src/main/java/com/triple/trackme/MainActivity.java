@@ -58,7 +58,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
         filesDir = getFilesDir();
         CurrentUserData.initializeUserData();
-        CurrentTrackView.initialize(this, (TextView) findViewById(R.id.timeVal),
+        CurrentTrackView.initializeTrack(this, (TextView) findViewById(R.id.timeVal),
                 (TextView) findViewById(R.id.distanceVal), (TextView) findViewById(R.id.speedVal),
                 (ImageButton) findViewById(R.id.buttonStop), (ImageButton) findViewById(R.id.buttonPause),
                 (ImageButton) findViewById(R.id.buttonPlay));
@@ -189,7 +189,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onLocationChanged(Location location) {
-        CurrentTrackView.newLocation(location, map);
+        CurrentTrackView.newPosition(location, map);
     }
 
     @Override
@@ -205,19 +205,19 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     public void clickStartTrackButton(View view) {
         final Animation animScale = AnimationUtils.loadAnimation(this, R.anim.scale);
         view.startAnimation(animScale);
-        CurrentTrackView.start();
+        CurrentTrackView.startTrack();
     }
 
     public void clickPauseTrackButton(View view) {
         final Animation animScale = AnimationUtils.loadAnimation(this, R.anim.scale);
         view.startAnimation(animScale);
-        CurrentTrackView.pause();
+        CurrentTrackView.pauseTrack();
     }
 
     public void clickStopTrackButton(View view) {
         final Animation animScale = AnimationUtils.loadAnimation(this, R.anim.scale);
         view.startAnimation(animScale);
-        CurrentTrackView.stop();
+        CurrentTrackView.stopTrack();
     }
 
     public void clickProfileButton(View view) {
