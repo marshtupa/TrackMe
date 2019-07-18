@@ -20,13 +20,26 @@ public class CurrentUserData {
     private static ArrayList<String> trackFilePaths;
 
     public static void initializeUserData() {
-        boolean isUserFileInitialize = UserJson.isUserFileInitialize();
-        isInitialize = isUserFileInitialize;
+        isInitialize = UserJson.isUserFileInitialize();
 
         if (isInitialize) {
             initializeUserDataFromFile();
         }
         else {
+            initializeUserEmptyData();
+        }
+    }
+
+    private static void initializeUserDataFromFile() {
+        try {
+            User user = UserJson.readUserFromJsonFile();
+            login = user.login;
+            name = user.name;
+            surname = user.surname;
+            photoFilePath = user.photoFilePath;
+            trackFilePaths = user.trackFilePaths;
+        }
+        catch (WorkWithDataException exception) {
             initializeUserEmptyData();
         }
     }
@@ -39,36 +52,20 @@ public class CurrentUserData {
         trackFilePaths = new ArrayList<String>();
     }
 
-    private static void initializeUserDataFromFile() {
-        User user = new User();
-        try {
-            user = UserJson.readUserFromJsonFile();
-        }
-        catch (WorkWithDataException exception) {
-
-        }
-        login = user.login;
-        name = user.name;
-        surname = user.surname;
-        photoFilePath = user.photoFilePath;
-        trackFilePaths = user.trackFilePaths;
-    }
-
     public static void addTrack(Track track) {
         if (trackFilePaths.size() >= MAX_TRACK_FILES) {
             deleteTrack();
         }
 
         String fileName = getNextName();
+        trackFilePaths.add(fileName);
         try {
             TrackJson.writeTrackToJsonFile(fileName, track);
+            saveUserData();
         }
         catch (WorkWithDataException exception) {
-
+            trackFilePaths.remove(trackFilePaths.size() - 1);
         }
-        trackFilePaths.add(fileName);
-
-        saveUserData();
     }
 
     private static void deleteTrack() {
@@ -78,8 +75,8 @@ public class CurrentUserData {
     }
 
     private static String getNextName() {
-        final String fileNameTemplate = "track_";
-        final String divider = "_";
+        final String FILE_NAME_TEMPLATE = "track_";
+        final String DIVIDER = "_";
 
         int nextFileNumber;
         if (trackFilePaths.size() == 0) {
@@ -87,24 +84,19 @@ public class CurrentUserData {
         }
         else {
             String lastName = trackFilePaths.get(trackFilePaths.size() - 1);
-            nextFileNumber = Integer.parseInt(lastName.substring(lastName.indexOf(divider) + 1)) + 1;
+            nextFileNumber = Integer.parseInt(lastName.substring(lastName.indexOf(DIVIDER) + 1)) + 1;
         }
 
-        return fileNameTemplate + nextFileNumber;
+        return FILE_NAME_TEMPLATE + nextFileNumber;
     }
 
-    public static void saveUserData() {
+    private static void saveUserData() throws WorkWithDataException {
         User user = new User();
         user.login = login;
         user.name = name;
         user.surname = surname;
         user.photoFilePath = photoFilePath;
         user.trackFilePaths = trackFilePaths;
-        try {
-            UserJson.writeUserToJsonFile(user);
-        }
-        catch (WorkWithDataException exception) {
-
-        }
+        UserJson.writeUserToJsonFile(user);
     }
 }
