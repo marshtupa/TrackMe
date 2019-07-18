@@ -18,14 +18,15 @@ import java.util.TimerTask;
 
 public class CurrentTrackView {
 
-    public enum CurrentTrackState { STOP, START, PAUSE }
+    private enum CurrentTrackState { STOP, START, PAUSE }
+    private final static int MIN_TIME_SECONDS_FOR_SAVE_TRACK = 10;
 
     private static CurrentTrackData currentTrackData;
     private static CurrentTrackState trackState;
     private static ArrayList<Polyline> polylines;
     private static Timer trackTimer;
 
-    private static Context mainActivityContext;
+    private static Context context;
     private static TextView timeTextView;
     private static TextView distanceTextView;
     private static TextView speedTextView;
@@ -37,7 +38,7 @@ public class CurrentTrackView {
                                        TextView timeTextView, TextView distanceTextView, TextView speedTextView,
                                        ImageButton stopButton, ImageButton pauseButton, ImageButton startButton) {
 
-        CurrentTrackView.mainActivityContext = context;
+        CurrentTrackView.context = context;
         CurrentTrackView.timeTextView = timeTextView;
         CurrentTrackView.distanceTextView = distanceTextView;
         CurrentTrackView.speedTextView = speedTextView;
@@ -49,16 +50,34 @@ public class CurrentTrackView {
     }
 
     public static void startTrack() {
-        setTrackState(CurrentTrackState.START);
+        if (trackState != CurrentTrackState.START) {
+            setTrackState(CurrentTrackState.START);
+        }
     }
 
     public static void pauseTrack() {
-        setTrackState(CurrentTrackState.PAUSE);
+        if (trackState == CurrentTrackState.START) {
+            setTrackState(CurrentTrackState.PAUSE);
+        }
     }
 
-    public static void stopTrack() {
-        currentTrackData.saveData();
-        setTrackState(CurrentTrackState.STOP);
+    public static void stopTrack(Context context) {
+        if (trackState != CurrentTrackState.STOP) {
+            if (currentTrackData.getAllTimeInSeconds() >= MIN_TIME_SECONDS_FOR_SAVE_TRACK) {
+                StopTrackDialog stopTrackDialog = new StopTrackDialog();
+                stopTrackDialog.create(context).show();
+            }
+            else {
+                setTrackState(CurrentTrackState.STOP);
+            }
+        }
+    }
+
+    public static void endTrackAndSave() {
+        if (trackState != CurrentTrackState.STOP) {
+            currentTrackData.saveData();
+            setTrackState(CurrentTrackState.STOP);
+        }
     }
 
     private static void setTrackState(CurrentTrackState trackState) {
@@ -68,19 +87,19 @@ public class CurrentTrackView {
             case START:
                 startTrackTimer();
                 updateDataUI();
-                updateButtonsUI(false, true, true);
+                updateButtonsUI(false, true);
                 break;
             case PAUSE:
                 stopTrackTimer();
                 updateDataUI();
-                updateButtonsUI(true, false, true);
+                updateButtonsUI(true, false);
                 break;
             case STOP:
                 cleanTrackData();
                 cleanRoute();
                 stopTrackTimer();
                 updateDataUI();
-                updateButtonsUI(true, false, false);
+                updateButtonsUI(true, false);
                 break;
         }
     }
@@ -119,24 +138,24 @@ public class CurrentTrackView {
     }
 
     private static void updateDataUI() {
-        ((MainActivity)mainActivityContext).setText(timeTextView, currentTrackData.timeToFormatString());
-        ((MainActivity)mainActivityContext).setText(distanceTextView, currentTrackData.distanceToFormatString());
-        ((MainActivity)mainActivityContext).setText(speedTextView, currentTrackData.speedToFormatString());
+        ((MainActivity) context).setText(timeTextView, currentTrackData.timeToFormatString());
+        ((MainActivity) context).setText(distanceTextView, currentTrackData.distanceToFormatString());
+        ((MainActivity) context).setText(speedTextView, currentTrackData.speedToFormatString());
     }
 
-    private static void updateButtonsUI(final boolean startButtonEnable, final boolean pauseButtonEnable, final boolean stopButtonEnable) {
+    private static void updateButtonsUI(final boolean startButtonEnable, final boolean pauseButtonEnable) {
         final int CHANGE_BUTTONS_DELAY = 290;
 
         startButton.setClickable(startButtonEnable);
         pauseButton.setClickable(pauseButtonEnable);
-        stopButton.setClickable(stopButtonEnable);
+        stopButton.setClickable(false);
 
         TimerTask changeButtonsTask = new TimerTask() {
             @Override
             public void run() {
-                ((MainActivity)mainActivityContext).enableButton(startButton, startButtonEnable);
-                ((MainActivity)mainActivityContext).enableButton(pauseButton, pauseButtonEnable);
-                ((MainActivity)mainActivityContext).enableButton(stopButton, stopButtonEnable);
+                ((MainActivity) context).enableButton(startButton, startButtonEnable);
+                ((MainActivity) context).enableButton(pauseButton, pauseButtonEnable);
+                stopButton.setClickable(true);
             }
         };
         Timer changeButtonsTimer = new Timer();

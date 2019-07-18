@@ -28,6 +28,10 @@ class CurrentTrackData {
         allTimeInSeconds += seconds;
     }
 
+    int getAllTimeInSeconds() {
+        return allTimeInSeconds;
+    }
+
     void newPosition(Location newPosition) {
         updateSpeed(newPosition);
         updateDistance(newPosition);
@@ -41,7 +45,7 @@ class CurrentTrackData {
     private void updateDistance(Location newPosition) {
         Location lastPosition = getLastPosition();
         if (lastPosition != null) {
-            double newDistance = GoogleMapService.distanceBetweenCoordinates(lastPosition, newPosition);
+            double newDistance = GoogleMapService.distanceBetweenTwoCoordinates(lastPosition, newPosition);
             allDistanceInMetres += newDistance;
         }
     }

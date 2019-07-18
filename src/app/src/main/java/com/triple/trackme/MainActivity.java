@@ -39,7 +39,7 @@ import java.io.File;
 public class MainActivity extends FragmentActivity implements OnMapReadyCallback, OnMapLoadedCallback, LocationListener {
 
     private GoogleMap map;
-    private ProgressDialog progressDialog;
+    private ProgressDialog loadMapProgressDialog;
 
     public static final int REQUEST_ID_ACCESS_COURSE_FINE_LOCATION = 100;
     public static File filesDir;
@@ -92,18 +92,18 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private void showMapLoadProgress() {
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Map Loading ...");
-        progressDialog.setMessage("Please wait...");
-        progressDialog.setCancelable(true);
-        progressDialog.show();
+        loadMapProgressDialog = new ProgressDialog(this);
+        loadMapProgressDialog.setTitle("Map Loading ...");
+        loadMapProgressDialog.setMessage("Please wait...");
+        loadMapProgressDialog.setCancelable(true);
+        loadMapProgressDialog.show();
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
         map.setOnMapLoadedCallback(this);
-        GoogleMapService.settingMap(map, getSupportFragmentManager(), this);
+        GoogleMapService.settingMap(map, this);
 
         if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -114,7 +114,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
     @Override
     public void onMapLoaded() {
-        progressDialog.dismiss();
+        loadMapProgressDialog.dismiss();
 
         int accessCoarsePermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
         int accessFinePermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
@@ -146,6 +146,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private void showMyLocation() {
+        final double DISTANCE_TO_CENTER = 0.005;
+
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         String locationProvider = GoogleMapService.getEnabledLocationProvider(locationManager, this);
         if (locationProvider == null) {
@@ -170,7 +172,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         if (myLocation != null) {
-            LatLng latLng = new LatLng(myLocation.getLatitude(), myLocation.getLongitude() - 0.005);
+            LatLng latLng = new LatLng(myLocation.getLatitude(), myLocation.getLongitude() - DISTANCE_TO_CENTER);
             map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 13));
             CameraPosition cameraPosition = new CameraPosition.Builder()
                     .target(latLng)
@@ -217,7 +219,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     public void clickStopTrackButton(View view) {
         final Animation animScale = AnimationUtils.loadAnimation(this, R.anim.scale);
         view.startAnimation(animScale);
-        CurrentTrackView.stopTrack();
+        CurrentTrackView.stopTrack(this);
     }
 
     public void clickProfileButton(View view) {
