@@ -60,7 +60,14 @@ public class CurrentTrackView {
         }
     }
 
-    public static void stopTrack() {
+    public static void stopTrack(Context context) {
+        if (trackState != CurrentTrackState.STOP) {
+            StopTrackDialog stopTrackDialog = new StopTrackDialog();
+            stopTrackDialog.create(context).show();
+        }
+    }
+
+    public static void endTrackAndSave() {
         if (trackState != CurrentTrackState.STOP) {
             currentTrackData.saveData();
             setTrackState(CurrentTrackState.STOP);

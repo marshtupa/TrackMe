@@ -219,7 +219,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     public void clickStopTrackButton(View view) {
         final Animation animScale = AnimationUtils.loadAnimation(this, R.anim.scale);
         view.startAnimation(animScale);
-        CurrentTrackView.stopTrack();
+        CurrentTrackView.stopTrack(this);
     }
 
     public void clickProfileButton(View view) {
