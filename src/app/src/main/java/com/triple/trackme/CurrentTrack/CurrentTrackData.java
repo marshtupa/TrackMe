@@ -41,7 +41,7 @@ class CurrentTrackData {
     private void updateDistance(Location newPosition) {
         Location lastPosition = getLastPosition();
         if (lastPosition != null) {
-            double newDistance = GoogleMapService.distanceBetweenCoordinates(lastPosition, newPosition);
+            double newDistance = GoogleMapService.distanceBetweenTwoCoordinates(lastPosition, newPosition);
             allDistanceInMetres += newDistance;
         }
     }

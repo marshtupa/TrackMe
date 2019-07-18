@@ -103,7 +103,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
         map.setOnMapLoadedCallback(this);
-        GoogleMapService.settingMap(map, getSupportFragmentManager(), this);
+        GoogleMapService.settingMap(map, this);
 
         if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {

@@ -25,7 +25,7 @@ public class CurrentTrackView {
     private static ArrayList<Polyline> polylines;
     private static Timer trackTimer;
 
-    private static Context mainActivityContext;
+    private static Context context;
     private static TextView timeTextView;
     private static TextView distanceTextView;
     private static TextView speedTextView;
@@ -37,7 +37,7 @@ public class CurrentTrackView {
                                        TextView timeTextView, TextView distanceTextView, TextView speedTextView,
                                        ImageButton stopButton, ImageButton pauseButton, ImageButton startButton) {
 
-        CurrentTrackView.mainActivityContext = context;
+        CurrentTrackView.context = context;
         CurrentTrackView.timeTextView = timeTextView;
         CurrentTrackView.distanceTextView = distanceTextView;
         CurrentTrackView.speedTextView = speedTextView;
@@ -119,9 +119,9 @@ public class CurrentTrackView {
     }
 
     private static void updateDataUI() {
-        ((MainActivity)mainActivityContext).setText(timeTextView, currentTrackData.timeToFormatString());
-        ((MainActivity)mainActivityContext).setText(distanceTextView, currentTrackData.distanceToFormatString());
-        ((MainActivity)mainActivityContext).setText(speedTextView, currentTrackData.speedToFormatString());
+        ((MainActivity) context).setText(timeTextView, currentTrackData.timeToFormatString());
+        ((MainActivity) context).setText(distanceTextView, currentTrackData.distanceToFormatString());
+        ((MainActivity) context).setText(speedTextView, currentTrackData.speedToFormatString());
     }
 
     private static void updateButtonsUI(final boolean startButtonEnable, final boolean pauseButtonEnable, final boolean stopButtonEnable) {
@@ -134,9 +134,9 @@ public class CurrentTrackView {
         TimerTask changeButtonsTask = new TimerTask() {
             @Override
             public void run() {
-                ((MainActivity)mainActivityContext).enableButton(startButton, startButtonEnable);
-                ((MainActivity)mainActivityContext).enableButton(pauseButton, pauseButtonEnable);
-                ((MainActivity)mainActivityContext).enableButton(stopButton, stopButtonEnable);
+                ((MainActivity) context).enableButton(startButton, startButtonEnable);
+                ((MainActivity) context).enableButton(pauseButton, pauseButtonEnable);
+                ((MainActivity) context).enableButton(stopButton, stopButtonEnable);
             }
         };
         Timer changeButtonsTimer = new Timer();
