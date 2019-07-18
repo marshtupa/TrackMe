@@ -2,21 +2,24 @@ package com.triple.trackme.Data.Work;
 
 import com.triple.trackme.Data.Storage.Position;
 import com.triple.trackme.Data.Storage.Track;
-import com.triple.trackme.MainActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class TrackJson {
 
-    public static void deleteTrackFile(String trackJsonFileName) {
-        TextFilesIO.deleteFile(MainActivity.filesDir, trackJsonFileName);
+    public static boolean isTrackFileInitialize(String trackJsonFileName) {
+        return TextFilesIO.isFileExists(trackJsonFileName);
     }
 
-    public static void writeTrackToJsonFile(File filesDir, String trackJsonFileName, Track track) {
+    public static void deleteTrackFile(String trackJsonFileName) {
+        TextFilesIO.deleteFile(trackJsonFileName);
+    }
+
+    public static void writeTrackToJsonFile(String trackJsonFileName, Track track) throws WorkWithDataException {
         JSONObject trackJson = new JSONObject();
 
         try {
@@ -33,20 +36,21 @@ public class TrackJson {
             }
             trackJson.put("positions", positionsJson);
 
-            String jsonStr = trackJson.toString();
-            TextFilesIO.writeTextToFile(filesDir, trackJsonFileName, jsonStr);
+            String jsonString = trackJson.toString();
+            TextFilesIO.writeTextToFile(trackJsonFileName, jsonString);
         }
-        catch (JSONException e) {
-            e.printStackTrace();
+        catch (IOException | JSONException exception) {
+            exception.printStackTrace();
+            throw new WorkWithDataException(exception.getMessage());
         }
     }
 
-    public static Track readTrackFromJsonFile(File filesDir, String trackJsonFileName) {
-        String jsonStr = TextFilesIO.readTextFromFile(filesDir, trackJsonFileName);
+    public static Track readTrackFromJsonFile(String trackJsonFileName) throws WorkWithDataException {
         Track track = new Track();
 
         try {
-            JSONObject trackJson = new JSONObject(jsonStr);
+            String jsonString = TextFilesIO.readTextFromFile(trackJsonFileName);
+            JSONObject trackJson = new JSONObject(jsonString);
 
             track.distance = trackJson.getDouble("distance");
             track.time = trackJson.getInt("time");
@@ -62,8 +66,9 @@ public class TrackJson {
                 track.positions.add(position);
             }
         }
-        catch (JSONException e) {
-            e.printStackTrace();
+        catch (IOException | JSONException exception) {
+            exception.printStackTrace();
+            throw new WorkWithDataException(exception.getMessage());
         }
 
         return track;
