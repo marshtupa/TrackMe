@@ -49,16 +49,22 @@ public class CurrentTrackView {
     }
 
     public static void startTrack() {
-        setTrackState(CurrentTrackState.START);
+        if (trackState != CurrentTrackState.START) {
+            setTrackState(CurrentTrackState.START);
+        }
     }
 
     public static void pauseTrack() {
-        setTrackState(CurrentTrackState.PAUSE);
+        if (trackState == CurrentTrackState.START) {
+            setTrackState(CurrentTrackState.PAUSE);
+        }
     }
 
     public static void stopTrack() {
-        currentTrackData.saveData();
-        setTrackState(CurrentTrackState.STOP);
+        if (trackState != CurrentTrackState.STOP) {
+            currentTrackData.saveData();
+            setTrackState(CurrentTrackState.STOP);
+        }
     }
 
     private static void setTrackState(CurrentTrackState trackState) {
@@ -68,19 +74,19 @@ public class CurrentTrackView {
             case START:
                 startTrackTimer();
                 updateDataUI();
-                updateButtonsUI(false, true, true);
+                updateButtonsUI(false, true);
                 break;
             case PAUSE:
                 stopTrackTimer();
                 updateDataUI();
-                updateButtonsUI(true, false, true);
+                updateButtonsUI(true, false);
                 break;
             case STOP:
                 cleanTrackData();
                 cleanRoute();
                 stopTrackTimer();
                 updateDataUI();
-                updateButtonsUI(true, false, false);
+                updateButtonsUI(true, false);
                 break;
         }
     }
@@ -124,19 +130,19 @@ public class CurrentTrackView {
         ((MainActivity) context).setText(speedTextView, currentTrackData.speedToFormatString());
     }
 
-    private static void updateButtonsUI(final boolean startButtonEnable, final boolean pauseButtonEnable, final boolean stopButtonEnable) {
+    private static void updateButtonsUI(final boolean startButtonEnable, final boolean pauseButtonEnable) {
         final int CHANGE_BUTTONS_DELAY = 290;
 
         startButton.setClickable(startButtonEnable);
         pauseButton.setClickable(pauseButtonEnable);
-        stopButton.setClickable(stopButtonEnable);
+        stopButton.setClickable(false);
 
         TimerTask changeButtonsTask = new TimerTask() {
             @Override
             public void run() {
                 ((MainActivity) context).enableButton(startButton, startButtonEnable);
                 ((MainActivity) context).enableButton(pauseButton, pauseButtonEnable);
-                ((MainActivity) context).enableButton(stopButton, stopButtonEnable);
+                stopButton.setClickable(true);
             }
         };
         Timer changeButtonsTimer = new Timer();
