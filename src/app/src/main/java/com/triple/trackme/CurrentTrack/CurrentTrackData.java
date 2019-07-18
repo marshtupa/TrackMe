@@ -28,6 +28,10 @@ class CurrentTrackData {
         allTimeInSeconds += seconds;
     }
 
+    int getAllTimeInSeconds() {
+        return allTimeInSeconds;
+    }
+
     void newPosition(Location newPosition) {
         updateSpeed(newPosition);
         updateDistance(newPosition);

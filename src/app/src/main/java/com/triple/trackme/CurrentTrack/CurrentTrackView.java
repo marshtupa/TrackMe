@@ -18,7 +18,8 @@ import java.util.TimerTask;
 
 public class CurrentTrackView {
 
-    public enum CurrentTrackState { STOP, START, PAUSE }
+    private enum CurrentTrackState { STOP, START, PAUSE }
+    private final static int MIN_TIME_SECONDS_FOR_SAVE_TRACK = 10;
 
     private static CurrentTrackData currentTrackData;
     private static CurrentTrackState trackState;
@@ -62,8 +63,13 @@ public class CurrentTrackView {
 
     public static void stopTrack(Context context) {
         if (trackState != CurrentTrackState.STOP) {
-            StopTrackDialog stopTrackDialog = new StopTrackDialog();
-            stopTrackDialog.create(context).show();
+            if (currentTrackData.getAllTimeInSeconds() >= MIN_TIME_SECONDS_FOR_SAVE_TRACK) {
+                StopTrackDialog stopTrackDialog = new StopTrackDialog();
+                stopTrackDialog.create(context).show();
+            }
+            else {
+                setTrackState(CurrentTrackState.STOP);
+            }
         }
     }
 
