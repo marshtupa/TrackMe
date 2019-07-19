@@ -13,13 +13,21 @@ public class StopTrackDialog {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage(R.string.stopTrackDialogMessage)
                 .setPositiveButton(R.string.stopTrackDialogPositiveButton, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) { }
+                    public void onClick(DialogInterface dialog, int id) {
+                        CurrentTrackView.startTrack();
+                    }
                 })
                 .setNegativeButton(R.string.stopTrackDialogNegativeButton, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         CurrentTrackView.endTrackAndSave();
                     }
                 });
+        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialogInterface) {
+                CurrentTrackView.startTrack();
+            }
+        });
 
         return builder.create();
     }
