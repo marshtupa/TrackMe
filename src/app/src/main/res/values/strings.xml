@@ -13,7 +13,7 @@
     <string name="distance_empty_example">21.42</string>
     <string name="speed_empty_example">15.32</string>
     <string name="time_empty_example">00:21:10</string>
-    <string name="stopTrackDialogMessage">Stop track? All data will save.</string>
-    <string name="stopTrackDialogPositiveButton">Cancel</string>
-    <string name="stopTrackDialogNegativeButton">Stop</string>
+    <string name="stopTrackDialogMessage">Do you want to complete the training?</string>
+    <string name="stopTrackDialogPositiveButton">Resume</string>
+    <string name="stopTrackDialogNegativeButton">Complete</string>
 </resources>

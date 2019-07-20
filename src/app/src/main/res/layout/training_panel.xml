@@ -66,8 +66,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginBottom="42dp"
-        android:contentDescription="@string/picture"
         android:background="@drawable/ic_speedometer"
+        android:contentDescription="@string/picture"
         app:layout_constraintBottom_toBottomOf="@+id/speedVal"
         app:layout_constraintStart_toStartOf="@+id/speedVal" />
 
