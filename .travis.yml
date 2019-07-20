@@ -1,5 +1,6 @@
 language: android
 dist: trusty
+install: ant deps
 android:
   components:
     - build-tools-26.0.2
