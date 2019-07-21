@@ -146,7 +146,7 @@ public class CurrentTrackView {
     }
 
     private static void updateButtonsUI(final boolean startButtonEnable, final boolean pauseButtonEnable) {
-        final int CHANGE_BUTTONS_DELAY = 290;
+        final int CHANGE_BUTTONS_DELAY = 300;
 
         startButton.setClickable(startButtonEnable);
         pauseButton.setClickable(pauseButtonEnable);
