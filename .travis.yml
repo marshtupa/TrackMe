@@ -1,32 +1,23 @@
 language: android
 dist: trusty
-sudo: required
-jdk: oraclejdk8
-
+env:
+  global:
+    - ANDROID_API=26
+    - ANDROID_BUILD_TOOLS=26.0.2
+android:
+  components:
+    - build-tools-$ANDROID_BUILD_TOOLS
+    - android-$ANDROID_API
+    - extra-google-google_play_services
+    - extra-google-m2repository
+    - extra-android-m2repository
+script:
+  - cd src
 before_cache:
-  -rm -f $HOME/src/gradle/caches/modules-2/modules-2.lock
-  -rm -fr $HOME/src/gradle/caches/*/plugin-resolution/
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 cache:
   directories:
-    -$HOME/src/gradle/caches/
-    -$HOME/src/gradle/wrapper/
- 
- env:
-   global:
-     - ANDROID_API=24
-     - EMULATOR_API=21
-     - ANDROID_BUILD_TOOLS=24.0.2
-     - ADB_INSTALL_TIMEOUT=5 # minutes
-   
- android:
-   components:
-     - tools
-     - platform-tools
-     - build-tools-$ANDROID_BUILD_TOOLS
-     - android-$ANDROID_API
-     - android-$EMULATOR_API_LEVEL
-     - extra-google-m2repository
-     - extra-android-m2repository # for design library
-     - addon-google_apis-google-19 # google play services
-     - sys-img-armeabi-v7a-addon-google_apis-google-$ANDROID_API_LEVEL
-     - sys-img-armeabi-v7a-addon-google_apis-google-$EMULATOR_API_LEVEL
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+    - $HOME/.android/build-cache
