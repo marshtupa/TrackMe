@@ -9,12 +9,14 @@ import com.triple.trackme.R;
 
 public class StopTrackDialog {
 
-    public Dialog create(Context context) {
+    public Dialog create(Context context, final CurrentTrackView.CurrentTrackState trackStateBeforeDialog) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage(R.string.stopTrackDialogMessage)
                 .setPositiveButton(R.string.stopTrackDialogPositiveButton, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        CurrentTrackView.startTrack();
+                        if (trackStateBeforeDialog == CurrentTrackView.CurrentTrackState.START) {
+                            CurrentTrackView.startTrack();
+                        }
                     }
                 })
                 .setNegativeButton(R.string.stopTrackDialogNegativeButton, new DialogInterface.OnClickListener() {
@@ -25,7 +27,9 @@ public class StopTrackDialog {
         builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialogInterface) {
-                CurrentTrackView.startTrack();
+                if (trackStateBeforeDialog == CurrentTrackView.CurrentTrackState.START) {
+                    CurrentTrackView.startTrack();
+                }
             }
         });
 

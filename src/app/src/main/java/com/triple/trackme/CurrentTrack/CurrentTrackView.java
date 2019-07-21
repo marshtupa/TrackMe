@@ -18,7 +18,7 @@ import java.util.TimerTask;
 
 public class CurrentTrackView {
 
-    private enum CurrentTrackState { STOP, START, PAUSE }
+    enum CurrentTrackState { STOP, START, PAUSE }
     private final static int MIN_TIME_SECONDS_FOR_SAVE_TRACK = 10;
 
     private static CurrentTrackData currentTrackData;
@@ -64,9 +64,10 @@ public class CurrentTrackView {
     public static void stopTrack(Context context) {
         if (trackState != CurrentTrackState.STOP) {
             if (currentTrackData.getAllTimeInSeconds() >= MIN_TIME_SECONDS_FOR_SAVE_TRACK) {
+                CurrentTrackState trackStateBeforeDialog = trackState;
                 setTrackState(CurrentTrackState.PAUSE);
                 StopTrackDialog stopTrackDialog = new StopTrackDialog();
-                stopTrackDialog.create(context).show();
+                stopTrackDialog.create(context, trackStateBeforeDialog).show();
             }
             else {
                 setTrackState(CurrentTrackState.STOP);
@@ -145,7 +146,7 @@ public class CurrentTrackView {
     }
 
     private static void updateButtonsUI(final boolean startButtonEnable, final boolean pauseButtonEnable) {
-        final int CHANGE_BUTTONS_DELAY = 290;
+        final int CHANGE_BUTTONS_DELAY = 300;
 
         startButton.setClickable(startButtonEnable);
         pauseButton.setClickable(pauseButtonEnable);
