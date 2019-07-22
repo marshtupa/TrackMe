@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/profileLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/lastTrainingPanel"
+        android:layout_width="330dp"
+        android:layout_height="190dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/radius_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profilePanel" />
+
+    <TextView
+        android:id="@+id/trainingAvgSpeed"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="@string/speed_empty_example"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="@color/colorDark"
+        app:layout_constraintStart_toStartOf="@+id/trainingDistance"
+        app:layout_constraintTop_toBottomOf="@+id/trainingDistance" />
+
+    <TextView
+        android:id="@+id/trainingDistance"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="65dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="@string/distance_empty_example"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="@color/colorDark"
+        app:layout_constraintEnd_toEndOf="@+id/lastTrainingPanel"
+        app:layout_constraintTop_toTopOf="@+id/lastTrainingPanel" />
+
+    <TextView
+        android:id="@+id/speedT"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="5dp"
+        android:fontFamily="sans-serif-light"
+        android:text="@string/speed_CI"
+        android:textColor="#777777"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/trainingAvgSpeed"
+        app:layout_constraintStart_toEndOf="@+id/trainingAvgSpeed" />
+
+    <TextView
+        android:id="@+id/distanceLable"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="5dp"
+        android:fontFamily="sans-serif-light"
+        android:text="@string/distance_km_label"
+        android:textColor="#777777"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/trainingDistance"
+        app:layout_constraintStart_toEndOf="@+id/trainingDistance" />
+
+    <TextView
+        android:id="@+id/trainingTime"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="@string/time_empty_example"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="@color/colorDark"
+        app:layout_constraintStart_toStartOf="@+id/trainingDistance"
+        app:layout_constraintTop_toBottomOf="@+id/trainingAvgSpeed" />
+
+    <View
+        android:id="@+id/profilePanel"
+        android:layout_height="150dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/radius_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/showTrainings"
+        android:layout_width="330dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/radius_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lastTrainingPanel" />
+
+    <View
+        android:id="@+id/profileActionPanel3"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:background="@drawable/radius_view"
+        app:layout_constraintBottom_toBottomOf="@+id/profileActionPanel"
+        app:layout_constraintEnd_toEndOf="@+id/lastTrainingPanel" />
+
+    <View
+        android:id="@+id/profileActionPanel"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/radius_view"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/miniMap" />
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/miniMap"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/lastTrainingPanel"
+        app:layout_constraintEnd_toStartOf="@+id/trainingAvgSpeed"
+        app:layout_constraintStart_toStartOf="@+id/lastTrainingPanel"
+        app:layout_constraintTop_toTopOf="@+id/lastTrainingPanel"
+        tools:context=".MapsActivity" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="Neretin"
+        android:textColor="@color/colorDark"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="17dp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="Ivan"
+        android:textColor="@color/colorDark"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="@+id/imageView2" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="95dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="50dp"
+        app:layout_constraintBottom_toBottomOf="@+id/profilePanel"
+        app:layout_constraintStart_toStartOf="@+id/profilePanel"
+        app:layout_constraintTop_toTopOf="@+id/profilePanel"
+        app:srcCompat="@drawable/ic_man" />
+
+    <TextView
+        android:id="@+id/otherTrainings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="Settings"
+        android:textColor="@color/colorDark"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/profileActionPanel3"
+        app:layout_constraintEnd_toEndOf="@+id/profileActionPanel3"
+        app:layout_constraintStart_toStartOf="@+id/profileActionPanel3"
+        app:layout_constraintTop_toTopOf="@+id/profileActionPanel3" />
+
+    <TextView
+        android:id="@+id/otherTrainings3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:text="Log out"
+        android:textColor="@color/colorDark"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/profileActionPanel"
+        app:layout_constraintEnd_toEndOf="@+id/profileActionPanel"
+        app:layout_constraintStart_toStartOf="@+id/profileActionPanel"
+        app:layout_constraintTop_toTopOf="@+id/profileActionPanel" />
+
+    <TextView
+        android:id="@+id/otherTrainings2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Other trainings"
+        android:textColor="@color/colorDark"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/showTrainings"
+        app:layout_constraintEnd_toEndOf="@+id/showTrainings"
+        app:layout_constraintStart_toStartOf="@+id/showTrainings"
+        app:layout_constraintTop_toTopOf="@+id/showTrainings" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
