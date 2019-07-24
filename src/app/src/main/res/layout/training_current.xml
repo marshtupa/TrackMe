@@ -1,0 +1,140 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/training_current"
+    android:layout_width="380dp"
+    android:layout_height="220dp"
+    app:cardBackgroundColor="@color/colorWhite"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="10dp"
+    app:cardMaxElevation="20dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:background="@color/colorWhite">
+
+        <TextView
+            android:id="@+id/trainingDistance1"
+            android:layout_width="wrap_content"
+            android:layout_height="65dp"
+            android:layout_marginTop="40dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="@string/distance_empty_example"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="@color/colorDark"
+            android:textSize="56sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/distanceLabel2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:fontFamily="sans-serif-light"
+            android:text="@string/distance_label"
+            android:textColor="#777777"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageButton"
+            app:layout_constraintStart_toEndOf="@+id/imageButton"
+            app:layout_constraintTop_toTopOf="@+id/imageButton" />
+
+        <TextView
+            android:id="@+id/trainingSpeed1"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_marginEnd="66dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="@string/speed_empty_example"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="@color/colorDark"
+            android:textSize="34sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/trainingDistance1"
+            app:layout_constraintVertical_bias="0.416" />
+
+        <TextView
+            android:id="@+id/speedLabel1"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginBottom="6dp"
+            android:fontFamily="sans-serif-light"
+            android:text="@string/speed_CI"
+            android:textColor="#777777"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/trainingSpeed1"
+            app:layout_constraintStart_toEndOf="@+id/trainingSpeed1" />
+
+        <TextView
+            android:id="@+id/trainingTime1"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_marginStart="32dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="@string/time_empty_example"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="@color/colorDark"
+            android:textSize="34sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/trainingDistance1"
+            app:layout_constraintVertical_bias="0.416" />
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginBottom="52dp"
+            android:background="@drawable/ic_dist"
+            app:layout_constraintBottom_toBottomOf="@+id/trainingDistance1"
+            app:layout_constraintStart_toStartOf="@+id/trainingDistance1" />
+
+        <ImageButton
+            android:id="@+id/buttonPause"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/ic_pause_23"
+            android:contentDescription="@string/pause_button"
+            android:onClick="clickPauseTrackButton"
+            app:layout_constraintBottom_toBottomOf="@+id/trainingDistance1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/trainingDistance1" />
+
+        <ImageButton
+            android:id="@+id/buttonPlay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/ic_play_23"
+            android:contentDescription="@string/play_button"
+            android:onClick="clickStartTrackButton"
+            app:layout_constraintBottom_toBottomOf="@+id/trainingDistance1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/trainingDistance1" />
+
+        <ImageButton
+            android:id="@+id/buttonStop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/ic_stop_23"
+            android:contentDescription="@string/stop_button"
+            android:onClick="clickStopTrackButton"
+            app:layout_constraintBottom_toBottomOf="@+id/trainingDistance1"
+            app:layout_constraintEnd_toStartOf="@+id/trainingDistance1"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

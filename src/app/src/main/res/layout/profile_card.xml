@@ -1,0 +1,39 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/profile"
+    android:layout_width="380dp"
+    android:layout_height="150dp"
+    app:cardBackgroundColor="@color/colorWhite"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="10dp"
+    app:cardMaxElevation="20dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:background="@drawable/ic_man"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="Ivan\nNeretin"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorDark"
+            android:textSize="34sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageButton2"
+            app:layout_constraintStart_toEndOf="@+id/imageButton2"
+            app:layout_constraintTop_toTopOf="@+id/imageButton2" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
