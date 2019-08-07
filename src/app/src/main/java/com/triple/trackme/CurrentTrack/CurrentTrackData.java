@@ -7,8 +7,10 @@ import com.triple.trackme.Data.Storage.Position;
 import com.triple.trackme.Data.Storage.Track;
 import com.triple.trackme.GoogleMapService;
 
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 class CurrentTrackData {
 
@@ -65,6 +67,7 @@ class CurrentTrackData {
 
     private Track toTrackData() {
         Track track = new Track();
+        track.dateTime = DateFormat.getDateTimeInstance().format(new Date());
         track.distance = allDistanceInMetres;
         track.time = allTimeInSeconds;
         double avgSpeed = (allDistanceInMetres / allTimeInSeconds) * 3.6;

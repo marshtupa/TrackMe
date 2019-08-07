@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Track {
 
+    public String dateTime = "";
     public double distance = 0;
     public int time = 0;
     public double avgSpeed = 0;
