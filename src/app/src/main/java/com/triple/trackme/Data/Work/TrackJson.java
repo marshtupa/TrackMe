@@ -23,6 +23,7 @@ public class TrackJson {
         JSONObject trackJson = new JSONObject();
 
         try {
+            trackJson.put("dateTime", track.dateTime);
             trackJson.put("distance", track.distance);
             trackJson.put("time", track.time);
             trackJson.put("avgSpeed", track.avgSpeed);
@@ -52,6 +53,7 @@ public class TrackJson {
             String jsonString = TextFilesIO.readTextFromFile(trackJsonFileName);
             JSONObject trackJson = new JSONObject(jsonString);
 
+            track.dateTime = trackJson.getString("dateTime");
             track.distance = trackJson.getDouble("distance");
             track.time = trackJson.getInt("time");
             track.avgSpeed = trackJson.getDouble("avgSpeed");
