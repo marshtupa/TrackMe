@@ -10,8 +10,6 @@ import java.util.ArrayList;
 
 public class CurrentUserData {
 
-    final private static int MAX_TRACK_FILES = 3;
-
     private static boolean isInitialize;
     private static String login;
     private static String name;
@@ -53,10 +51,6 @@ public class CurrentUserData {
     }
 
     public static void addTrack(Track track) {
-        if (trackFilePaths.size() >= MAX_TRACK_FILES) {
-            deleteTrack();
-        }
-
         String fileName = getNextName();
         trackFilePaths.add(fileName);
         try {
@@ -66,12 +60,6 @@ public class CurrentUserData {
         catch (WorkWithDataException exception) {
             trackFilePaths.remove(trackFilePaths.size() - 1);
         }
-    }
-
-    private static void deleteTrack() {
-        String firstName = trackFilePaths.get(0);
-        TrackJson.deleteTrackFile(firstName);
-        trackFilePaths.remove(0);
     }
 
     private static String getNextName() {
