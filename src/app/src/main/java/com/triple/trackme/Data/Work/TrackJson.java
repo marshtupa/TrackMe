@@ -62,9 +62,9 @@ public class TrackJson {
             JSONArray positionsJson = trackJson.getJSONArray("positions");
             for (int i = 0; i < positionsJson.length(); i++) {
                 JSONObject positionJson = positionsJson.getJSONObject(i);
-                Position position = new Position();
-                position.latitude = positionJson.getDouble("latitude");
-                position.longitude = positionJson.getDouble("longitude");
+                double longitude = positionJson.getDouble("longitude");
+                double latitude = positionJson.getDouble("latitude");
+                Position position = new Position(longitude, latitude);
                 track.positions.add(position);
             }
         }

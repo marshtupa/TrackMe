@@ -2,6 +2,11 @@ package com.triple.trackme.Data.Storage;
 
 public class Position {
 
-    public double longitude = 0;
-    public double latitude = 0;
+    public double longitude;
+    public double latitude;
+
+    public Position(double longitude, double latitude) {
+        this.longitude = longitude;
+        this.latitude = latitude;
+    }
 }

@@ -73,9 +73,7 @@ class CurrentTrackData {
         double avgSpeed = (allDistanceInMetres / allTimeInSeconds) * 3.6;
         track.avgSpeed = avgSpeed;
         for (Location pos : allPositions) {
-            Position position = new Position();
-            position.latitude = pos.getLatitude();
-            position.longitude = pos.getLongitude();
+            Position position = new Position(pos.getLongitude(), pos.getLatitude());
             track.positions.add(position);
         }
         return track;
