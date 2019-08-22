@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentActivity;
 import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -225,6 +226,10 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     public void clickProfileButton(View view) {
         final Animation animScale = AnimationUtils.loadAnimation(this, R.anim.scale_interface);
         view.startAnimation(animScale);
+
+        Intent intent = new Intent(MainActivity.this, ProfileMenuActivity.class);
+        startActivity(intent);
+
     }
 
     public void clickCurrentPositionButton(View view) {
