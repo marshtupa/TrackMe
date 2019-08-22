@@ -5,7 +5,7 @@ import android.location.Location;
 import com.triple.trackme.CurrentUser.CurrentUserData;
 import com.triple.trackme.Data.Storage.Position;
 import com.triple.trackme.Data.Storage.Track;
-import com.triple.trackme.GoogleMapService;
+import com.triple.trackme.Services.GoogleMapService;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;

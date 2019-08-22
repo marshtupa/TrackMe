@@ -1,4 +1,4 @@
-package com.triple.trackme;
+package com.triple.trackme.Services;
 
 import android.content.Context;
 import android.location.Criteria;
@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.MapStyleOptions;
+import com.triple.trackme.R;
 
 public class GoogleMapService {
 
@@ -27,7 +28,7 @@ public class GoogleMapService {
         return (double)Math.round(earthRadius * b);
     }
 
-    static String getEnabledLocationProvider(LocationManager locationManager, Context context) {
+    public static String getEnabledLocationProvider(LocationManager locationManager, Context context) {
         Criteria criteria = new Criteria();
         String bestProvider = locationManager.getBestProvider(criteria, true);
         boolean enabled = locationManager.isProviderEnabled(bestProvider);
@@ -40,7 +41,7 @@ public class GoogleMapService {
         return bestProvider;
     }
 
-    static void settingMap(GoogleMap map, Context context) {
+    public static void settingMap(GoogleMap map, Context context) {
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         map.setMapStyle(MapStyleOptions.loadRawResourceStyle(context, R.raw.style_map));
 

@@ -1,8 +1,10 @@
-package com.triple.trackme;
+package com.triple.trackme.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.triple.trackme.R;
 
 public class ProfileActivity extends AppCompatActivity {
 
