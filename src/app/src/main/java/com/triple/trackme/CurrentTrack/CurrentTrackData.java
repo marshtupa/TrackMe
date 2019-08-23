@@ -5,7 +5,7 @@ import android.location.Location;
 import com.triple.trackme.CurrentUser.CurrentUserData;
 import com.triple.trackme.Data.Storage.Position;
 import com.triple.trackme.Data.Storage.Track;
-import com.triple.trackme.GoogleMapService;
+import com.triple.trackme.Services.GoogleMapService;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
@@ -66,18 +66,16 @@ class CurrentTrackData {
     }
 
     private Track toTrackData() {
-        Track track = new Track();
-        track.dateTime = DateFormat.getDateTimeInstance().format(new Date());
-        track.distance = allDistanceInMetres;
-        track.time = allTimeInSeconds;
+        String dateTime = DateFormat.getDateTimeInstance().format(new Date());
+        double distance = allDistanceInMetres;
+        int time = allTimeInSeconds;
         double avgSpeed = (allDistanceInMetres / allTimeInSeconds) * 3.6;
-        track.avgSpeed = avgSpeed;
+        ArrayList<Position> positions = new ArrayList<Position>();
         for (Location pos : allPositions) {
-            Position position = new Position();
-            position.latitude = pos.getLatitude();
-            position.longitude = pos.getLongitude();
-            track.positions.add(position);
+            Position position = new Position(pos.getLongitude(), pos.getLatitude());
+            positions.add(position);
         }
+        Track track = new Track(dateTime, distance, time, avgSpeed, positions);
         return track;
     }
 

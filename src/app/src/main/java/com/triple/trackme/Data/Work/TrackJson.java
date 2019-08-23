@@ -47,32 +47,30 @@ public class TrackJson {
     }
 
     public static Track readTrackFromJsonFile(String trackJsonFileName) throws WorkWithDataException {
-        Track track = new Track();
-
         try {
             String jsonString = TextFilesIO.readTextFromFile(trackJsonFileName);
             JSONObject trackJson = new JSONObject(jsonString);
-
-            track.dateTime = trackJson.getString("dateTime");
-            track.distance = trackJson.getDouble("distance");
-            track.time = trackJson.getInt("time");
-            track.avgSpeed = trackJson.getDouble("avgSpeed");
-            track.positions = new ArrayList<Position>();
+            String dateTime = trackJson.getString("dateTime");
+            double distance = trackJson.getDouble("distance");
+            int time = trackJson.getInt("time");
+            double avgSpeed = trackJson.getDouble("avgSpeed");
+            ArrayList<Position> positions = new ArrayList<Position>();
 
             JSONArray positionsJson = trackJson.getJSONArray("positions");
             for (int i = 0; i < positionsJson.length(); i++) {
                 JSONObject positionJson = positionsJson.getJSONObject(i);
-                Position position = new Position();
-                position.latitude = positionJson.getDouble("latitude");
-                position.longitude = positionJson.getDouble("longitude");
-                track.positions.add(position);
+                double longitude = positionJson.getDouble("longitude");
+                double latitude = positionJson.getDouble("latitude");
+                Position position = new Position(longitude, latitude);
+                positions.add(position);
             }
+
+            Track track = new Track(dateTime, distance, time, avgSpeed, positions);
+            return track;
         }
         catch (IOException | JSONException exception) {
             exception.printStackTrace();
             throw new WorkWithDataException(exception.getMessage());
         }
-
-        return track;
     }
 }

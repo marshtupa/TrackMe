@@ -1,4 +1,4 @@
-package com.triple.trackme;
+package com.triple.trackme.Activity;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -33,6 +33,8 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.triple.trackme.CurrentTrack.CurrentTrackView;
 import com.triple.trackme.CurrentUser.CurrentUserData;
+import com.triple.trackme.R;
+import com.triple.trackme.Services.GoogleMapService;
 
 import java.io.File;
 
