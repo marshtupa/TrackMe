@@ -52,9 +52,9 @@ public class CurrentUserData {
 
     public static ArrayList<Track> getTrackDataAll() {
         ArrayList<Track> trackData = new ArrayList<Track>();
-        for (String trackFileName : trackFilePaths) {
+        for (int i = trackFilePaths.size() - 1; i >= 0; i--) {
             try {
-                Track track = TrackJson.readTrackFromJsonFile(trackFileName);
+                Track track = TrackJson.readTrackFromJsonFile(trackFilePaths.get(i));
                 trackData.add(track);
             }
             catch (Exception exception) {}
