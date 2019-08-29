@@ -50,6 +50,19 @@ public class CurrentUserData {
         trackFilePaths = new ArrayList<String>();
     }
 
+    public static ArrayList<Track> getTrackDataAll() {
+        ArrayList<Track> trackData = new ArrayList<Track>();
+        for (String trackFileName : trackFilePaths) {
+            try {
+                Track track = TrackJson.readTrackFromJsonFile(trackFileName);
+                trackData.add(track);
+            }
+            catch (Exception exception) {}
+        }
+
+        return trackData;
+    }
+
     public static void addTrack(Track track) {
         String fileName = getNextName();
         trackFilePaths.add(fileName);
