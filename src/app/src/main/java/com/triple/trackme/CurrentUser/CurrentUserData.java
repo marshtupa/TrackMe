@@ -80,7 +80,7 @@ public class CurrentUserData {
         final String DIVIDER = "_";
 
         int nextFileNumber;
-        if (trackFilePaths.size() == 0) {
+        if (trackFilePaths.isEmpty()) {
             nextFileNumber = 1;
         }
         else {
