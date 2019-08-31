@@ -35,7 +35,7 @@ public class ProfileActivity extends AppCompatActivity {
         trainingsView.setAdapter(trainingsAdapter);
     }
 
-    public void clickBackButton(View view) {
+    public void clickBackButton(final View view) {
         final Animation animScale = AnimationUtils.loadAnimation(this, R.anim.scale_interface);
         view.startAnimation(animScale);
         finish();
