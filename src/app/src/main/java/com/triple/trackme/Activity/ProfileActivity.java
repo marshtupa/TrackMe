@@ -5,6 +5,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import com.triple.trackme.CurrentUser.CurrentUserData;
 import com.triple.trackme.R;
@@ -30,5 +33,11 @@ public class ProfileActivity extends AppCompatActivity {
         trainingsView.setLayoutManager(trainingsManager);
         trainingsAdapter = new TrainingsAdapter(CurrentUserData.getTrackDataAll());
         trainingsView.setAdapter(trainingsAdapter);
+    }
+
+    public void clickBackButton(View view) {
+        final Animation animScale = AnimationUtils.loadAnimation(this, R.anim.scale_interface);
+        view.startAnimation(animScale);
+        finish();
     }
 }
