@@ -103,6 +103,8 @@ public class CurrentTrackView {
                 updateDataUI();
                 updateButtonsUI(true, false);
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + trackState);
         }
     }
 

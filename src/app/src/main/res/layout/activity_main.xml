@@ -21,7 +21,7 @@
         android:layout_marginTop="35dp"
         android:layout_marginEnd="12dp"
         android:background="@drawable/circle_button"
-        android:contentDescription="@string/menu_button"
+        android:contentDescription="@string/currentPosition_button"
         android:onClick="clickCurrentPositionButton"
         android:src="@drawable/ic_compass_outline"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,6 +38,6 @@
         android:onClick="clickProfileButton"
         android:src="@drawable/ic_menu"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/training_panel" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -70,7 +70,7 @@ public class TrackJson {
         }
         catch (IOException | JSONException exception) {
             exception.printStackTrace();
-            throw new WorkWithDataException(exception.getMessage());
+            throw (WorkWithDataException)(new WorkWithDataException().initCause(exception));
         }
     }
 }

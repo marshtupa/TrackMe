@@ -4,7 +4,11 @@ import java.lang.Exception;
 
 public class WorkWithDataException extends Exception {
 
-    public WorkWithDataException(String errorMessage) {
+    WorkWithDataException(String errorMessage) {
         super(errorMessage);
+    }
+
+    WorkWithDataException() {
+        super();
     }
 }
