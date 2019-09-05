@@ -61,7 +61,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void clickBackButton(final View view) {
-        final int BUTTON_ANIMATION_DELAY = 150;
+        final int BUTTON_ANIMATION_DELAY = 130;
         final Animation animScale = AnimationUtils.loadAnimation(this, R.anim.scale_interface);
         view.startAnimation(animScale);
 
