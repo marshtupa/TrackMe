@@ -10,7 +10,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
-import com.triple.trackme.Activity.MainActivity;
+import com.triple.trackme.Activity.Main.MainActivity;
 
 import java.util.ArrayList;
 import java.util.Timer;

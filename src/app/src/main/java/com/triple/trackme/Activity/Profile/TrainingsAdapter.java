@@ -1,4 +1,4 @@
-package com.triple.trackme;
+package com.triple.trackme.Activity.Profile;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.triple.trackme.Data.Storage.Track;
+import com.triple.trackme.R;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
