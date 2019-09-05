@@ -1,6 +1,6 @@
 package com.triple.trackme.Data.Work;
 
-import com.triple.trackme.Activity.MainActivity;
+import com.triple.trackme.Activity.Main.MainActivity;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

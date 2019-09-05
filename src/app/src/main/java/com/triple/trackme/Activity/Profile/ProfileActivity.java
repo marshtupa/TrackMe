@@ -1,4 +1,4 @@
-package com.triple.trackme.Activity;
+package com.triple.trackme.Activity.Profile;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,7 +15,6 @@ import android.view.animation.AnimationUtils;
 
 import com.triple.trackme.CurrentUser.CurrentUserData;
 import com.triple.trackme.R;
-import com.triple.trackme.TrainingsAdapter;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -37,7 +36,7 @@ public class ProfileActivity extends AppCompatActivity {
         getWindow().setStatusBarColor(Color.TRANSPARENT);
     }
 
-    private void setWindowFlag(Activity activity, final int bits, boolean on) {
+    private void setWindowFlag(Activity activity, final int bits, final boolean on) {
         Window win = activity.getWindow();
         WindowManager.LayoutParams winParams = win.getAttributes();
         if (on) {
@@ -51,6 +50,7 @@ public class ProfileActivity extends AppCompatActivity {
     private void setTrainingsView() {
         trainingsView = findViewById(R.id.trainingsList);
         trainingsView.setHasFixedSize(true);
+        trainingsView.addItemDecoration(new RecyclerViewPaddingDecoration(this));
         trainingsManager = new LinearLayoutManager(this);
         trainingsView.setLayoutManager(trainingsManager);
         trainingsAdapter = new TrainingsAdapter(CurrentUserData.getTrackDataAll());
