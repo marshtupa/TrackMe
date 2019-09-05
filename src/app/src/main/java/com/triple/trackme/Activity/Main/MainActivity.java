@@ -39,6 +39,8 @@ import com.triple.trackme.R;
 import com.triple.trackme.Services.GoogleMapService;
 
 import java.io.File;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends FragmentActivity implements OnMapReadyCallback, OnMapLoadedCallback, LocationListener {
 
@@ -227,10 +229,19 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public void clickProfileButton(View view) {
+        final int BUTTON_ANIMATION_DELAY = 200;
         final Animation animScale = AnimationUtils.loadAnimation(this, R.anim.scale_interface);
         view.startAnimation(animScale);
-        Intent profileIntent = new Intent(MainActivity.this, ProfileActivity.class);
-        startActivity(profileIntent);
+
+        TimerTask changeButtonsTask = new TimerTask() {
+            @Override
+            public void run() {
+                Intent profileIntent = new Intent(MainActivity.this, ProfileActivity.class);
+                startActivity(profileIntent);
+            }
+        };
+        Timer changeButtonsTimer = new Timer();
+        changeButtonsTimer.schedule(changeButtonsTask, BUTTON_ANIMATION_DELAY);
     }
 
     public void clickCurrentPositionButton(View view) {

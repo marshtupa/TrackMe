@@ -16,6 +16,9 @@ import android.view.animation.AnimationUtils;
 import com.triple.trackme.CurrentUser.CurrentUserData;
 import com.triple.trackme.R;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class ProfileActivity extends AppCompatActivity {
 
     private RecyclerView trainingsView;
@@ -58,8 +61,17 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void clickBackButton(final View view) {
+        final int BUTTON_ANIMATION_DELAY = 150;
         final Animation animScale = AnimationUtils.loadAnimation(this, R.anim.scale_interface);
         view.startAnimation(animScale);
-        finish();
+
+        TimerTask changeButtonsTask = new TimerTask() {
+            @Override
+            public void run() {
+                finish();
+            }
+        };
+        Timer changeButtonsTimer = new Timer();
+        changeButtonsTimer.schedule(changeButtonsTask, BUTTON_ANIMATION_DELAY);
     }
 }
