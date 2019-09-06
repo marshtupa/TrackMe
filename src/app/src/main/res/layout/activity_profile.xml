@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E6DDC1"
     tools:context=".Activity.Profile.ProfileActivity">
 
     <ImageButton
@@ -14,8 +15,8 @@
         android:layout_marginTop="35dp"
         android:background="@drawable/circle_button"
         android:contentDescription="@string/back_button"
-        android:src="@drawable/ic_back"
         android:onClick="clickBackButton"
+        android:src="@drawable/ic_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,11 +26,13 @@
         android:layout_height="0dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="35dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginEnd="22dp"
         android:layout_marginBottom="10dp"
+        android:fontFamily="sans-serif-condensed-medium"
         android:gravity="center"
         android:text="@string/completedTrainings"
         android:textAlignment="textEnd"
+        android:textColor="@color/colorDark"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/trainingsList"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,8 +44,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
-        android:overScrollMode="never"
         android:layoutAnimation="@anim/layout_animation_fall_down"
+        android:overScrollMode="never"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
