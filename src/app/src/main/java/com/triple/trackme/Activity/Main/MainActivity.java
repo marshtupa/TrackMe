@@ -32,7 +32,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
-import com.triple.trackme.Activity.Profile.ProfileActivity;
+import com.triple.trackme.Activity.CompletedTrainings.CompletedTrainingsActivity;
 import com.triple.trackme.CurrentTrack.CurrentTrackView;
 import com.triple.trackme.CurrentUser.CurrentUserData;
 import com.triple.trackme.R;
@@ -236,7 +236,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         TimerTask changeButtonsTask = new TimerTask() {
             @Override
             public void run() {
-                Intent profileIntent = new Intent(MainActivity.this, ProfileActivity.class);
+                Intent profileIntent = new Intent(MainActivity.this, CompletedTrainingsActivity.class);
                 startActivity(profileIntent);
             }
         };

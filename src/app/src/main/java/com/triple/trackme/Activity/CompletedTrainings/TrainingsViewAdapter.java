@@ -1,4 +1,4 @@
-package com.triple.trackme.Activity.Profile;
+package com.triple.trackme.Activity.CompletedTrainings;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,11 +13,11 @@ import com.triple.trackme.R;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class TrainingsAdapter extends RecyclerView.Adapter<TrainingsAdapter.TrainingViewHolder> {
+public class TrainingsViewAdapter extends RecyclerView.Adapter<TrainingsViewAdapter.TrainingViewHolder> {
 
     private ArrayList<Track> trainingsData;
 
-    public TrainingsAdapter(ArrayList<Track> trainingsData) {
+    public TrainingsViewAdapter(ArrayList<Track> trainingsData) {
         this.trainingsData = trainingsData;
     }
 
