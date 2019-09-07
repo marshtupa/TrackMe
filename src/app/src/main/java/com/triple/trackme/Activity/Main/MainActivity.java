@@ -25,6 +25,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMapLoadedCallback;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -236,8 +237,9 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         TimerTask changeButtonsTask = new TimerTask() {
             @Override
             public void run() {
-                Intent profileIntent = new Intent(MainActivity.this, CompletedTrainingsActivity.class);
-                startActivity(profileIntent);
+                Intent completedTrainingsIntent = new Intent(MainActivity.this, CompletedTrainingsActivity.class);
+                startActivity(completedTrainingsIntent);
+                Animatoo.animateSlideLeft(MainActivity.this);
             }
         };
         Timer changeButtonsTimer = new Timer();
