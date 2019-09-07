@@ -14,7 +14,9 @@ import com.triple.trackme.Data.Storage.Track;
 import com.triple.trackme.R;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class TrainingsViewAdapter extends RecyclerView.Adapter<TrainingsViewAdapter.TrainingViewHolder> {
 
@@ -46,9 +48,14 @@ public class TrainingsViewAdapter extends RecyclerView.Adapter<TrainingsViewAdap
         int seconds = trackData.time % 60;
         String timeString = String.format("%s:%s:%s", String.format("%02d", hours), String.format("%02d", minutes), String.format("%02d", seconds));
 
+        Date trackDate = new Date(trackData.dateTime);
+        SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM - hh:mm");
+        String dateString = formatter.format(trackDate);
+
         holder.distanceValue.setText(distanceString);
         holder.speedValue.setText(speedString);
         holder.timeValue.setText(timeString);
+        holder.dateValue.setText(dateString);
     }
 
     @Override
@@ -61,12 +68,14 @@ public class TrainingsViewAdapter extends RecyclerView.Adapter<TrainingsViewAdap
         TextView distanceValue;
         TextView speedValue;
         TextView timeValue;
+        TextView dateValue;
 
         TrainingViewHolder(View view) {
             super(view);
             distanceValue = view.findViewById(R.id.distanceValue);
             speedValue = view.findViewById(R.id.speedValue);
             timeValue = view.findViewById(R.id.timeValue);
+            dateValue = view.findViewById(R.id.dateValue);
             setMargins(view);
         }
 
