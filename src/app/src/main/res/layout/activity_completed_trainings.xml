@@ -39,7 +39,7 @@
         app:layout_constraintStart_toEndOf="@+id/backButton"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
+    <com.chauthai.overscroll.RecyclerViewBouncy
         android:id="@+id/trainingsList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
