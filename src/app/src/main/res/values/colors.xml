@@ -6,4 +6,5 @@
     <color name="colorLDark">#AA222222</color>
     <color name="colorAccent">#D81B60</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorMainMap">#E6DDC1</color>
 </resources>

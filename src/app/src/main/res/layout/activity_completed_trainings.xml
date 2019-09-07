@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E6DDC1"
+    android:background="@color/colorMainMap"
     tools:context=".Activity.CompletedTrainings.CompletedTrainingsActivity">
 
     <ImageButton
@@ -50,5 +50,23 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/backButton" />
+
+    <ImageView
+        android:id="@+id/imageTopGradient"
+        android:layout_width="0dp"
+        android:layout_height="10dp"
+        android:src="@drawable/gradient_top_rectangle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/trainingsList" />
+
+    <ImageView
+        android:id="@+id/imageBottomGradient"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:src="@drawable/gradient_bottom_rectangle"
+        app:layout_constraintBottom_toBottomOf="@+id/trainingsList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
