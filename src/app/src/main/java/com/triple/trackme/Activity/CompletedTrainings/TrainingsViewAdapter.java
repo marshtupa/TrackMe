@@ -1,5 +1,8 @@
 package com.triple.trackme.Activity.CompletedTrainings;
 
+import android.content.Context;
+import android.content.res.Resources;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +18,12 @@ import java.util.ArrayList;
 
 public class TrainingsViewAdapter extends RecyclerView.Adapter<TrainingsViewAdapter.TrainingViewHolder> {
 
+    private Context context;
     private ArrayList<Track> trainingsData;
+    private boolean first = false;
 
-    public TrainingsViewAdapter(ArrayList<Track> trainingsData) {
+    TrainingsViewAdapter(Context context, ArrayList<Track> trainingsData) {
+        this.context = context;
         this.trainingsData = trainingsData;
     }
 
@@ -50,7 +56,7 @@ public class TrainingsViewAdapter extends RecyclerView.Adapter<TrainingsViewAdap
         return trainingsData.size();
     }
 
-    public class TrainingViewHolder extends RecyclerView.ViewHolder {
+    class TrainingViewHolder extends RecyclerView.ViewHolder {
 
         TextView distanceValue;
         TextView speedValue;
@@ -61,6 +67,32 @@ public class TrainingsViewAdapter extends RecyclerView.Adapter<TrainingsViewAdap
             distanceValue = view.findViewById(R.id.distanceValue);
             speedValue = view.findViewById(R.id.speedValue);
             timeValue = view.findViewById(R.id.timeValue);
+            setMargins(view);
+        }
+
+        private void setMargins(View view) {
+            final int MARGIN = 15;
+
+            int top = 0;
+            if (!first) {
+                top = getPixelValue(MARGIN);
+                first = true;
+            }
+            int left = getPixelValue(MARGIN);
+            int right = getPixelValue(MARGIN);
+            int bottom = getPixelValue(MARGIN);
+
+            ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) view.getLayoutParams();
+            params.setMargins(left, top, right, bottom);
+        }
+
+        private int getPixelValue(int dip) {
+            Resources resources = context.getResources();
+            return (int) TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP,
+                    dip,
+                    resources.getDisplayMetrics()
+            );
         }
     }
 }

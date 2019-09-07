@@ -57,7 +57,7 @@ public class CompletedTrainingsActivity extends AppCompatActivity {
         trainingsView.addItemDecoration(new RecyclerViewPaddingDecoration(this));
         trainingsManager = new LinearLayoutManager(this);
         trainingsView.setLayoutManager(trainingsManager);
-        trainingsAdapter = new TrainingsViewAdapter(CurrentUserData.getTrackDataAll());
+        trainingsAdapter = new TrainingsViewAdapter(this, CurrentUserData.getTrackDataAll());
         trainingsView.setAdapter(trainingsAdapter);
     }
 
