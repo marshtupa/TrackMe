@@ -65,12 +65,14 @@ public class CompletedTrainingsActivity extends AppCompatActivity {
         final int BUTTON_ANIMATION_DELAY = 130;
         final Animation animScale = AnimationUtils.loadAnimation(this, R.anim.scale_interface);
         view.startAnimation(animScale);
+        view.setClickable(false);
 
         TimerTask changeButtonsTask = new TimerTask() {
             @Override
             public void run() {
                 finish();
                 Animatoo.animateSlideRight(CompletedTrainingsActivity.this);
+                view.setClickable(true);
             }
         };
         Timer changeButtonsTimer = new Timer();

@@ -229,10 +229,11 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         CurrentTrackView.stopTrack(this);
     }
 
-    public void clickProfileButton(View view) {
+    public void clickCompletedTrainingsButton(final View view) {
         final int BUTTON_ANIMATION_DELAY = 200;
         final Animation animScale = AnimationUtils.loadAnimation(this, R.anim.scale_interface);
         view.startAnimation(animScale);
+        view.setClickable(false);
 
         TimerTask changeButtonsTask = new TimerTask() {
             @Override
@@ -240,6 +241,7 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
                 Intent completedTrainingsIntent = new Intent(MainActivity.this, CompletedTrainingsActivity.class);
                 startActivity(completedTrainingsIntent);
                 Animatoo.animateSlideLeft(MainActivity.this);
+                view.setClickable(true);
             }
         };
         Timer changeButtonsTimer = new Timer();

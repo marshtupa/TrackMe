@@ -35,7 +35,7 @@
         android:layout_marginTop="35dp"
         android:background="@drawable/circle_button"
         android:contentDescription="@string/menu_button"
-        android:onClick="clickProfileButton"
+        android:onClick="clickCompletedTrainingsButton"
         android:src="@drawable/ic_completed_trainings"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
