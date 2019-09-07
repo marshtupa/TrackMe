@@ -25,6 +25,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMapLoadedCallback;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -32,7 +33,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
-import com.triple.trackme.Activity.Profile.ProfileActivity;
+import com.triple.trackme.Activity.CompletedTrainings.CompletedTrainingsActivity;
 import com.triple.trackme.CurrentTrack.CurrentTrackView;
 import com.triple.trackme.CurrentUser.CurrentUserData;
 import com.triple.trackme.R;
@@ -228,16 +229,19 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         CurrentTrackView.stopTrack(this);
     }
 
-    public void clickProfileButton(View view) {
+    public void clickCompletedTrainingsButton(final View view) {
         final int BUTTON_ANIMATION_DELAY = 200;
         final Animation animScale = AnimationUtils.loadAnimation(this, R.anim.scale_interface);
         view.startAnimation(animScale);
+        view.setClickable(false);
 
         TimerTask changeButtonsTask = new TimerTask() {
             @Override
             public void run() {
-                Intent profileIntent = new Intent(MainActivity.this, ProfileActivity.class);
-                startActivity(profileIntent);
+                Intent completedTrainingsIntent = new Intent(MainActivity.this, CompletedTrainingsActivity.class);
+                startActivity(completedTrainingsIntent);
+                Animatoo.animateSlideLeft(MainActivity.this);
+                view.setClickable(true);
             }
         };
         Timer changeButtonsTimer = new Timer();

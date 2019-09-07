@@ -1,4 +1,4 @@
-package com.triple.trackme.Activity.Profile;
+package com.triple.trackme.Activity.CompletedTrainings;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,13 +13,14 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
+import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.triple.trackme.CurrentUser.CurrentUserData;
 import com.triple.trackme.R;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class ProfileActivity extends AppCompatActivity {
+public class CompletedTrainingsActivity extends AppCompatActivity {
 
     private RecyclerView trainingsView;
     private RecyclerView.Adapter trainingsAdapter;
@@ -29,7 +30,7 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         updateWindow();
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_completed_trainings);
         setTrainingsView();
     }
 
@@ -56,7 +57,7 @@ public class ProfileActivity extends AppCompatActivity {
         trainingsView.addItemDecoration(new RecyclerViewPaddingDecoration(this));
         trainingsManager = new LinearLayoutManager(this);
         trainingsView.setLayoutManager(trainingsManager);
-        trainingsAdapter = new TrainingsAdapter(CurrentUserData.getTrackDataAll());
+        trainingsAdapter = new TrainingsViewAdapter(CurrentUserData.getTrackDataAll());
         trainingsView.setAdapter(trainingsAdapter);
     }
 
@@ -64,11 +65,14 @@ public class ProfileActivity extends AppCompatActivity {
         final int BUTTON_ANIMATION_DELAY = 130;
         final Animation animScale = AnimationUtils.loadAnimation(this, R.anim.scale_interface);
         view.startAnimation(animScale);
+        view.setClickable(false);
 
         TimerTask changeButtonsTask = new TimerTask() {
             @Override
             public void run() {
                 finish();
+                Animatoo.animateSlideRight(CompletedTrainingsActivity.this);
+                view.setClickable(true);
             }
         };
         Timer changeButtonsTimer = new Timer();

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.Profile.ProfileActivity">
+    android:background="@color/colorMainMap"
+    tools:context=".Activity.CompletedTrainings.CompletedTrainingsActivity">
 
     <ImageButton
         android:id="@+id/backButton"
@@ -14,8 +15,8 @@
         android:layout_marginTop="35dp"
         android:background="@drawable/circle_button"
         android:contentDescription="@string/back_button"
-        android:src="@drawable/ic_back"
         android:onClick="clickBackButton"
+        android:src="@drawable/ic_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,27 +26,48 @@
         android:layout_height="0dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="35dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginEnd="22dp"
         android:layout_marginBottom="10dp"
+        android:fontFamily="sans-serif-condensed-medium"
         android:gravity="center"
         android:text="@string/completedTrainings"
         android:textAlignment="textEnd"
+        android:textColor="@color/colorDark"
         android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/trainingsList"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/backButton"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
+    <com.chauthai.overscroll.RecyclerViewBouncy
         android:id="@+id/trainingsList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
-        android:overScrollMode="never"
         android:layoutAnimation="@anim/layout_animation_fall_down"
+        android:overScrollMode="never"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/backButton" />
+
+    <ImageView
+        android:id="@+id/imageTopGradient"
+        android:layout_width="0dp"
+        android:layout_height="10dp"
+        android:src="@drawable/gradient_top_rectangle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/trainingsList" />
+
+    <ImageView
+        android:id="@+id/imageBottomGradient"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:src="@drawable/gradient_bottom_rectangle"
+        app:layout_constraintBottom_toBottomOf="@+id/trainingsList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
