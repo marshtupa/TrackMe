@@ -10,7 +10,7 @@
 
     <include
         android:id="@+id/training_panel"
-        layout="@layout/training_panel"
+        layout="@layout/current_training_panel"
         tools:layout_editor_absoluteX="84dp"
         tools:layout_editor_absoluteY="0dp" />
 
@@ -23,7 +23,7 @@
         android:background="@drawable/circle_button"
         android:contentDescription="@string/currentPosition_button"
         android:onClick="clickCurrentPositionButton"
-        android:src="@drawable/ic_compass_outline"
+        android:src="@drawable/ic_compass"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/training_panel" />
 

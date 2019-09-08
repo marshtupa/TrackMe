@@ -61,7 +61,7 @@ public class CompletedTrainingsActivity extends AppCompatActivity {
     public void clickBackButton(final View view) {
         final int BUTTON_ANIMATION_DELAY = 130;
         final Animation animScale = AnimationUtils.loadAnimation(
-                this, R.anim.scale_interface);
+                this, R.anim.scale_menu_button);
         view.startAnimation(animScale);
         view.setClickable(false);
 
