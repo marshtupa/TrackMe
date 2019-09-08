@@ -55,7 +55,7 @@
     <ImageView
         android:id="@+id/imageTopGradient"
         android:layout_width="0dp"
-        android:layout_height="10dp"
+        android:layout_height="5dp"
         android:src="@drawable/gradient_top_rectangle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +64,7 @@
     <ImageView
         android:id="@+id/imageBottomGradient"
         android:layout_width="0dp"
-        android:layout_height="20dp"
+        android:layout_height="5dp"
         android:src="@drawable/gradient_bottom_rectangle"
         app:layout_constraintBottom_toBottomOf="@+id/trainingsList"
         app:layout_constraintEnd_toEndOf="parent"

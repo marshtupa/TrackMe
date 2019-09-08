@@ -22,12 +22,8 @@ import java.util.TimerTask;
 
 public class CompletedTrainingsActivity extends AppCompatActivity {
 
-    private RecyclerView trainingsView;
-    private RecyclerView.Adapter trainingsAdapter;
-    private RecyclerView.LayoutManager trainingsManager;
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         updateWindow();
         setContentView(R.layout.activity_completed_trainings);
@@ -35,12 +31,13 @@ public class CompletedTrainingsActivity extends AppCompatActivity {
     }
 
     private void updateWindow() {
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false);
         getWindow().setStatusBarColor(Color.TRANSPARENT);
     }
 
-    private void setWindowFlag(Activity activity, final int bits, final boolean on) {
+    private void setWindowFlag(final Activity activity, final int bits, final boolean on) {
         Window win = activity.getWindow();
         WindowManager.LayoutParams winParams = win.getAttributes();
         if (on) {
@@ -52,18 +49,19 @@ public class CompletedTrainingsActivity extends AppCompatActivity {
     }
 
     private void setTrainingsView() {
-        trainingsView = findViewById(R.id.trainingsList);
+        RecyclerView trainingsView = findViewById(R.id.trainingsList);
         trainingsView.setHasFixedSize(true);
-        trainingsView.addItemDecoration(new RecyclerViewPaddingDecoration(this));
-        trainingsManager = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager trainingsManager = new LinearLayoutManager(this);
         trainingsView.setLayoutManager(trainingsManager);
-        trainingsAdapter = new TrainingsViewAdapter(CurrentUserData.getTrackDataAll());
+        RecyclerView.Adapter trainingsAdapter = new TrainingsViewAdapter(
+                this, CurrentUserData.getTrackDataAll());
         trainingsView.setAdapter(trainingsAdapter);
     }
 
     public void clickBackButton(final View view) {
         final int BUTTON_ANIMATION_DELAY = 130;
-        final Animation animScale = AnimationUtils.loadAnimation(this, R.anim.scale_interface);
+        final Animation animScale = AnimationUtils.loadAnimation(
+                this, R.anim.scale_menu_button);
         view.startAnimation(animScale);
         view.setClickable(false);
 

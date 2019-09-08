@@ -13,8 +13,10 @@ import com.triple.trackme.R;
 
 public class GoogleMapService {
 
-    public static double distanceBetweenTwoCoordinates(Location coordinate1, Location coordinate2) {
-        final double earthRadius = 6371000;
+    public static double distanceBetweenTwoCoordinates(final Location coordinate1,
+                                                       final Location coordinate2) {
+
+        final double EARTH_RADIUS = 6371000;
 
         double latitude = Math.toRadians(coordinate2.getLatitude() - coordinate1.getLatitude());
         double longitude = Math.toRadians(coordinate2.getLongitude() - coordinate1.getLongitude());
@@ -25,23 +27,26 @@ public class GoogleMapService {
                 Math.sin(longitude / 2) * Math.sin(longitude / 2);
         double b = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-        return (double)Math.round(earthRadius * b);
+        return (double)Math.round(EARTH_RADIUS * b);
     }
 
-    public static String getEnabledLocationProvider(LocationManager locationManager, Context context) {
+    public static String getEnabledLocationProvider(final LocationManager locationManager,
+                                                    final Context context) {
+
         Criteria criteria = new Criteria();
         String bestProvider = locationManager.getBestProvider(criteria, true);
         boolean enabled = locationManager.isProviderEnabled(bestProvider);
 
         if (!enabled) {
-            Toast.makeText(context, "No location provider enabled!", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "No location provider enabled!",
+                    Toast.LENGTH_LONG).show();
             Log.i("MapInfo", "No location provider enabled!");
             return null;
         }
         return bestProvider;
     }
 
-    public static void settingMap(GoogleMap map, Context context) {
+    public static void settingMap(final GoogleMap map, final Context context) {
         map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         map.setMapStyle(MapStyleOptions.loadRawResourceStyle(context, R.raw.style_map));
 

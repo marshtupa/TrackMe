@@ -11,17 +11,17 @@ import java.io.IOException;
 
 class TextFilesIO {
 
-    static void deleteFile(String fileName) {
+    static void deleteFile(final String fileName) {
         File file = new File(MainActivity.filesDir, fileName);
         file.delete();
     }
 
-    static boolean isFileExists(String fileName) {
+    static boolean isFileExists(final String fileName) {
         File file = new File(MainActivity.filesDir, fileName);
         return file.exists();
     }
 
-    static void writeTextToFile(String fileName, String fileText) throws IOException {
+    static void writeTextToFile(final String fileName, final String fileText) throws IOException {
         File file = new File(MainActivity.filesDir, fileName);
 
         if (!file.exists()) {
@@ -34,7 +34,7 @@ class TextFilesIO {
         bufferedWriter.close();
     }
 
-    static String readTextFromFile(String fileName) throws IOException {
+    static String readTextFromFile(final String fileName) throws IOException {
         File file = new File(MainActivity.filesDir, fileName);
 
         StringBuilder fileText = new StringBuilder();

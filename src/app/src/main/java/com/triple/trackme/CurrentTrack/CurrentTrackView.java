@@ -34,9 +34,13 @@ public class CurrentTrackView {
     private static ImageButton pauseButton;
     private static ImageButton startButton;
 
-    public static void initializeTrack(Context context,
-                                       TextView timeTextView, TextView distanceTextView, TextView speedTextView,
-                                       ImageButton stopButton, ImageButton pauseButton, ImageButton startButton) {
+    public static void initializeTrack(final Context context,
+                                       final TextView timeTextView,
+                                       final TextView distanceTextView,
+                                       final TextView speedTextView,
+                                       final ImageButton stopButton,
+                                       final ImageButton pauseButton,
+                                       final ImageButton startButton) {
 
         CurrentTrackView.context = context;
         CurrentTrackView.timeTextView = timeTextView;
@@ -61,7 +65,7 @@ public class CurrentTrackView {
         }
     }
 
-    public static void stopTrack(Context context) {
+    public static void stopTrack(final Context context) {
         if (trackState != CurrentTrackState.STOP) {
             if (currentTrackData.getAllTimeInSeconds() >= MIN_TIME_SECONDS_FOR_SAVE_TRACK) {
                 CurrentTrackState trackStateBeforeDialog = trackState;
@@ -75,14 +79,14 @@ public class CurrentTrackView {
         }
     }
 
-    public static void endTrackAndSave() {
+    static void endTrackAndSave() {
         if (trackState != CurrentTrackState.STOP) {
             currentTrackData.saveData();
             setTrackState(CurrentTrackState.STOP);
         }
     }
 
-    private static void setTrackState(CurrentTrackState trackState) {
+    private static void setTrackState(final CurrentTrackState trackState) {
         CurrentTrackView.trackState = trackState;
 
         switch (trackState) {
@@ -108,7 +112,7 @@ public class CurrentTrackView {
         }
     }
 
-    public static void newPosition(Location newPosition, GoogleMap map) {
+    public static void newPosition(final Location newPosition, final GoogleMap map) {
         if (trackState == CurrentTrackState.START) {
             Location lastPosition = currentTrackData.getLastPosition();
             currentTrackData.newPosition(newPosition);
@@ -118,7 +122,10 @@ public class CurrentTrackView {
         }
     }
 
-    private static void drawRoute(GoogleMap map, Location lastPosition, Location newPosition) {
+    private static void drawRoute(final GoogleMap map,
+                                  final Location lastPosition,
+                                  final Location newPosition) {
+
         Polyline polyline = map.addPolyline(new PolylineOptions()
                 .add(new LatLng(lastPosition.getLatitude(), lastPosition.getLongitude()),
                         new LatLng(newPosition.getLatitude(), newPosition.getLongitude()))
@@ -142,12 +149,17 @@ public class CurrentTrackView {
     }
 
     private static void updateDataUI() {
-        ((MainActivity) context).setText(timeTextView, currentTrackData.timeToFormatString());
-        ((MainActivity) context).setText(distanceTextView, currentTrackData.distanceToFormatString());
-        ((MainActivity) context).setText(speedTextView, currentTrackData.speedToFormatString());
+        ((MainActivity) context).setText(timeTextView,
+                currentTrackData.timeToFormatString());
+        ((MainActivity) context).setText(distanceTextView,
+                currentTrackData.distanceToFormatString());
+        ((MainActivity) context).setText(speedTextView,
+                currentTrackData.speedToFormatString());
     }
 
-    private static void updateButtonsUI(final boolean startButtonEnable, final boolean pauseButtonEnable) {
+    private static void updateButtonsUI(final boolean startButtonEnable,
+                                        final boolean pauseButtonEnable) {
+
         final int CHANGE_BUTTONS_DELAY = 300;
 
         startButton.setClickable(startButtonEnable);
@@ -170,7 +182,7 @@ public class CurrentTrackView {
         TimerTask repeatedTimerTask = new TimerTask() {
             public void run() {
                 if (trackState == CurrentTrackState.START) {
-                    currentTrackData.addSeconds(1);
+                    currentTrackData.addSecond();
                     updateDataUI();
                 }
             }

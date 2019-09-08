@@ -19,7 +19,7 @@ public class UserJson {
         TextFilesIO.deleteFile(USER_JSON_FILE_NAME);
     }
 
-    public static void writeUserToJsonFile(User user) throws WorkWithDataException {
+    public static void writeUserToJsonFile(final User user) throws WorkWithDataException {
         JSONObject userJson = new JSONObject();
 
         try {
