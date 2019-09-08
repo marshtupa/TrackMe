@@ -26,38 +26,39 @@ class CurrentTrackData {
         allPositions = new ArrayList<Location>();
     }
 
-    void addSeconds(int seconds) {
-        allTimeInSeconds += seconds;
+    void addSecond() {
+        allTimeInSeconds++;
     }
 
     int getAllTimeInSeconds() {
         return allTimeInSeconds;
     }
 
-    void newPosition(Location newPosition) {
+    void newPosition(final Location newPosition) {
         updateSpeed(newPosition);
         updateDistance(newPosition);
         allPositions.add(newPosition);
     }
 
-    private void updateSpeed(Location newPosition) {
+    private void updateSpeed(final Location newPosition) {
         currentSpeedInKmH = newPosition.getSpeed();
     }
 
-    private void updateDistance(Location newPosition) {
+    private void updateDistance(final Location newPosition) {
         Location lastPosition = getLastPosition();
         if (lastPosition != null) {
-            double newDistance = GoogleMapService.distanceBetweenTwoCoordinates(lastPosition, newPosition);
+            double newDistance = GoogleMapService
+                    .distanceBetweenTwoCoordinates(lastPosition, newPosition);
             allDistanceInMetres += newDistance;
         }
     }
 
     Location getLastPosition() {
-        Location lastPosition = null;
         if (allPositions.size() > 0) {
-            lastPosition = allPositions.get(allPositions.size() - 1);
+            return allPositions.get(allPositions.size() - 1);
         }
-        return lastPosition;
+
+        return null;
     }
 
     void saveData() {
@@ -75,8 +76,8 @@ class CurrentTrackData {
             Position position = new Position(pos.getLongitude(), pos.getLatitude());
             positions.add(position);
         }
-        Track track = new Track(dateTime, distance, time, avgSpeed, positions);
-        return track;
+
+        return new Track(dateTime, distance, time, avgSpeed, positions);
     }
 
     String timeToFormatString() {
@@ -84,17 +85,17 @@ class CurrentTrackData {
         int minutes = (allTimeInSeconds - hours * 3600) / 60;
         int seconds = allTimeInSeconds % 60;
 
-        String timeString = String.format("%s:%s:%s", String.format("%02d", hours), String.format("%02d", minutes), String.format("%02d", seconds));
-        return timeString;
+        return String.format("%s:%s:%s",
+                String.format("%02d", hours),
+                String.format("%02d", minutes),
+                String.format("%02d", seconds));
     }
 
     String distanceToFormatString() {
-        String distanceString = new DecimalFormat("00.00").format(allDistanceInMetres / 1000);
-        return distanceString;
+        return new DecimalFormat("00.00").format(allDistanceInMetres / 1000);
     }
 
     String speedToFormatString() {
-        String speedString = new DecimalFormat("00.00").format(currentSpeedInKmH);
-        return speedString;
+        return new DecimalFormat("00.00").format(currentSpeedInKmH);
     }
 }

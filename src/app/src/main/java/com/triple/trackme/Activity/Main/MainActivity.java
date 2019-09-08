@@ -43,7 +43,8 @@ import java.io.File;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MainActivity extends FragmentActivity implements OnMapReadyCallback, OnMapLoadedCallback, LocationListener {
+public class MainActivity extends FragmentActivity
+        implements OnMapReadyCallback, OnMapLoadedCallback, LocationListener {
 
     private GoogleMap map;
     private ProgressDialog loadMapProgressDialog;
@@ -59,15 +60,19 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
         showMapLoadProgress();
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         setViewTrackPanelNotClickable();
 
         filesDir = getFilesDir();
         CurrentUserData.initializeUserData();
-        CurrentTrackView.initializeTrack(this, (TextView) findViewById(R.id.timeVal),
-                (TextView) findViewById(R.id.distanceVal), (TextView) findViewById(R.id.speedVal),
-                (ImageButton) findViewById(R.id.buttonStop), (ImageButton) findViewById(R.id.buttonPause),
+        CurrentTrackView.initializeTrack(this,
+                (TextView) findViewById(R.id.timeVal),
+                (TextView) findViewById(R.id.distanceVal),
+                (TextView) findViewById(R.id.speedVal),
+                (ImageButton) findViewById(R.id.buttonStop),
+                (ImageButton) findViewById(R.id.buttonPause),
                 (ImageButton) findViewById(R.id.buttonPlay));
     }
 
@@ -82,12 +87,13 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private void updateWindow() {
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false);
         getWindow().setStatusBarColor(Color.TRANSPARENT);
     }
 
-    private void setWindowFlag(Activity activity, final int bits, boolean on) {
+    private void setWindowFlag(final Activity activity, final int bits, boolean on) {
         Window win = activity.getWindow();
         WindowManager.LayoutParams winParams = win.getAttributes();
         if (on) {
@@ -107,13 +113,16 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(final GoogleMap googleMap) {
         map = googleMap;
         map.setOnMapLoadedCallback(this);
         GoogleMapService.settingMap(map, this);
 
-        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED
+                && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
             return;
         }
         map.setMyLocationEnabled(true);
@@ -123,19 +132,26 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapLoaded() {
         loadMapProgressDialog.dismiss();
 
-        int accessCoarsePermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
-        int accessFinePermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
+        int accessCoarsePermission = ContextCompat.checkSelfPermission(
+                this, Manifest.permission.ACCESS_COARSE_LOCATION);
+        int accessFinePermission = ContextCompat.checkSelfPermission(
+                this, Manifest.permission.ACCESS_FINE_LOCATION);
 
-        if (accessCoarsePermission != PackageManager.PERMISSION_GRANTED || accessFinePermission != PackageManager.PERMISSION_GRANTED) {
-            String[] permissions = new String[]{ Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION };
-            ActivityCompat.requestPermissions(this, permissions, REQUEST_ID_ACCESS_COURSE_FINE_LOCATION);
+        if (accessCoarsePermission != PackageManager.PERMISSION_GRANTED
+                || accessFinePermission != PackageManager.PERMISSION_GRANTED) {
+            String[] permissions = new String[]{
+                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.ACCESS_FINE_LOCATION };
+            ActivityCompat.requestPermissions(this, permissions,
+                    REQUEST_ID_ACCESS_COURSE_FINE_LOCATION);
             return;
         }
         showMyLocation();
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(final int requestCode, final String permissions[],
+                                           final int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         if (requestCode == REQUEST_ID_ACCESS_COURSE_FINE_LOCATION) {
@@ -156,7 +172,8 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         final double DISTANCE_TO_CENTER = 0.005;
 
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        String locationProvider = GoogleMapService.getEnabledLocationProvider(locationManager, this);
+        String locationProvider = GoogleMapService.getEnabledLocationProvider(
+                locationManager, this);
         if (locationProvider == null) {
             return;
         }
@@ -172,14 +189,16 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
             myLocation = locationManager.getLastKnownLocation(locationProvider);
         }
         catch (SecurityException e) {
-            Toast.makeText(this, "Show My Location Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Show My Location Error: " + e.getMessage(),
+                    Toast.LENGTH_LONG).show();
             Log.i("MapInfo", "Show My Location Error: " + e.getMessage());
             e.printStackTrace();
             return;
         }
 
         if (myLocation != null) {
-            LatLng latLng = new LatLng(myLocation.getLatitude(), myLocation.getLongitude() - DISTANCE_TO_CENTER);
+            LatLng latLng = new LatLng(myLocation.getLatitude(),
+                    myLocation.getLongitude() - DISTANCE_TO_CENTER);
             map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 13));
             CameraPosition cameraPosition = new CameraPosition.Builder()
                     .target(latLng)
@@ -197,33 +216,33 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     @Override
-    public void onLocationChanged(Location location) {
+    public void onLocationChanged(final Location location) {
         CurrentTrackView.newPosition(location, map);
     }
 
     @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) { }
+    public void onStatusChanged(final String provider, final int status, final Bundle extras) { }
 
     @Override
-    public void onProviderEnabled(String provider) { }
+    public void onProviderEnabled(final String provider) { }
 
     @Override
-    public void onProviderDisabled(String provider) { }
+    public void onProviderDisabled(final String provider) { }
 
 
-    public void clickStartTrackButton(View view) {
+    public void clickStartTrackButton(final View view) {
         final Animation animScale = AnimationUtils.loadAnimation(this, R.anim.scale);
         view.startAnimation(animScale);
         CurrentTrackView.startTrack();
     }
 
-    public void clickPauseTrackButton(View view) {
+    public void clickPauseTrackButton(final View view) {
         final Animation animScale = AnimationUtils.loadAnimation(this, R.anim.scale);
         view.startAnimation(animScale);
         CurrentTrackView.pauseTrack();
     }
 
-    public void clickStopTrackButton(View view) {
+    public void clickStopTrackButton(final View view) {
         final Animation animScale = AnimationUtils.loadAnimation(this, R.anim.scale);
         view.startAnimation(animScale);
         CurrentTrackView.stopTrack(this);
@@ -231,14 +250,16 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void clickCompletedTrainingsButton(final View view) {
         final int BUTTON_ANIMATION_DELAY = 200;
-        final Animation animScale = AnimationUtils.loadAnimation(this, R.anim.scale_interface);
+        final Animation animScale = AnimationUtils.loadAnimation(
+                this, R.anim.scale_interface);
         view.startAnimation(animScale);
         view.setClickable(false);
 
         TimerTask changeButtonsTask = new TimerTask() {
             @Override
             public void run() {
-                Intent completedTrainingsIntent = new Intent(MainActivity.this, CompletedTrainingsActivity.class);
+                Intent completedTrainingsIntent = new Intent(
+                        MainActivity.this, CompletedTrainingsActivity.class);
                 startActivity(completedTrainingsIntent);
                 Animatoo.animateSlideLeft(MainActivity.this);
                 view.setClickable(true);
@@ -248,8 +269,9 @@ public class MainActivity extends FragmentActivity implements OnMapReadyCallback
         changeButtonsTimer.schedule(changeButtonsTask, BUTTON_ANIMATION_DELAY);
     }
 
-    public void clickCurrentPositionButton(View view) {
-        final Animation animScale = AnimationUtils.loadAnimation(this, R.anim.scale_interface);
+    public void clickCurrentPositionButton(final View view) {
+        final Animation animScale = AnimationUtils.loadAnimation(
+                this, R.anim.scale_interface);
         view.startAnimation(animScale);
         showMyLocation();
     }

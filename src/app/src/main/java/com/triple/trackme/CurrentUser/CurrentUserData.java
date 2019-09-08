@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 public class CurrentUserData {
 
-    private static boolean isInitialize;
     private static String login;
     private static String name;
     private static String surname;
@@ -18,7 +17,7 @@ public class CurrentUserData {
     private static ArrayList<String> trackFilePaths;
 
     public static void initializeUserData() {
-        isInitialize = UserJson.isUserFileInitialize();
+        boolean isInitialize = UserJson.isUserFileInitialize();
 
         if (isInitialize) {
             initializeUserDataFromFile();
@@ -63,7 +62,7 @@ public class CurrentUserData {
         return trackData;
     }
 
-    public static void addTrack(Track track) {
+    public static void addTrack(final Track track) {
         String fileName = getNextName();
         trackFilePaths.add(fileName);
         try {
@@ -85,7 +84,8 @@ public class CurrentUserData {
         }
         else {
             String lastName = trackFilePaths.get(trackFilePaths.size() - 1);
-            nextFileNumber = Integer.parseInt(lastName.substring(lastName.indexOf(DIVIDER) + 1)) + 1;
+            nextFileNumber = Integer
+                    .parseInt(lastName.substring(lastName.indexOf(DIVIDER) + 1)) + 1;
         }
 
         return FILE_NAME_TEMPLATE + nextFileNumber;

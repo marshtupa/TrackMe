@@ -7,9 +7,10 @@ import android.content.DialogInterface;
 
 import com.triple.trackme.R;
 
-public class StopTrackDialog {
+class StopTrackDialog {
 
-    public Dialog create(Context context, final CurrentTrackView.CurrentTrackState trackStateBeforeDialog) {
+    Dialog create(final Context context,
+                  final CurrentTrackView.CurrentTrackState trackStateBeforeDialog) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage(R.string.stopTrackDialogMessage)
                 .setPositiveButton(R.string.stopTrackDialogPositiveButton, new DialogInterface.OnClickListener() {

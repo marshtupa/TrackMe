@@ -11,16 +11,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class RecyclerViewPaddingDecoration extends RecyclerView.ItemDecoration {
 
-    private final static int PADDING_IN_DIPS = 5;
-    private final int padding;
+    private final static int PADDING_IN_DIPS = 10;
+    private int padding;
 
-    public RecyclerViewPaddingDecoration(@NonNull Context context) {
+    RecyclerViewPaddingDecoration(@NonNull Context context) {
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-        padding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, PADDING_IN_DIPS, metrics);
+        padding = (int) TypedValue
+                .applyDimension(TypedValue.COMPLEX_UNIT_DIP, PADDING_IN_DIPS, metrics);
     }
 
     @Override
-    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+    public void getItemOffsets(final Rect outRect, final View view,
+                               final RecyclerView parent, final RecyclerView.State state) {
         final int itemPosition = parent.getChildAdapterPosition(view);
         if (itemPosition == RecyclerView.NO_POSITION) {
             return;
