@@ -56,7 +56,14 @@ public class TrainingsViewAdapter
                 String.format("%02d", seconds));
 
         Date trackDate = new Date(trackData.dateTime);
-        SimpleDateFormat formatter = new SimpleDateFormat("dd MMMM - hh:mm");
+        Date currentDate = new Date();
+        SimpleDateFormat formatter;
+        if (trackDate.getYear() < currentDate.getYear()) {
+            formatter = new SimpleDateFormat("dd MMMM y - hh:mm a");
+        }
+        else {
+            formatter = new SimpleDateFormat("dd MMMM - hh:mm a");
+        }
         String dateString = formatter.format(trackDate);
 
         holder.distanceValue.setText(distanceString);
