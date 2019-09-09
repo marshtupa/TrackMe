@@ -13,7 +13,6 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
-import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.triple.trackme.CurrentUser.CurrentUserData;
 import com.triple.trackme.R;
 
@@ -69,7 +68,7 @@ public class CompletedTrainingsActivity extends AppCompatActivity {
             @Override
             public void run() {
                 finish();
-                Animatoo.animateSlideRight(CompletedTrainingsActivity.this);
+                overridePendingTransition(R.anim.activity_slide_right_out, R.anim.activity_slide_right_in);
                 view.setClickable(true);
             }
         };
