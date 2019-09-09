@@ -9,14 +9,14 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/viewCurrentTrackPanel"
         android:layout_width="0dp"
-        android:layout_height="225dp"
+        android:layout_height="220dp"
         android:layout_marginStart="12dp"
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="12dp"
-        app:cardCornerRadius="12dp"
+        app:cardCornerRadius="10dp"
+        app:cardBackgroundColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent">
 
 
@@ -28,7 +28,7 @@
                 android:id="@+id/distanceVal"
                 android:layout_width="wrap_content"
                 android:layout_height="65dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="40dp"
                 android:fontFamily="sans-serif-condensed-medium"
                 android:text="@string/distance_empty_example"
                 android:textAlignment="center"
@@ -76,38 +76,14 @@
                 android:textColor="@color/colorDark"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/distanceVal" />
-
-            <ImageView
-                android:id="@+id/timePic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginBottom="40dp"
-                android:background="@drawable/ic_time"
-                android:contentDescription="@string/picture"
-                app:layout_constraintBottom_toBottomOf="@+id/timeVal"
-                app:layout_constraintStart_toStartOf="@+id/timeVal" />
-
-            <TextView
-                android:id="@+id/timeTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:fontFamily="sans-serif-light"
-                android:text="@string/time_label"
-                android:textColor="#777777"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@+id/timePic"
-                app:layout_constraintStart_toEndOf="@+id/timePic"
-                app:layout_constraintTop_toTopOf="@+id/timePic"
-                app:layout_constraintVertical_bias="0.666" />
+                app:layout_constraintTop_toBottomOf="@+id/distanceVal"
+                app:layout_constraintVertical_bias="0.42" />
 
             <TextView
                 android:id="@+id/speedVal"
                 android:layout_width="wrap_content"
                 android:layout_height="45dp"
-                android:layout_marginEnd="62dp"
+                android:layout_marginEnd="66dp"
                 android:fontFamily="sans-serif-condensed-medium"
                 android:text="@string/speed_empty_example"
                 android:textAlignment="center"
@@ -115,37 +91,15 @@
                 android:textColor="@color/colorDark"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/distanceVal" />
-
-            <ImageView
-                android:id="@+id/speedPic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginBottom="42dp"
-                android:background="@drawable/ic_speed"
-                android:contentDescription="@string/picture"
-                app:layout_constraintBottom_toBottomOf="@+id/speedVal"
-                app:layout_constraintStart_toStartOf="@+id/speedVal" />
-
-            <TextView
-                android:id="@+id/speedTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:fontFamily="sans-serif-light"
-                android:text="@string/speed_label"
-                android:textColor="#777777"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@+id/speedPic"
-                app:layout_constraintStart_toEndOf="@+id/speedPic"
-                app:layout_constraintTop_toTopOf="@+id/speedPic" />
+                app:layout_constraintTop_toBottomOf="@+id/distanceVal"
+                app:layout_constraintVertical_bias="0.42" />
 
             <TextView
                 android:id="@+id/speedTitle2"
                 android:layout_width="30dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="6dp"
                 android:fontFamily="sans-serif-light"
                 android:text="@string/speed_CI"
                 android:textColor="#777777"
