@@ -25,7 +25,6 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 
-import com.blogspot.atifsoftwares.animatoolib.Animatoo;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMapLoadedCallback;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -93,7 +92,7 @@ public class MainActivity extends FragmentActivity
         getWindow().setStatusBarColor(Color.TRANSPARENT);
     }
 
-    private void setWindowFlag(final Activity activity, final int bits, boolean on) {
+    private void setWindowFlag(final Activity activity, final int bits, final boolean on) {
         Window win = activity.getWindow();
         WindowManager.LayoutParams winParams = win.getAttributes();
         if (on) {
@@ -261,7 +260,7 @@ public class MainActivity extends FragmentActivity
                 Intent completedTrainingsIntent = new Intent(
                         MainActivity.this, CompletedTrainingsActivity.class);
                 startActivity(completedTrainingsIntent);
-                Animatoo.animateSlideLeft(MainActivity.this);
+                overridePendingTransition(R.anim.activity_slide_left_in, R.anim.activity_slide_left_out);
                 view.setClickable(true);
             }
         };
