@@ -33,7 +33,7 @@
         android:text="@string/completedTrainings"
         android:textAlignment="textEnd"
         android:textColor="@color/colorDark"
-        android:textSize="24sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/trainingsList"
         app:layout_constraintEnd_toEndOf="parent"
