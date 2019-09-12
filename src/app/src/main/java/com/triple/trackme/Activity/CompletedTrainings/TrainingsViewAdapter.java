@@ -6,12 +6,14 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.triple.trackme.Data.Storage.Track;
 import com.triple.trackme.R;
+import com.triple.trackme.Services.ImageMapService;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -70,6 +72,9 @@ public class TrainingsViewAdapter
         holder.speedValue.setText(speedString);
         holder.timeValue.setText(timeString);
         holder.dateValue.setText(dateString);
+        new DownloadImageMapTask().execute(
+                ImageMapService.getImageUrl(context.getString(R.string.google_maps_static_key)),
+                holder);
     }
 
     @Override
@@ -83,6 +88,7 @@ public class TrainingsViewAdapter
         TextView speedValue;
         TextView timeValue;
         TextView dateValue;
+        ImageView imageMap;
 
         TrainingViewHolder(final View view) {
             super(view);
@@ -90,6 +96,7 @@ public class TrainingsViewAdapter
             speedValue = view.findViewById(R.id.speedValue);
             timeValue = view.findViewById(R.id.timeValue);
             dateValue = view.findViewById(R.id.dateValue);
+            imageMap = view.findViewById(R.id.imageMap);
             setMargins(view);
         }
 
