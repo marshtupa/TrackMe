@@ -74,7 +74,9 @@ public class TrainingsViewAdapter
         holder.timeValue.setText(timeString);
         holder.dateValue.setText(dateString);
         new DownloadImageMapTask().execute(
-                ImageMapHelper.getImageUrl(context.getString(R.string.google_maps_static_key)),
+                ImageMapHelper.getImageUrl(
+                        context.getString(R.string.google_maps_static_key),
+                        trackData),
                 holder);
     }
 
