@@ -68,7 +68,8 @@ public class CompletedTrainingsActivity extends AppCompatActivity {
             @Override
             public void run() {
                 finish();
-                overridePendingTransition(R.anim.activity_slide_right_out, R.anim.activity_slide_right_in);
+                overridePendingTransition(
+                        R.anim.activity_slide_right_out, R.anim.activity_slide_right_in);
                 view.setClickable(true);
             }
         };

@@ -48,7 +48,9 @@ public class TrackJson {
         }
     }
 
-    public static Track readTrackFromJsonFile(final String trackJsonFileName) throws WorkWithDataException {
+    public static Track readTrackFromJsonFile(final String trackJsonFileName)
+            throws WorkWithDataException {
+
         try {
             String jsonString = TextFilesHelper.readTextFromFile(trackJsonFileName);
             JSONObject trackJson = new JSONObject(jsonString);

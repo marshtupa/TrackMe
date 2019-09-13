@@ -230,19 +230,22 @@ public class MainActivity extends FragmentActivity
 
 
     public void clickStartTrackButton(final View view) {
-        final Animation animScale = AnimationUtils.loadAnimation(this, R.anim.scale_training_button);
+        final Animation animScale = AnimationUtils.loadAnimation(
+                this, R.anim.scale_training_button);
         view.startAnimation(animScale);
         CurrentTrackView.startTrack();
     }
 
     public void clickPauseTrackButton(final View view) {
-        final Animation animScale = AnimationUtils.loadAnimation(this, R.anim.scale_training_button);
+        final Animation animScale = AnimationUtils.loadAnimation(
+                this, R.anim.scale_training_button);
         view.startAnimation(animScale);
         CurrentTrackView.pauseTrack();
     }
 
     public void clickStopTrackButton(final View view) {
-        final Animation animScale = AnimationUtils.loadAnimation(this, R.anim.scale_training_button);
+        final Animation animScale = AnimationUtils.loadAnimation(
+                this, R.anim.scale_training_button);
         view.startAnimation(animScale);
         CurrentTrackView.stopTrack(this);
     }
@@ -260,7 +263,8 @@ public class MainActivity extends FragmentActivity
                 Intent completedTrainingsIntent = new Intent(
                         MainActivity.this, CompletedTrainingsActivity.class);
                 startActivity(completedTrainingsIntent);
-                overridePendingTransition(R.anim.activity_slide_left_in, R.anim.activity_slide_left_out);
+                overridePendingTransition(
+                        R.anim.activity_slide_left_in, R.anim.activity_slide_left_out);
                 view.setClickable(true);
             }
         };
