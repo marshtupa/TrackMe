@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -89,6 +90,7 @@ public class TrainingsViewAdapter
         TextView timeValue;
         TextView dateValue;
         ImageView imageMap;
+        ProgressBar mapLoadProgress;
 
         TrainingViewHolder(final View view) {
             super(view);
@@ -97,6 +99,9 @@ public class TrainingsViewAdapter
             timeValue = view.findViewById(R.id.timeValue);
             dateValue = view.findViewById(R.id.dateValue);
             imageMap = view.findViewById(R.id.imageMap);
+            imageMap.setVisibility(View.INVISIBLE);
+            mapLoadProgress = view.findViewById(R.id.mapLoadProgress);
+            mapLoadProgress.setVisibility(View.VISIBLE);
             setMargins(view);
         }
 

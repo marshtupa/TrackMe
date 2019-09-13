@@ -3,6 +3,7 @@ package com.triple.trackme.Activity.CompletedTrainings;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.view.View;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -39,7 +40,9 @@ class DownloadImageMapTask extends AsyncTask<Object, Void, Bitmap> {
 
     protected void onPostExecute(Bitmap bmp) {
         if (bmp != null && holder != null) {
+            holder.mapLoadProgress.setVisibility(View.INVISIBLE);
             holder.imageMap.setImageBitmap(bmp);
+            holder.imageMap.setVisibility(View.VISIBLE);
         }
     }
 }
