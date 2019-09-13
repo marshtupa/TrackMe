@@ -17,7 +17,7 @@ class DownloadImageMapTask extends AsyncTask<Object, Void, Bitmap> {
     private TrainingsViewAdapter.TrainingViewHolder holder;
 
     @Override
-    protected Bitmap doInBackground(Object... objects) {
+    protected Bitmap doInBackground(final Object... objects) {
         String urlRequest = (String)objects[0];
         holder = (TrainingsViewAdapter.TrainingViewHolder)objects[1];
 
@@ -38,7 +38,7 @@ class DownloadImageMapTask extends AsyncTask<Object, Void, Bitmap> {
         return bmp;
     }
 
-    protected void onPostExecute(Bitmap bmp) {
+    protected void onPostExecute(final Bitmap bmp) {
         if (bmp != null && holder != null) {
             holder.mapLoadProgress.setVisibility(View.INVISIBLE);
             holder.imageMap.setImageBitmap(bmp);
