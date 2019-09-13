@@ -1,10 +1,8 @@
 package com.triple.trackme.Data.Work;
 
-import java.lang.Exception;
-
 public class WorkWithDataException extends Exception {
 
-    WorkWithDataException(String errorMessage) {
+    WorkWithDataException(final String errorMessage) {
         super(errorMessage);
     }
 

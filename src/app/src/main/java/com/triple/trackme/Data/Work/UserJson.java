@@ -12,11 +12,11 @@ public class UserJson {
     final static private String USER_JSON_FILE_NAME = "UserData";
 
     public static boolean isUserFileInitialize() {
-        return TextFilesIO.isFileExists(USER_JSON_FILE_NAME);
+        return TextFilesHelper.isFileExists(USER_JSON_FILE_NAME);
     }
 
     public static void deleteUserFile() {
-        TextFilesIO.deleteFile(USER_JSON_FILE_NAME);
+        TextFilesHelper.deleteFile(USER_JSON_FILE_NAME);
     }
 
     public static void writeUserToJsonFile(final User user) throws WorkWithDataException {
@@ -35,11 +35,11 @@ public class UserJson {
             userJson.put("trackFilePaths", trackFilePathsJson);
 
             String jsonString = userJson.toString();
-            TextFilesIO.writeTextToFile(USER_JSON_FILE_NAME, jsonString);
+            TextFilesHelper.writeTextToFile(USER_JSON_FILE_NAME, jsonString);
         }
         catch (IOException | JSONException exception) {
             exception.printStackTrace();
-            throw new WorkWithDataException(exception.getMessage());
+            throw (WorkWithDataException)(new WorkWithDataException().initCause(exception));
         }
     }
 
@@ -47,7 +47,7 @@ public class UserJson {
         User user = new User();
 
         try {
-            String jsonString = TextFilesIO.readTextFromFile(USER_JSON_FILE_NAME);
+            String jsonString = TextFilesHelper.readTextFromFile(USER_JSON_FILE_NAME);
             JSONObject userJson = new JSONObject(jsonString);
 
             user.login = userJson.getString("login");
@@ -63,7 +63,7 @@ public class UserJson {
         }
         catch (IOException | JSONException exception) {
             exception.printStackTrace();
-            throw new WorkWithDataException(exception.getMessage());
+            throw (WorkWithDataException)(new WorkWithDataException().initCause(exception));
         }
 
         return user;

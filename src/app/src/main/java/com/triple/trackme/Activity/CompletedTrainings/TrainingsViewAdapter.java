@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.triple.trackme.Data.Storage.Track;
 import com.triple.trackme.R;
-import com.triple.trackme.Services.ImageMapService;
+import com.triple.trackme.Services.ImageMapHelper;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -28,6 +28,7 @@ public class TrainingsViewAdapter
     private boolean first = false;
 
     TrainingsViewAdapter(final Context context, final ArrayList<Track> trainingsData) {
+        super();
         this.context = context;
         this.trainingsData = trainingsData;
     }
@@ -36,8 +37,7 @@ public class TrainingsViewAdapter
     public TrainingViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.completed_training_panel, parent, false);
-        TrainingViewHolder holder = new TrainingViewHolder(view);
-        return holder;
+        return new TrainingViewHolder(view);
     }
 
     @Override
@@ -73,7 +73,7 @@ public class TrainingsViewAdapter
         holder.timeValue.setText(timeString);
         holder.dateValue.setText(dateString);
         new DownloadImageMapTask().execute(
-                ImageMapService.getImageUrl(context.getString(R.string.google_maps_static_key)),
+                ImageMapHelper.getImageUrl(context.getString(R.string.google_maps_static_key)),
                 holder);
     }
 

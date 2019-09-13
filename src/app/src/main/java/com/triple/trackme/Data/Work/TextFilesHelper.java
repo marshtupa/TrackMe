@@ -9,7 +9,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-class TextFilesIO {
+class TextFilesHelper {
 
     static void deleteFile(final String fileName) {
         File file = new File(MainActivity.filesDir, fileName);

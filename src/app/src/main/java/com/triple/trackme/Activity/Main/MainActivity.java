@@ -36,7 +36,7 @@ import com.triple.trackme.Activity.CompletedTrainings.CompletedTrainingsActivity
 import com.triple.trackme.CurrentTrack.CurrentTrackView;
 import com.triple.trackme.CurrentUser.CurrentUserData;
 import com.triple.trackme.R;
-import com.triple.trackme.Services.GoogleMapService;
+import com.triple.trackme.Services.GoogleMapHelper;
 
 import java.io.File;
 import java.util.Timer;
@@ -52,7 +52,7 @@ public class MainActivity extends FragmentActivity
     public static File filesDir;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         updateWindow();
         setContentView(R.layout.activity_main);
@@ -79,7 +79,7 @@ public class MainActivity extends FragmentActivity
         View view = findViewById(R.id.viewCurrentTrackPanel);
         view.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
+            public boolean onTouch(final View view, final MotionEvent motionEvent) {
                 return true;
             }
         });
@@ -115,7 +115,7 @@ public class MainActivity extends FragmentActivity
     public void onMapReady(final GoogleMap googleMap) {
         map = googleMap;
         map.setOnMapLoadedCallback(this);
-        GoogleMapService.settingMap(map, this);
+        GoogleMapHelper.settingMap(map, this);
 
         if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED
@@ -171,7 +171,7 @@ public class MainActivity extends FragmentActivity
         final double DISTANCE_TO_CENTER = 0.005;
 
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        String locationProvider = GoogleMapService.getEnabledLocationProvider(
+        String locationProvider = GoogleMapHelper.getEnabledLocationProvider(
                 locationManager, this);
         if (locationProvider == null) {
             return;
