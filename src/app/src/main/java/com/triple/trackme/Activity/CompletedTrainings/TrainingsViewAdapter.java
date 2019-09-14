@@ -2,6 +2,7 @@ package com.triple.trackme.Activity.CompletedTrainings;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,9 +14,11 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.triple.trackme.Data.Storage.Track;
+import com.triple.trackme.Data.Work.ImageFilesHelper;
 import com.triple.trackme.R;
 import com.triple.trackme.Services.ImageMapHelper;
 
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,6 +38,11 @@ public class TrainingsViewAdapter
     }
 
     @Override
+    public int getItemCount() {
+        return trainingsData.size();
+    }
+
+    @Override
     public TrainingViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.completed_training_panel, parent, false);
@@ -44,12 +52,30 @@ public class TrainingsViewAdapter
     @Override
     public void onBindViewHolder(final TrainingViewHolder holder, final int position) {
         Track trackData = trainingsData.get(position);
+        setupTrackCard(holder, trackData);
+    }
 
+    private void setupTrackCard(final TrainingViewHolder holder, final Track trackData) {
+        setDistanceValue(holder, trackData);
+        setSpeedValue(holder, trackData);
+        setTimeValue(holder, trackData);
+        setDateValue(holder, trackData);
+        setMapImage(holder, trackData);
+    }
+
+    private void setDistanceValue(final TrainingViewHolder holder, final Track trackData) {
         String distanceString = new DecimalFormat("00.00")
                 .format(trackData.distance / 1000);
+        holder.distanceValue.setText(distanceString);
+    }
+
+    private void setSpeedValue(final TrainingViewHolder holder, final Track trackData) {
         String speedString = new DecimalFormat("00.00")
                 .format(trackData.avgSpeed);
+        holder.speedValue.setText(speedString);
+    }
 
+    private void setTimeValue(final TrainingViewHolder holder, final Track trackData) {
         int hours = trackData.time / 3600;
         int minutes = (trackData.time - hours * 3600) / 60;
         int seconds = trackData.time % 60;
@@ -57,7 +83,10 @@ public class TrainingsViewAdapter
                 String.format("%02d", hours),
                 String.format("%02d", minutes),
                 String.format("%02d", seconds));
+        holder.timeValue.setText(timeString);
+    }
 
+    private void setDateValue(final TrainingViewHolder holder, final Track trackData) {
         Date trackDate = new Date(trackData.dateTime);
         Date currentDate = new Date();
         SimpleDateFormat formatter;
@@ -68,21 +97,35 @@ public class TrainingsViewAdapter
             formatter = new SimpleDateFormat("dd MMMM - hh:mm a");
         }
         String dateString = formatter.format(trackDate);
-
-        holder.distanceValue.setText(distanceString);
-        holder.speedValue.setText(speedString);
-        holder.timeValue.setText(timeString);
         holder.dateValue.setText(dateString);
-        new DownloadImageMapTask().execute(
-                ImageMapHelper.getImageUrl(
-                        context.getString(R.string.google_maps_static_key),
-                        trackData),
-                holder);
     }
 
-    @Override
-    public int getItemCount() {
-        return trainingsData.size();
+    private void setMapImage(final TrainingViewHolder holder, final Track trackData) {
+        if (ImageFilesHelper.isFileExists(trackData.mapImagePath)) {
+            holder.mapLoadProgress.setVisibility(View.INVISIBLE);
+            holder.imageMap.setVisibility(View.VISIBLE);
+
+            try {
+                Bitmap bitmap = ImageFilesHelper.readBitmapFromFile(trackData.mapImagePath);
+                holder.imageMap.setImageBitmap(bitmap);
+            }
+            catch (IOException exception) {
+                exception.printStackTrace();
+                holder.imageMap.setVisibility(View.INVISIBLE);
+                holder.mapLoadProgress.setVisibility(View.VISIBLE);
+            }
+        }
+        else {
+            holder.imageMap.setVisibility(View.INVISIBLE);
+            holder.mapLoadProgress.setVisibility(View.VISIBLE);
+
+            new DownloadImageMapTask().execute(
+                    ImageMapHelper.getImageUrl(
+                            context.getString(R.string.google_maps_static_key),
+                            trackData),
+                    holder,
+                    trackData);
+        }
     }
 
     class TrainingViewHolder extends RecyclerView.ViewHolder {
@@ -101,9 +144,7 @@ public class TrainingsViewAdapter
             timeValue = view.findViewById(R.id.timeValue);
             dateValue = view.findViewById(R.id.dateValue);
             imageMap = view.findViewById(R.id.imageMap);
-            imageMap.setVisibility(View.INVISIBLE);
             mapLoadProgress = view.findViewById(R.id.mapLoadProgress);
-            mapLoadProgress.setVisibility(View.VISIBLE);
             setMargins(view);
         }
 

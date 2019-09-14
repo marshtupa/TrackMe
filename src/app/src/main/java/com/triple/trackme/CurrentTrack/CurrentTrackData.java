@@ -72,7 +72,7 @@ class CurrentTrackData {
         double distance = allDistanceInMetres;
         int time = allTimeInSeconds;
         double avgSpeed = (allDistanceInMetres / allTimeInSeconds) * 3.6;
-        String mapImagePath = "";
+        String mapImagePath = getMapImageFileName(id);
         ArrayList<Position> positions = new ArrayList<Position>();
         for (Location pos : allPositions) {
             Position position = new Position(pos.getLongitude(), pos.getLatitude());
@@ -80,6 +80,12 @@ class CurrentTrackData {
         }
 
         return new Track(id, dateTime, distance, time, avgSpeed, mapImagePath, positions);
+    }
+
+    private static String getMapImageFileName(long id) {
+        final String FILE_NAME_TEMPLATE = "mapImage_";
+        final String FILE_NAME_EXTENSION = ".jpeg";
+        return FILE_NAME_TEMPLATE + id + FILE_NAME_EXTENSION;
     }
 
     String timeToFormatString() {
