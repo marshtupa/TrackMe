@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class RecyclerViewPaddingDecoration extends RecyclerView.ItemDecoration {
 
     private final static int PADDING_IN_DIPS = 10;
-    private int padding;
+    private final int padding;
 
     RecyclerViewPaddingDecoration(@NonNull final Context context) {
         super();

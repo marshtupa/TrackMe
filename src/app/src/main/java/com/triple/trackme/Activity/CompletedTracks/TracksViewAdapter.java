@@ -27,8 +27,8 @@ import java.util.Date;
 public class TracksViewAdapter
         extends RecyclerView.Adapter<TracksViewAdapter.TrackViewHolder> {
 
-    private Context context;
-    private ArrayList<Track> tracksData;
+    private final Context context;
+    private final ArrayList<Track> tracksData;
     private boolean first;
 
     TracksViewAdapter(final Context context, final ArrayList<Track> tracksData) {
