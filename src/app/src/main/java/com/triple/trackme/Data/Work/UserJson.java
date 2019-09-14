@@ -1,10 +1,19 @@
 package com.triple.trackme.Data.Work;
 
+import android.app.Application;
+import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.os.Environment;
+
 import com.triple.trackme.Data.Storage.User;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;
+
+import java.io.File;
 import java.io.IOException;
 
 public class UserJson {
@@ -22,6 +31,9 @@ public class UserJson {
     public static void writeUserToJsonFile(User user) throws WorkWithDataException {
         JSONObject userJson = new JSONObject();
 
+        String Path = "";
+
+
         try {
             userJson.put("login", user.login);
             userJson.put("name", user.name);
@@ -35,7 +47,7 @@ public class UserJson {
             userJson.put("trackFilePaths", trackFilePathsJson);
 
             String jsonString = userJson.toString();
-            TextFilesIO.writeTextToFile(USER_JSON_FILE_NAME, jsonString);
+            TextFilesIO.writeTextToFile(Path + USER_JSON_FILE_NAME, jsonString);
         }
         catch (IOException | JSONException exception) {
             exception.printStackTrace();
