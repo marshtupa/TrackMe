@@ -10,7 +10,6 @@ public final class ImageMapUtils {
     private static final int DEFAULT_MAP_LATITUDE = 0;
     private static final int DEFAULT_MAP_LONGITUDE = 0;
 
-    private static StringBuilder url = null;
     private static String apiKey;
     private static Track trackData;
 
@@ -20,22 +19,22 @@ public final class ImageMapUtils {
         ImageMapUtils.apiKey = apiKey;
         ImageMapUtils.trackData = trackData;
 
-        ImageMapUtils.url = new StringBuilder();
-        initializeUrl();
-        setCenter();
-        setStyle();
-        setZoom();
-        setSize();
-        setPath();
-        setApiKey();
+        StringBuilder url = new StringBuilder();
+        initializeUrl(url);
+        setCenter(url);
+        setStyle(url);
+        setZoom(url);
+        setSize(url);
+        setPath(url);
+        setApiKey(url);
         return url.toString();
     }
 
-    private static void initializeUrl() {
+    private static void initializeUrl(final StringBuilder url) {
         url.append("https://maps.googleapis.com/maps/api/staticmap?");
     }
 
-    private static void setCenter() {
+    private static void setCenter(final StringBuilder url) {
         final int MIN_SIZE = 1;
 
         Position centerPosition = null;
@@ -60,7 +59,7 @@ public final class ImageMapUtils {
         }
     }
 
-    private static void setStyle() {
+    private static void setStyle(final StringBuilder url) {
         url.append("&style=element:geometry%7Ccolor:0xebe3cd");
         url.append("&style=element:labels.text.fill%7Ccolor:0x523735");
         url.append("&style=element:labels.text.stroke%7Ccolor:0xf5f1e6");
@@ -88,19 +87,19 @@ public final class ImageMapUtils {
         url.append("&style=feature:water%7Celement:labels.text.fill%7Ccolor:0x92998d");
     }
 
-    private static void setZoom() {
+    private static void setZoom(final StringBuilder url) {
         url.append("&zoom=");
         url.append(DEFAULT_MAP_ZOOM);
     }
 
-    private static void setSize() {
+    private static void setSize(final StringBuilder url) {
         url.append("&size=");
         url.append(DEFAULT_IMAGE_MAP_SIZE);
         url.append('x');
         url.append(DEFAULT_IMAGE_MAP_SIZE);
     }
 
-    private static void setPath() {
+    private static void setPath(final StringBuilder url) {
         if (trackData.positions != null && trackData.positions.size() > 0) {
             url.append("&path=color:0x0082ff%7Cweight:10%7C");
             for (int i = 0; i < trackData.positions.size(); i++) {
@@ -115,7 +114,7 @@ public final class ImageMapUtils {
         }
     }
 
-    private static void setApiKey() {
+    private static void setApiKey(final StringBuilder url) {
         url.append("&key=");
         url.append(apiKey);
     }
