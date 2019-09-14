@@ -19,5 +19,5 @@
     <string name="stopTrackDialogMessage">Do you want to complete the training?</string>
     <string name="stopTrackDialogPositiveButton">Resume</string>
     <string name="stopTrackDialogNegativeButton">Complete</string>
-    <string name="completedTrainings">Completed trainings</string>
+    <string name="completedTracks">Completed trainings</string>
 </resources>

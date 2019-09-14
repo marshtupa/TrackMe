@@ -22,6 +22,7 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.triple.trackme", appContext.getPackageName());
+        assertEquals("Equals package name",
+                "com.triple.trackme", appContext.getPackageName());
     }
 }

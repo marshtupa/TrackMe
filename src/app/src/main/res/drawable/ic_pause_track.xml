@@ -7,11 +7,11 @@
       android:bottom="0.5dp">
     <shape android:shape="rectangle">
       <gradient
-          android:startColor="#4DD3E3"
-          android:endColor="#4CD963"
+          android:startColor="#FEE305"
+          android:endColor="#F77C01"
           android:angle="135"
           android:type="linear" />
     </shape>
   </item>
-  <item android:drawable="@drawable/ic_play_training_temp" />
+  <item android:drawable="@drawable/ic_pause_track_temp" />
 </layer-list>

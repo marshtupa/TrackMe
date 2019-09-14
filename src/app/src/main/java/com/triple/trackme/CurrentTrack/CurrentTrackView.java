@@ -67,7 +67,8 @@ public class CurrentTrackView {
 
     public static void stopTrack(final Context context) {
         if (trackState != CurrentTrackState.STOP) {
-            if (currentTrackData.getAllTimeInSeconds() >= MIN_TIME_SECONDS_FOR_SAVE_TRACK) {
+            if (currentTrackData.getAllTimeInSeconds() >= MIN_TIME_SECONDS_FOR_SAVE_TRACK
+                    && currentTrackData.getLastPosition() != null) {
                 CurrentTrackState trackStateBeforeDialog = trackState;
                 setTrackState(CurrentTrackState.PAUSE);
                 StopTrackDialog stopTrackDialog = new StopTrackDialog();

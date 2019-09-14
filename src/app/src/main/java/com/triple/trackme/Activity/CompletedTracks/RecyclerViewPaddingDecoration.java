@@ -1,4 +1,4 @@
-package com.triple.trackme.Activity.CompletedTrainings;
+package com.triple.trackme.Activity.CompletedTracks;
 
 import android.content.Context;
 import android.graphics.Rect;
@@ -12,9 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 public class RecyclerViewPaddingDecoration extends RecyclerView.ItemDecoration {
 
     private final static int PADDING_IN_DIPS = 10;
-    private int padding;
+    private final int padding;
 
-    RecyclerViewPaddingDecoration(@NonNull Context context) {
+    RecyclerViewPaddingDecoration(@NonNull final Context context) {
+        super();
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
         padding = (int) TypedValue
                 .applyDimension(TypedValue.COMPLEX_UNIT_DIP, PADDING_IN_DIPS, metrics);

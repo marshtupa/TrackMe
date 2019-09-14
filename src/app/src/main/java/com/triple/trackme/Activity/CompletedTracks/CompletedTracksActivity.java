@@ -1,4 +1,4 @@
-package com.triple.trackme.Activity.CompletedTrainings;
+package com.triple.trackme.Activity.CompletedTracks;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,14 +19,14 @@ import com.triple.trackme.R;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class CompletedTrainingsActivity extends AppCompatActivity {
+public class CompletedTracksActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         updateWindow();
-        setContentView(R.layout.activity_completed_trainings);
-        setTrainingsView();
+        setContentView(R.layout.activity_completed_tracks);
+        setTracksView();
     }
 
     private void updateWindow() {
@@ -47,14 +47,14 @@ public class CompletedTrainingsActivity extends AppCompatActivity {
         win.setAttributes(winParams);
     }
 
-    private void setTrainingsView() {
-        RecyclerView trainingsView = findViewById(R.id.trainingsList);
-        trainingsView.setHasFixedSize(true);
-        RecyclerView.LayoutManager trainingsManager = new LinearLayoutManager(this);
-        trainingsView.setLayoutManager(trainingsManager);
-        RecyclerView.Adapter trainingsAdapter = new TrainingsViewAdapter(
+    private void setTracksView() {
+        RecyclerView tracksView = findViewById(R.id.tracksList);
+        tracksView.setHasFixedSize(true);
+        RecyclerView.LayoutManager tracksManager = new LinearLayoutManager(this);
+        tracksView.setLayoutManager(tracksManager);
+        RecyclerView.Adapter tracksAdapter = new TracksViewAdapter(
                 this, CurrentUserData.getTrackDataAll());
-        trainingsView.setAdapter(trainingsAdapter);
+        tracksView.setAdapter(tracksAdapter);
     }
 
     public void clickBackButton(final View view) {
@@ -68,7 +68,8 @@ public class CompletedTrainingsActivity extends AppCompatActivity {
             @Override
             public void run() {
                 finish();
-                overridePendingTransition(R.anim.activity_slide_right_out, R.anim.activity_slide_right_in);
+                overridePendingTransition(
+                        R.anim.activity_slide_right_out, R.anim.activity_slide_right_in);
                 view.setClickable(true);
             }
         };

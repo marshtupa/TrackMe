@@ -9,11 +9,15 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-class TextFilesIO {
+final class TextFilesUtils {
+
+    private TextFilesUtils() { }
 
     static void deleteFile(final String fileName) {
-        File file = new File(MainActivity.filesDir, fileName);
-        file.delete();
+        if (isFileExists(fileName)) {
+            File file = new File(MainActivity.filesDir, fileName);
+            file.delete();
+        }
     }
 
     static boolean isFileExists(final String fileName) {
@@ -42,9 +46,10 @@ class TextFilesIO {
         FileReader fileReader = new FileReader(file.getAbsoluteFile());
         BufferedReader bufferedReader = new BufferedReader(fileReader);
 
-        String line = "";
+        String line;
         while ((line = bufferedReader.readLine()) != null) {
-            fileText.append(line + "\n");
+            fileText.append(line);
+            fileText.append('\n');
         }
 
         bufferedReader.close();

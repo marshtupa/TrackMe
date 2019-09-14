@@ -12,11 +12,11 @@ import java.util.ArrayList;
 public class TrackJson {
 
     public static boolean isTrackFileInitialize(final String trackJsonFileName) {
-        return TextFilesIO.isFileExists(trackJsonFileName);
+        return TextFilesUtils.isFileExists(trackJsonFileName);
     }
 
     public static void deleteTrackFile(final String trackJsonFileName) {
-        TextFilesIO.deleteFile(trackJsonFileName);
+        TextFilesUtils.deleteFile(trackJsonFileName);
     }
 
     public static void writeTrackToJsonFile(final String trackJsonFileName, final Track track)
@@ -25,10 +25,12 @@ public class TrackJson {
         JSONObject trackJson = new JSONObject();
 
         try {
+            trackJson.put("id", track.id);
             trackJson.put("dateTime", track.dateTime);
             trackJson.put("distance", track.distance);
             trackJson.put("time", track.time);
             trackJson.put("avgSpeed", track.avgSpeed);
+            trackJson.put("mapImagePath", track.mapImagePath);
 
             JSONArray positionsJson = new JSONArray();
             for (Position position : track.positions) {
@@ -40,22 +42,26 @@ public class TrackJson {
             trackJson.put("positions", positionsJson);
 
             String jsonString = trackJson.toString();
-            TextFilesIO.writeTextToFile(trackJsonFileName, jsonString);
+            TextFilesUtils.writeTextToFile(trackJsonFileName, jsonString);
         }
         catch (IOException | JSONException exception) {
             exception.printStackTrace();
-            throw new WorkWithDataException(exception.getMessage());
+            throw (WorkWithDataException)(new WorkWithDataException().initCause(exception));
         }
     }
 
-    public static Track readTrackFromJsonFile(final String trackJsonFileName) throws WorkWithDataException {
+    public static Track readTrackFromJsonFile(final String trackJsonFileName)
+            throws WorkWithDataException {
+
         try {
-            String jsonString = TextFilesIO.readTextFromFile(trackJsonFileName);
+            String jsonString = TextFilesUtils.readTextFromFile(trackJsonFileName);
             JSONObject trackJson = new JSONObject(jsonString);
+            long id = trackJson.getLong("id");
             String dateTime = trackJson.getString("dateTime");
             double distance = trackJson.getDouble("distance");
             int time = trackJson.getInt("time");
             double avgSpeed = trackJson.getDouble("avgSpeed");
+            String mapImagePath = trackJson.getString("mapImagePath");
             ArrayList<Position> positions = new ArrayList<Position>();
 
             JSONArray positionsJson = trackJson.getJSONArray("positions");
@@ -67,7 +73,7 @@ public class TrackJson {
                 positions.add(position);
             }
 
-            return new Track(dateTime, distance, time, avgSpeed, positions);
+            return new Track(id, dateTime, distance, time, avgSpeed, mapImagePath, positions);
         }
         catch (IOException | JSONException exception) {
             exception.printStackTrace();

@@ -6,17 +6,18 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class UserJson {
 
     final static private String USER_JSON_FILE_NAME = "UserData";
 
     public static boolean isUserFileInitialize() {
-        return TextFilesIO.isFileExists(USER_JSON_FILE_NAME);
+        return TextFilesUtils.isFileExists(USER_JSON_FILE_NAME);
     }
 
     public static void deleteUserFile() {
-        TextFilesIO.deleteFile(USER_JSON_FILE_NAME);
+        TextFilesUtils.deleteFile(USER_JSON_FILE_NAME);
     }
 
     public static void writeUserToJsonFile(final User user) throws WorkWithDataException {
@@ -27,6 +28,7 @@ public class UserJson {
             userJson.put("name", user.name);
             userJson.put("surname", user.surname);
             userJson.put("photoFilePath", user.photoFilePath);
+            userJson.put("countTrack", user.countTrack);
 
             JSONArray trackFilePathsJson = new JSONArray();
             for (String path : user.trackFilePaths) {
@@ -35,37 +37,37 @@ public class UserJson {
             userJson.put("trackFilePaths", trackFilePathsJson);
 
             String jsonString = userJson.toString();
-            TextFilesIO.writeTextToFile(USER_JSON_FILE_NAME, jsonString);
+            TextFilesUtils.writeTextToFile(USER_JSON_FILE_NAME, jsonString);
         }
         catch (IOException | JSONException exception) {
             exception.printStackTrace();
-            throw new WorkWithDataException(exception.getMessage());
+            throw (WorkWithDataException)(new WorkWithDataException().initCause(exception));
         }
     }
 
     public static User readUserFromJsonFile() throws WorkWithDataException {
-        User user = new User();
-
         try {
-            String jsonString = TextFilesIO.readTextFromFile(USER_JSON_FILE_NAME);
+            String jsonString = TextFilesUtils.readTextFromFile(USER_JSON_FILE_NAME);
             JSONObject userJson = new JSONObject(jsonString);
 
-            user.login = userJson.getString("login");
-            user.name = userJson.getString("name");
-            user.surname = userJson.getString("surname");
-            user.photoFilePath = userJson.getString("photoFilePath");
+            String login = userJson.getString("login");
+            String name = userJson.getString("name");
+            String surname = userJson.getString("surname");
+            String photoFilePath = userJson.getString("photoFilePath");
+            long countTrack = userJson.getLong("countTrack");
+            ArrayList<String> trackFilePaths = new ArrayList<String>();
 
             JSONArray trackFilePathsJson = userJson.getJSONArray("trackFilePaths");
             for (int i = 0; i < trackFilePathsJson.length(); i++) {
                 String trackFilePath = trackFilePathsJson.getString(i);
-                user.trackFilePaths.add(trackFilePath);
+                trackFilePaths.add(trackFilePath);
             }
+
+            return new User(login, name, surname, photoFilePath, countTrack, trackFilePaths);
         }
         catch (IOException | JSONException exception) {
             exception.printStackTrace();
-            throw new WorkWithDataException(exception.getMessage());
+            throw (WorkWithDataException)(new WorkWithDataException().initCause(exception));
         }
-
-        return user;
     }
 }

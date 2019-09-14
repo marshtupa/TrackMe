@@ -10,8 +10,8 @@
     <include layout="@layout/map_panel" />
 
     <include
-        android:id="@+id/training_panel"
-        layout="@layout/current_training_panel"
+        android:id="@+id/track_panel"
+        layout="@layout/current_track_panel"
         tools:layout_editor_absoluteX="84dp"
         tools:layout_editor_absoluteY="0dp" />
 
@@ -26,7 +26,7 @@
         android:onClick="clickCurrentPositionButton"
         android:src="@drawable/ic_compass"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/training_panel" />
+        app:layout_constraintTop_toTopOf="@+id/track_panel" />
 
     <ImageButton
         android:id="@+id/profileButton"
@@ -36,8 +36,8 @@
         android:layout_marginTop="35dp"
         android:background="@drawable/circle_button"
         android:contentDescription="@string/menu_button"
-        android:onClick="clickCompletedTrainingsButton"
-        android:src="@drawable/ic_completed_trainings"
+        android:onClick="clickCompletedTracksButton"
+        android:src="@drawable/ic_completed_tracks"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

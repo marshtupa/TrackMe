@@ -32,11 +32,11 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
-import com.triple.trackme.Activity.CompletedTrainings.CompletedTrainingsActivity;
+import com.triple.trackme.Activity.CompletedTracks.CompletedTracksActivity;
 import com.triple.trackme.CurrentTrack.CurrentTrackView;
 import com.triple.trackme.CurrentUser.CurrentUserData;
 import com.triple.trackme.R;
-import com.triple.trackme.Services.GoogleMapService;
+import com.triple.trackme.Services.GoogleMapUtils;
 
 import java.io.File;
 import java.util.Timer;
@@ -52,7 +52,7 @@ public class MainActivity extends FragmentActivity
     public static File filesDir;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         updateWindow();
         setContentView(R.layout.activity_main);
@@ -79,7 +79,7 @@ public class MainActivity extends FragmentActivity
         View view = findViewById(R.id.viewCurrentTrackPanel);
         view.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
+            public boolean onTouch(final View view, final MotionEvent motionEvent) {
                 return true;
             }
         });
@@ -115,7 +115,7 @@ public class MainActivity extends FragmentActivity
     public void onMapReady(final GoogleMap googleMap) {
         map = googleMap;
         map.setOnMapLoadedCallback(this);
-        GoogleMapService.settingMap(map, this);
+        GoogleMapUtils.settingMap(map, this);
 
         if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED
@@ -171,7 +171,7 @@ public class MainActivity extends FragmentActivity
         final double DISTANCE_TO_CENTER = 0.005;
 
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        String locationProvider = GoogleMapService.getEnabledLocationProvider(
+        String locationProvider = GoogleMapUtils.getEnabledLocationProvider(
                 locationManager, this);
         if (locationProvider == null) {
             return;
@@ -230,24 +230,27 @@ public class MainActivity extends FragmentActivity
 
 
     public void clickStartTrackButton(final View view) {
-        final Animation animScale = AnimationUtils.loadAnimation(this, R.anim.scale_training_button);
+        final Animation animScale = AnimationUtils.loadAnimation(
+                this, R.anim.scale_track_button);
         view.startAnimation(animScale);
         CurrentTrackView.startTrack();
     }
 
     public void clickPauseTrackButton(final View view) {
-        final Animation animScale = AnimationUtils.loadAnimation(this, R.anim.scale_training_button);
+        final Animation animScale = AnimationUtils.loadAnimation(
+                this, R.anim.scale_track_button);
         view.startAnimation(animScale);
         CurrentTrackView.pauseTrack();
     }
 
     public void clickStopTrackButton(final View view) {
-        final Animation animScale = AnimationUtils.loadAnimation(this, R.anim.scale_training_button);
+        final Animation animScale = AnimationUtils.loadAnimation(
+                this, R.anim.scale_track_button);
         view.startAnimation(animScale);
         CurrentTrackView.stopTrack(this);
     }
 
-    public void clickCompletedTrainingsButton(final View view) {
+    public void clickCompletedTracksButton(final View view) {
         final int BUTTON_ANIMATION_DELAY = 200;
         final Animation animScale = AnimationUtils.loadAnimation(
                 this, R.anim.scale_menu_button);
@@ -257,10 +260,11 @@ public class MainActivity extends FragmentActivity
         TimerTask changeButtonsTask = new TimerTask() {
             @Override
             public void run() {
-                Intent completedTrainingsIntent = new Intent(
-                        MainActivity.this, CompletedTrainingsActivity.class);
-                startActivity(completedTrainingsIntent);
-                overridePendingTransition(R.anim.activity_slide_left_in, R.anim.activity_slide_left_out);
+                Intent completedTracksIntent = new Intent(
+                        MainActivity.this, CompletedTracksActivity.class);
+                startActivity(completedTracksIntent);
+                overridePendingTransition(
+                        R.anim.activity_slide_left_in, R.anim.activity_slide_left_out);
                 view.setClickable(true);
             }
         };

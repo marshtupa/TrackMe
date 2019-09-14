@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorMainMap"
-    tools:context=".Activity.CompletedTrainings.CompletedTrainingsActivity">
+    tools:context=".Activity.CompletedTracks.CompletedTracksActivity">
 
     <ImageButton
         android:id="@+id/backButton"
@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/completedTrainingsText"
+        android:id="@+id/completedTracksText"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="12dp"
@@ -30,18 +30,18 @@
         android:layout_marginBottom="10dp"
         android:fontFamily="sans-serif-condensed-medium"
         android:gravity="center"
-        android:text="@string/completedTrainings"
+        android:text="@string/completedTracks"
         android:textAlignment="textEnd"
         android:textColor="@color/colorDark"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/trainingsList"
+        app:layout_constraintBottom_toTopOf="@+id/tracksList"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/backButton"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.chauthai.overscroll.RecyclerViewBouncy
-        android:id="@+id/trainingsList"
+        android:id="@+id/tracksList"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
@@ -59,14 +59,14 @@
         android:src="@drawable/gradient_top_rectangle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/trainingsList" />
+        app:layout_constraintTop_toTopOf="@+id/tracksList" />
 
     <ImageView
         android:id="@+id/imageBottomGradient"
         android:layout_width="0dp"
         android:layout_height="5dp"
         android:src="@drawable/gradient_bottom_rectangle"
-        app:layout_constraintBottom_toBottomOf="@+id/trainingsList"
+        app:layout_constraintBottom_toBottomOf="@+id/tracksList"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
