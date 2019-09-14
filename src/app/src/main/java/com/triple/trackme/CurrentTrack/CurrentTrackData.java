@@ -5,7 +5,7 @@ import android.location.Location;
 import com.triple.trackme.CurrentUser.CurrentUserData;
 import com.triple.trackme.Data.Storage.Position;
 import com.triple.trackme.Data.Storage.Track;
-import com.triple.trackme.Services.GoogleMapUtility;
+import com.triple.trackme.Services.GoogleMapUtils;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
@@ -47,7 +47,7 @@ class CurrentTrackData {
     private void updateDistance(final Location newPosition) {
         Location lastPosition = getLastPosition();
         if (lastPosition != null) {
-            double newDistance = GoogleMapUtility
+            double newDistance = GoogleMapUtils
                     .distanceBetweenTwoCoordinates(lastPosition, newPosition);
             allDistanceInMetres += newDistance;
         }

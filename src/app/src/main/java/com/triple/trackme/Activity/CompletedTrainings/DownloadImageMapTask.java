@@ -6,7 +6,7 @@ import android.os.AsyncTask;
 import android.view.View;
 
 import com.triple.trackme.Data.Storage.Track;
-import com.triple.trackme.Data.Work.ImageFilesUtility;
+import com.triple.trackme.Data.Work.ImageFilesUtils;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -53,7 +53,7 @@ class DownloadImageMapTask extends AsyncTask<Object, Void, Bitmap> {
 
     private void saveBitmapImage(final Bitmap bitmap) {
         try {
-            ImageFilesUtility.writeBitmapToFile(trackData.mapImagePath, bitmap);
+            ImageFilesUtils.writeBitmapToFile(trackData.mapImagePath, bitmap);
         }
         catch (IOException exception) {
             exception.printStackTrace();

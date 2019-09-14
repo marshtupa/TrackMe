@@ -14,9 +14,9 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.triple.trackme.Data.Storage.Track;
-import com.triple.trackme.Data.Work.ImageFilesUtility;
+import com.triple.trackme.Data.Work.ImageFilesUtils;
 import com.triple.trackme.R;
-import com.triple.trackme.Services.ImageMapUtility;
+import com.triple.trackme.Services.ImageMapUtils;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -101,12 +101,12 @@ public class TrainingsViewAdapter
     }
 
     private void setMapImage(final TrainingViewHolder holder, final Track trackData) {
-        if (ImageFilesUtility.isFileExists(trackData.mapImagePath)) {
+        if (ImageFilesUtils.isFileExists(trackData.mapImagePath)) {
             holder.mapLoadProgress.setVisibility(View.INVISIBLE);
             holder.imageMap.setVisibility(View.VISIBLE);
 
             try {
-                Bitmap bitmap = ImageFilesUtility.readBitmapFromFile(trackData.mapImagePath);
+                Bitmap bitmap = ImageFilesUtils.readBitmapFromFile(trackData.mapImagePath);
                 holder.imageMap.setImageBitmap(bitmap);
             }
             catch (IOException exception) {
@@ -120,7 +120,7 @@ public class TrainingsViewAdapter
             holder.mapLoadProgress.setVisibility(View.VISIBLE);
 
             new DownloadImageMapTask().execute(
-                    ImageMapUtility.getImageUrl(
+                    ImageMapUtils.getImageUrl(
                             context.getString(R.string.google_maps_static_key),
                             trackData),
                     holder,

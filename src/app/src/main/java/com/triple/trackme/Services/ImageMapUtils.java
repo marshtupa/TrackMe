@@ -3,9 +3,7 @@ package com.triple.trackme.Services;
 import com.triple.trackme.Data.Storage.Position;
 import com.triple.trackme.Data.Storage.Track;
 
-public class ImageMapUtility {
-
-    private ImageMapUtility() { }
+public final class ImageMapUtils {
 
     private static final int DEFAULT_IMAGE_MAP_SIZE = 512;
     private static final int DEFAULT_MAP_ZOOM = 15;
@@ -16,11 +14,13 @@ public class ImageMapUtility {
     private static String apiKey;
     private static Track trackData;
 
-    public static String getImageUrl(final String apiKey, final Track trackData) {
-        ImageMapUtility.apiKey = apiKey;
-        ImageMapUtility.trackData = trackData;
+    private ImageMapUtils() { }
 
-        ImageMapUtility.url = new StringBuilder();
+    public static String getImageUrl(final String apiKey, final Track trackData) {
+        ImageMapUtils.apiKey = apiKey;
+        ImageMapUtils.trackData = trackData;
+
+        ImageMapUtils.url = new StringBuilder();
         initializeUrl();
         setCenter();
         setStyle();
@@ -36,19 +36,27 @@ public class ImageMapUtility {
     }
 
     private static void setCenter() {
+        final int MIN_SIZE = 1;
+
         Position centerPosition = null;
-        if (trackData.positions.size() == 1) {
+        if (trackData.positions.size() == MIN_SIZE) {
             centerPosition = trackData.positions.get(0);
         }
-        else if (trackData.positions.size() > 1) {
+        else if (trackData.positions.size() > MIN_SIZE) {
             centerPosition = trackData.positions.get(trackData.positions.size() / 2);
         }
 
         if (centerPosition == null) {
-            url.append("center=" + DEFAULT_MAP_LATITUDE + "," + DEFAULT_MAP_LONGITUDE);
+            url.append("center=");
+            url.append(DEFAULT_MAP_LATITUDE);
+            url.append(',');
+            url.append(DEFAULT_MAP_LONGITUDE);
         }
         else {
-            url.append("center=" + centerPosition.latitude + "," + centerPosition.longitude);
+            url.append("center=");
+            url.append(centerPosition.latitude);
+            url.append(',');
+            url.append(centerPosition.longitude);
         }
     }
 
@@ -152,16 +160,23 @@ public class ImageMapUtility {
     }
 
     private static void setZoom() {
-        url.append("&zoom=" + DEFAULT_MAP_ZOOM);
+        url.append("&zoom=");
+        url.append(DEFAULT_MAP_ZOOM);
     }
 
     private static void setSize() {
-        url.append("&size=" + DEFAULT_IMAGE_MAP_SIZE + "x" + DEFAULT_IMAGE_MAP_SIZE);
+        url.append("&size=");
+        url.append(DEFAULT_IMAGE_MAP_SIZE);
+        url.append('x');
+        url.append(DEFAULT_IMAGE_MAP_SIZE);
     }
 
     private static void setPath() {
         if (trackData.positions != null && trackData.positions.size() > 0) {
-            url.append("&path=color:0x0082ff" + "%7C" + "weight:10" + "%7C");
+            url.append("&path=color:0x0082ff");
+            url.append("%7C");
+            url.append("weight:10");
+            url.append("%7C");
             for (int i = 0; i < trackData.positions.size(); i++) {
                 Position position = trackData.positions.get(i);
                 url.append(position.latitude);

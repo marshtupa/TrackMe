@@ -10,9 +10,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class ImageFilesUtility {
+public final class ImageFilesUtils {
 
-    private ImageFilesUtility() { }
+    private ImageFilesUtils() { }
 
     public static void deleteFile(final String fileName) {
         if (isFileExists(fileName)) {

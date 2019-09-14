@@ -9,9 +9,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-class TextFilesUtility {
+final class TextFilesUtils {
 
-    private TextFilesUtility() { }
+    private TextFilesUtils() { }
 
     static void deleteFile(final String fileName) {
         if (isFileExists(fileName)) {

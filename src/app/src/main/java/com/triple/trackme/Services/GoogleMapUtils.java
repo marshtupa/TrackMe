@@ -11,9 +11,9 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.triple.trackme.R;
 
-public class GoogleMapUtility {
+public final class GoogleMapUtils {
 
-    private GoogleMapUtility() { }
+    private GoogleMapUtils() { }
 
     public static double distanceBetweenTwoCoordinates(final Location coordinate1,
                                                        final Location coordinate2) {
