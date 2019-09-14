@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class UserJson {
 
@@ -27,6 +28,7 @@ public class UserJson {
             userJson.put("name", user.name);
             userJson.put("surname", user.surname);
             userJson.put("photoFilePath", user.photoFilePath);
+            userJson.put("countTrack", user.countTrack);
 
             JSONArray trackFilePathsJson = new JSONArray();
             for (String path : user.trackFilePaths) {
@@ -44,28 +46,28 @@ public class UserJson {
     }
 
     public static User readUserFromJsonFile() throws WorkWithDataException {
-        User user = new User();
-
         try {
             String jsonString = TextFilesHelper.readTextFromFile(USER_JSON_FILE_NAME);
             JSONObject userJson = new JSONObject(jsonString);
 
-            user.login = userJson.getString("login");
-            user.name = userJson.getString("name");
-            user.surname = userJson.getString("surname");
-            user.photoFilePath = userJson.getString("photoFilePath");
+            String login = userJson.getString("login");
+            String name = userJson.getString("name");
+            String surname = userJson.getString("surname");
+            String photoFilePath = userJson.getString("photoFilePath");
+            long countTrack = userJson.getLong("countTrack");
+            ArrayList<String> trackFilePaths = new ArrayList<String>();
 
             JSONArray trackFilePathsJson = userJson.getJSONArray("trackFilePaths");
             for (int i = 0; i < trackFilePathsJson.length(); i++) {
                 String trackFilePath = trackFilePathsJson.getString(i);
-                user.trackFilePaths.add(trackFilePath);
+                trackFilePaths.add(trackFilePath);
             }
+
+            return new User(login, name, surname, photoFilePath, countTrack, trackFilePaths);
         }
         catch (IOException | JSONException exception) {
             exception.printStackTrace();
             throw (WorkWithDataException)(new WorkWithDataException().initCause(exception));
         }
-
-        return user;
     }
 }

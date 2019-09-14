@@ -62,22 +62,24 @@ class CurrentTrackData {
     }
 
     void saveData() {
-        Track track = toTrackData();
+        long id = CurrentUserData.getNewTrackId();
+        Track track = toTrackData(id);
         CurrentUserData.addTrack(track);
     }
 
-    private Track toTrackData() {
+    private Track toTrackData(long id) {
         String dateTime = DateFormat.getDateTimeInstance().format(new Date());
         double distance = allDistanceInMetres;
         int time = allTimeInSeconds;
         double avgSpeed = (allDistanceInMetres / allTimeInSeconds) * 3.6;
+        String mapImagePath = "";
         ArrayList<Position> positions = new ArrayList<Position>();
         for (Location pos : allPositions) {
             Position position = new Position(pos.getLongitude(), pos.getLatitude());
             positions.add(position);
         }
 
-        return new Track(dateTime, distance, time, avgSpeed, positions);
+        return new Track(id, dateTime, distance, time, avgSpeed, mapImagePath, positions);
     }
 
     String timeToFormatString() {
