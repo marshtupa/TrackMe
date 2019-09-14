@@ -12,8 +12,10 @@ import java.io.IOException;
 class TextFilesHelper {
 
     static void deleteFile(final String fileName) {
-        File file = new File(MainActivity.filesDir, fileName);
-        file.delete();
+        if (isFileExists(fileName)) {
+            File file = new File(MainActivity.filesDir, fileName);
+            file.delete();
+        }
     }
 
     static boolean isFileExists(final String fileName) {
