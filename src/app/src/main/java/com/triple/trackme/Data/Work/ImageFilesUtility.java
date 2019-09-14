@@ -10,7 +10,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class ImageFilesHelper {
+public class ImageFilesUtility {
+
+    private ImageFilesUtility() { }
 
     public static void deleteFile(final String fileName) {
         if (isFileExists(fileName)) {
@@ -38,7 +40,6 @@ public class ImageFilesHelper {
 
     public static Bitmap readBitmapFromFile(final String fileName) throws IOException {
         File file = new File(MainActivity.filesDir, fileName);
-        Bitmap bitmap = BitmapFactory.decodeStream(new FileInputStream(file));
-        return bitmap;
+        return BitmapFactory.decodeStream(new FileInputStream(file));
     }
 }

@@ -13,11 +13,11 @@ public class UserJson {
     final static private String USER_JSON_FILE_NAME = "UserData";
 
     public static boolean isUserFileInitialize() {
-        return TextFilesHelper.isFileExists(USER_JSON_FILE_NAME);
+        return TextFilesUtility.isFileExists(USER_JSON_FILE_NAME);
     }
 
     public static void deleteUserFile() {
-        TextFilesHelper.deleteFile(USER_JSON_FILE_NAME);
+        TextFilesUtility.deleteFile(USER_JSON_FILE_NAME);
     }
 
     public static void writeUserToJsonFile(final User user) throws WorkWithDataException {
@@ -37,7 +37,7 @@ public class UserJson {
             userJson.put("trackFilePaths", trackFilePathsJson);
 
             String jsonString = userJson.toString();
-            TextFilesHelper.writeTextToFile(USER_JSON_FILE_NAME, jsonString);
+            TextFilesUtility.writeTextToFile(USER_JSON_FILE_NAME, jsonString);
         }
         catch (IOException | JSONException exception) {
             exception.printStackTrace();
@@ -47,7 +47,7 @@ public class UserJson {
 
     public static User readUserFromJsonFile() throws WorkWithDataException {
         try {
-            String jsonString = TextFilesHelper.readTextFromFile(USER_JSON_FILE_NAME);
+            String jsonString = TextFilesUtility.readTextFromFile(USER_JSON_FILE_NAME);
             JSONObject userJson = new JSONObject(jsonString);
 
             String login = userJson.getString("login");

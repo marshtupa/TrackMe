@@ -12,11 +12,11 @@ import java.util.ArrayList;
 public class TrackJson {
 
     public static boolean isTrackFileInitialize(final String trackJsonFileName) {
-        return TextFilesHelper.isFileExists(trackJsonFileName);
+        return TextFilesUtility.isFileExists(trackJsonFileName);
     }
 
     public static void deleteTrackFile(final String trackJsonFileName) {
-        TextFilesHelper.deleteFile(trackJsonFileName);
+        TextFilesUtility.deleteFile(trackJsonFileName);
     }
 
     public static void writeTrackToJsonFile(final String trackJsonFileName, final Track track)
@@ -42,7 +42,7 @@ public class TrackJson {
             trackJson.put("positions", positionsJson);
 
             String jsonString = trackJson.toString();
-            TextFilesHelper.writeTextToFile(trackJsonFileName, jsonString);
+            TextFilesUtility.writeTextToFile(trackJsonFileName, jsonString);
         }
         catch (IOException | JSONException exception) {
             exception.printStackTrace();
@@ -54,7 +54,7 @@ public class TrackJson {
             throws WorkWithDataException {
 
         try {
-            String jsonString = TextFilesHelper.readTextFromFile(trackJsonFileName);
+            String jsonString = TextFilesUtility.readTextFromFile(trackJsonFileName);
             JSONObject trackJson = new JSONObject(jsonString);
             long id = trackJson.getLong("id");
             String dateTime = trackJson.getString("dateTime");

@@ -84,7 +84,7 @@ public class CurrentUserData {
         }
     }
 
-    private static String getTrackFileName(long id) {
+    private static String getTrackFileName(final long id) {
         final String FILE_NAME_TEMPLATE = "track_";
         return FILE_NAME_TEMPLATE + id;
     }
@@ -106,7 +106,7 @@ public class CurrentUserData {
         for (int i = 0; i < trackFilePaths.size(); i++) {
             userTrackFilePaths.append(trackFilePaths.get(i));
             if (i < trackFilePaths.size() - 1) {
-                userTrackFilePaths.append("\n");
+                userTrackFilePaths.append('\n');
             }
         }
         Log.i("LocalData",

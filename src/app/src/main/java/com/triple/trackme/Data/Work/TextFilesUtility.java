@@ -9,7 +9,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-class TextFilesHelper {
+class TextFilesUtility {
+
+    private TextFilesUtility() { }
 
     static void deleteFile(final String fileName) {
         if (isFileExists(fileName)) {
@@ -44,9 +46,10 @@ class TextFilesHelper {
         FileReader fileReader = new FileReader(file.getAbsoluteFile());
         BufferedReader bufferedReader = new BufferedReader(fileReader);
 
-        String line = "";
+        String line;
         while ((line = bufferedReader.readLine()) != null) {
-            fileText.append(line + "\n");
+            fileText.append(line);
+            fileText.append('\n');
         }
 
         bufferedReader.close();
