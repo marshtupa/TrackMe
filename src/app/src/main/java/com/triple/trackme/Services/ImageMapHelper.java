@@ -59,7 +59,7 @@ public class ImageMapHelper {
 
     private static void setPath() {
         if (trackData.positions != null && trackData.positions.size() > 0) {
-            url.append("&path=");
+            url.append("&path=color:0x0082ff" + "%7C" + "weight:10" + "%7C");
             for (int i = 0; i < trackData.positions.size(); i++) {
                 Position position = trackData.positions.get(i);
                 url.append(position.latitude + "," + position.longitude);
