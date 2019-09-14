@@ -1,4 +1,4 @@
-package com.triple.trackme.Activity.CompletedTrainings;
+package com.triple.trackme.Activity.CompletedTracks;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -18,13 +18,13 @@ import java.io.InputStream;
 
 class DownloadImageMapTask extends AsyncTask<Object, Void, Bitmap> {
 
-    private TrainingsViewAdapter.TrainingViewHolder holder;
+    private TracksViewAdapter.TrackViewHolder holder;
     private Track trackData;
 
     @Override
     protected Bitmap doInBackground(final Object... objects) {
         String urlRequest = (String)objects[0];
-        holder = (TrainingsViewAdapter.TrainingViewHolder)objects[1];
+        holder = (TracksViewAdapter.TrackViewHolder)objects[1];
         trackData = (Track)objects[2];
 
         Bitmap bitmap = null;

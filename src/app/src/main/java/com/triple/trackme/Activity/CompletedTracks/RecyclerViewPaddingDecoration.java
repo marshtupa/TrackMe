@@ -1,4 +1,4 @@
-package com.triple.trackme.Activity.CompletedTrainings;
+package com.triple.trackme.Activity.CompletedTracks;
 
 import android.content.Context;
 import android.graphics.Rect;

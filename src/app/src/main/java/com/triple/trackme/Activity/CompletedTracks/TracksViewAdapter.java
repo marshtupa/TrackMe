@@ -1,4 +1,4 @@
-package com.triple.trackme.Activity.CompletedTrainings;
+package com.triple.trackme.Activity.CompletedTracks;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -24,38 +24,38 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class TrainingsViewAdapter
-        extends RecyclerView.Adapter<TrainingsViewAdapter.TrainingViewHolder> {
+public class TracksViewAdapter
+        extends RecyclerView.Adapter<TracksViewAdapter.TrackViewHolder> {
 
     private Context context;
-    private ArrayList<Track> trainingsData;
+    private ArrayList<Track> tracksData;
     private boolean first;
 
-    TrainingsViewAdapter(final Context context, final ArrayList<Track> trainingsData) {
+    TracksViewAdapter(final Context context, final ArrayList<Track> tracksData) {
         super();
         this.context = context;
-        this.trainingsData = trainingsData;
+        this.tracksData = tracksData;
     }
 
     @Override
     public int getItemCount() {
-        return trainingsData.size();
+        return tracksData.size();
     }
 
     @Override
-    public TrainingViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
+    public TrackViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.completed_training_panel, parent, false);
-        return new TrainingViewHolder(view);
+                .inflate(R.layout.completed_track_panel, parent, false);
+        return new TrackViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final TrainingViewHolder holder, final int position) {
-        Track trackData = trainingsData.get(position);
+    public void onBindViewHolder(final TrackViewHolder holder, final int position) {
+        Track trackData = tracksData.get(position);
         setupTrackCard(holder, trackData);
     }
 
-    private void setupTrackCard(final TrainingViewHolder holder, final Track trackData) {
+    private void setupTrackCard(final TrackViewHolder holder, final Track trackData) {
         setDistanceValue(holder, trackData);
         setSpeedValue(holder, trackData);
         setTimeValue(holder, trackData);
@@ -63,19 +63,19 @@ public class TrainingsViewAdapter
         setMapImage(holder, trackData);
     }
 
-    private void setDistanceValue(final TrainingViewHolder holder, final Track trackData) {
+    private void setDistanceValue(final TrackViewHolder holder, final Track trackData) {
         String distanceString = new DecimalFormat("00.00")
                 .format(trackData.distance / 1000);
         holder.distanceValue.setText(distanceString);
     }
 
-    private void setSpeedValue(final TrainingViewHolder holder, final Track trackData) {
+    private void setSpeedValue(final TrackViewHolder holder, final Track trackData) {
         String speedString = new DecimalFormat("00.00")
                 .format(trackData.avgSpeed);
         holder.speedValue.setText(speedString);
     }
 
-    private void setTimeValue(final TrainingViewHolder holder, final Track trackData) {
+    private void setTimeValue(final TrackViewHolder holder, final Track trackData) {
         int hours = trackData.time / 3600;
         int minutes = (trackData.time - hours * 3600) / 60;
         int seconds = trackData.time % 60;
@@ -86,7 +86,7 @@ public class TrainingsViewAdapter
         holder.timeValue.setText(timeString);
     }
 
-    private void setDateValue(final TrainingViewHolder holder, final Track trackData) {
+    private void setDateValue(final TrackViewHolder holder, final Track trackData) {
         Date trackDate = new Date(trackData.dateTime);
         Date currentDate = new Date();
         SimpleDateFormat formatter;
@@ -100,7 +100,7 @@ public class TrainingsViewAdapter
         holder.dateValue.setText(dateString);
     }
 
-    private void setMapImage(final TrainingViewHolder holder, final Track trackData) {
+    private void setMapImage(final TrackViewHolder holder, final Track trackData) {
         if (ImageFilesUtils.isFileExists(trackData.mapImagePath)) {
             holder.mapLoadProgress.setVisibility(View.INVISIBLE);
             holder.imageMap.setVisibility(View.VISIBLE);
@@ -128,7 +128,7 @@ public class TrainingsViewAdapter
         }
     }
 
-    class TrainingViewHolder extends RecyclerView.ViewHolder {
+    class TrackViewHolder extends RecyclerView.ViewHolder {
 
         TextView distanceValue;
         TextView speedValue;
@@ -137,7 +137,7 @@ public class TrainingsViewAdapter
         ImageView imageMap;
         ProgressBar mapLoadProgress;
 
-        TrainingViewHolder(final View view) {
+        TrackViewHolder(final View view) {
             super(view);
             distanceValue = view.findViewById(R.id.distanceValue);
             speedValue = view.findViewById(R.id.speedValue);

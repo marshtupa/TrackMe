@@ -32,7 +32,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
-import com.triple.trackme.Activity.CompletedTrainings.CompletedTrainingsActivity;
+import com.triple.trackme.Activity.CompletedTracks.CompletedTracksActivity;
 import com.triple.trackme.CurrentTrack.CurrentTrackView;
 import com.triple.trackme.CurrentUser.CurrentUserData;
 import com.triple.trackme.R;
@@ -231,26 +231,26 @@ public class MainActivity extends FragmentActivity
 
     public void clickStartTrackButton(final View view) {
         final Animation animScale = AnimationUtils.loadAnimation(
-                this, R.anim.scale_training_button);
+                this, R.anim.scale_track_button);
         view.startAnimation(animScale);
         CurrentTrackView.startTrack();
     }
 
     public void clickPauseTrackButton(final View view) {
         final Animation animScale = AnimationUtils.loadAnimation(
-                this, R.anim.scale_training_button);
+                this, R.anim.scale_track_button);
         view.startAnimation(animScale);
         CurrentTrackView.pauseTrack();
     }
 
     public void clickStopTrackButton(final View view) {
         final Animation animScale = AnimationUtils.loadAnimation(
-                this, R.anim.scale_training_button);
+                this, R.anim.scale_track_button);
         view.startAnimation(animScale);
         CurrentTrackView.stopTrack(this);
     }
 
-    public void clickCompletedTrainingsButton(final View view) {
+    public void clickCompletedTracksButton(final View view) {
         final int BUTTON_ANIMATION_DELAY = 200;
         final Animation animScale = AnimationUtils.loadAnimation(
                 this, R.anim.scale_menu_button);
@@ -260,9 +260,9 @@ public class MainActivity extends FragmentActivity
         TimerTask changeButtonsTask = new TimerTask() {
             @Override
             public void run() {
-                Intent completedTrainingsIntent = new Intent(
-                        MainActivity.this, CompletedTrainingsActivity.class);
-                startActivity(completedTrainingsIntent);
+                Intent completedTracksIntent = new Intent(
+                        MainActivity.this, CompletedTracksActivity.class);
+                startActivity(completedTracksIntent);
                 overridePendingTransition(
                         R.anim.activity_slide_left_in, R.anim.activity_slide_left_out);
                 view.setClickable(true);
