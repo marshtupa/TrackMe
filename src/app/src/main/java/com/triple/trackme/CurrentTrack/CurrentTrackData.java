@@ -17,7 +17,7 @@ class CurrentTrackData {
     private int allTimeInSeconds;
     private double allDistanceInMetres;
     private double currentSpeedInKmH;
-    private ArrayList<Location> allPositions;
+    private final ArrayList<Location> allPositions;
 
     CurrentTrackData() {
         allTimeInSeconds = 0;

@@ -9,7 +9,9 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class TrackJson {
+public final class TrackJsonUtils {
+
+    private TrackJsonUtils() { }
 
     public static boolean isTrackFileInitialize(final String trackJsonFileName) {
         return TextFilesUtils.isFileExists(trackJsonFileName);

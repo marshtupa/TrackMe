@@ -8,9 +8,11 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class UserJson {
+public final class UserJsonUtils {
 
     final static private String USER_JSON_FILE_NAME = "UserData";
+
+    private UserJsonUtils() { }
 
     public static boolean isUserFileInitialize() {
         return TextFilesUtils.isFileExists(USER_JSON_FILE_NAME);
