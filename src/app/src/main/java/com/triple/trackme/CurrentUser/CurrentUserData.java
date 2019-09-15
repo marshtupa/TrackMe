@@ -41,6 +41,7 @@ public class CurrentUserData {
             trackFilePaths = user.trackFilePaths;
         }
         catch (WorkWithDataException exception) {
+            exception.printStackTrace();
             initializeUserEmptyData();
         }
     }
@@ -65,7 +66,9 @@ public class CurrentUserData {
                 Track track = TrackJsonUtils.readTrackFromJsonFile(trackFilePaths.get(i));
                 trackData.add(track);
             }
-            catch (Exception exception) {}
+            catch (WorkWithDataException exception) {
+                exception.printStackTrace();
+            }
         }
 
         return trackData;
@@ -80,6 +83,7 @@ public class CurrentUserData {
             saveUserData();
         }
         catch (WorkWithDataException exception) {
+            exception.printStackTrace();
             trackFilePaths.remove(trackFilePaths.size() - 1);
         }
     }

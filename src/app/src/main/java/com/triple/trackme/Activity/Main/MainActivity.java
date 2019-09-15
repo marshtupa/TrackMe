@@ -151,6 +151,7 @@ public class MainActivity extends FragmentActivity
     @Override
     public void onRequestPermissionsResult(final int requestCode, final String permissions[],
                                            final int[] grantResults) {
+
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         if (requestCode == REQUEST_ID_ACCESS_COURSE_FINE_LOCATION) {
