@@ -33,7 +33,7 @@ public class RecyclerViewPaddingDecoration extends RecyclerView.ItemDecoration {
         }
 
         final RecyclerView.Adapter adapter = parent.getAdapter();
-        if ((adapter != null) && (itemPosition == adapter.getItemCount() - 1)) {
+        if (adapter != null && itemPosition == adapter.getItemCount() - 1) {
             outRect.bottom = padding;
         }
     }

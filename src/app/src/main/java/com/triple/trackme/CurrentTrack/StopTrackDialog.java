@@ -13,8 +13,9 @@ class StopTrackDialog {
                   final CurrentTrackView.CurrentTrackState trackStateBeforeDialog) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage(R.string.stopTrackDialogMessage)
-                .setPositiveButton(R.string.stopTrackDialogPositiveButton, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
+                .setPositiveButton(R.string.stopTrackDialogPositiveButton,
+                        new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, final int id) {
                         if (trackStateBeforeDialog == CurrentTrackView.CurrentTrackState.START) {
                             CurrentTrackView.startTrack();
                         }

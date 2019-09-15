@@ -151,18 +151,21 @@ public class MainActivity extends FragmentActivity
     @Override
     public void onRequestPermissionsResult(final int requestCode, final String permissions[],
                                            final int[] grantResults) {
+
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        final String PERMISSION_DENIED_MESSAGE = "Permission denied!";
 
         if (requestCode == REQUEST_ID_ACCESS_COURSE_FINE_LOCATION) {
             if (grantResults.length > 1
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED
                     && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "Permission denied!", Toast.LENGTH_LONG).show();
-                Log.i("MapInfo", "Permission denied!");
+                Toast.makeText(this, PERMISSION_DENIED_MESSAGE, Toast.LENGTH_LONG).show();
+                Log.i("MapInfo", PERMISSION_DENIED_MESSAGE);
                 this.showMyLocation();
             } else {
-                Toast.makeText(this, "Permission denied!", Toast.LENGTH_LONG).show();
-                Log.i("MapInfo", "Permission denied!");
+                Toast.makeText(this, PERMISSION_DENIED_MESSAGE, Toast.LENGTH_LONG).show();
+                Log.i("MapInfo", PERMISSION_DENIED_MESSAGE);
             }
         }
     }
