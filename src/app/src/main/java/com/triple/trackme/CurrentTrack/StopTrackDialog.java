@@ -21,13 +21,13 @@ class StopTrackDialog {
                     }
                 })
                 .setNegativeButton(R.string.stopTrackDialogNegativeButton, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
+                    public void onClick(final DialogInterface dialog, final int id) {
                         CurrentTrackView.endTrackAndSave();
                     }
                 });
         builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
-            public void onCancel(DialogInterface dialogInterface) {
+            public void onCancel(final DialogInterface dialogInterface) {
                 if (trackStateBeforeDialog == CurrentTrackView.CurrentTrackState.START) {
                     CurrentTrackView.startTrack();
                 }
