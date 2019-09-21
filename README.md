@@ -27,7 +27,7 @@ Now `TrackMe` avalible only for Android 6.0
 
 You love `TrackMe`? You want new features or bug fixes?  
 Please **contribute** to the  project either by [_creating a PR_](https://github.com/lmaron-g/TrackMe/compare) or [_submitting an issue_](https://github.com/lmaron-g/TrackMe/issues/new/choose) on GitHub.  
-Read the [**contribution guide**](https://github.com/lmaron-g/TrackMe/blob/dev/.github/CONTRIBUTING.md) for more detailed information.
+Read the [**contribution guide**](https://github.com/lmaron-g/TrackMe/blob/dev/CONTRIBUTING.md) for more detailed information.
 
 ## License
 
