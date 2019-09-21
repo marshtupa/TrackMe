@@ -9,6 +9,8 @@
 
 ## Description
 With `TrackMe` you can track how much you run from day to day. `TrackMe` is your perfect running partner and it has the features you need to run better. Save information about trainings: Visualization of the Route, Distance, Time and Average Speed.
+![65374166-6259d800-dc8f-11e9-9b82-8c9909626bf3_pixel_very_silver_portrait](https://user-images.githubusercontent.com/45558274/65374592-53c1ef80-dc94-11e9-8c83-a2d93070ce54.png)
+![65374164-5ff77e00-dc8f-11e9-8fad-07229be81726_pixel_very_silver_portrait](https://user-images.githubusercontent.com/45558274/65374591-50c6ff00-dc94-11e9-830f-b025a1e7bd5e.png)
 
 ## Download
 
@@ -25,7 +27,7 @@ Now `TrackMe` avalible only for Android 6.0
 
 You love `TrackMe`? You want new features or bug fixes?  
 Please **contribute** to the  project either by [_creating a PR_](https://github.com/lmaron-g/TrackMe/compare) or [_submitting an issue_](https://github.com/lmaron-g/TrackMe/issues/new/choose) on GitHub.  
-Read the [**contribution guide**](https://github.com/lmaron-g/TrackMe/blob/dev/.github/CONTRIBUTING.md) for more detailed information.
+Read the [**contribution guide**](https://github.com/lmaron-g/TrackMe/blob/dev/CONTRIBUTING.md) for more detailed information.
 
 ## License
 
