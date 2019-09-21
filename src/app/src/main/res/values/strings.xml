@@ -5,6 +5,7 @@
     <string name="stop_button">Stop button</string>
     <string name="play_button">Play button</string>
     <string name="back_button">Back button</string>
+    <string name="statistics_button">Statistics button</string>
     <string name="currentPosition_button">Current position button</string>
     <string name="picture">Picture</string>
     <string name="distance_km_label">km</string>
