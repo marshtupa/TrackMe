@@ -1,11 +1,13 @@
 <resources>
     <string name="app_name">TrackMe</string>
-    <string name="menu_button">Menu button</string>
+    <string name="completedTracks_button">Completed tracks button</string>
     <string name="pause_button">Pause button</string>
     <string name="stop_button">Stop button</string>
     <string name="play_button">Play button</string>
     <string name="back_button">Back button</string>
+    <string name="statistics_button">Statistics button</string>
     <string name="currentPosition_button">Current position button</string>
+    <string name="userProfile_button">User profile button</string>
     <string name="picture">Picture</string>
     <string name="distance_km_label">km</string>
     <string name="time_label">Time</string>
