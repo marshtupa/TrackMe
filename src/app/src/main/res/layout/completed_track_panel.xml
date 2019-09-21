@@ -18,12 +18,10 @@
 
         <ImageView
             android:id="@+id/imageMap"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginEnd="40dp"
+            android:layout_width="230dp"
+            android:layout_height="181dp"
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/speedValue"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@color/colorLDark" />
@@ -32,9 +30,10 @@
             android:id="@+id/dateValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="35dp"
-            android:layout_marginBottom="12dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginBottom="10dp"
             android:text="@string/date_empty_example"
+            android:textColor="#54403D"
             android:textSize="12sp"
             android:textStyle="italic"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -84,7 +83,6 @@
             android:id="@+id/timeValue"
             android:layout_width="wrap_content"
             android:layout_height="45dp"
-            android:layout_marginEnd="20dp"
             android:layout_marginBottom="12dp"
             android:fontFamily="sans-serif-condensed-medium"
             android:text="@string/time_empty_example"
@@ -93,7 +91,8 @@
             android:textColor="@color/colorDark"
             android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageMap" />
 
         <TextView
             android:id="@+id/distanceValue"
