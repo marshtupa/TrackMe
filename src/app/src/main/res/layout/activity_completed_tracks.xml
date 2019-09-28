@@ -20,25 +20,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/statisticsButton"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="35dp"
-        android:layout_marginEnd="12dp"
-        android:background="@drawable/circle_button"
-        android:contentDescription="@string/statistics_button"
-        android:src="@drawable/ic_statistics"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/completedTracksText"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="35dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginEnd="22dp"
         android:layout_marginBottom="10dp"
         android:fontFamily="sans-serif-condensed-medium"
         android:gravity="center"
@@ -46,8 +34,9 @@
         android:textColor="@color/colorDark"
         android:textSize="30sp"
         android:textStyle="bold"
+        android:textAlignment="textEnd"
         app:layout_constraintBottom_toTopOf="@+id/tracksList"
-        app:layout_constraintEnd_toStartOf="@+id/statisticsButton"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/backButton"
         app:layout_constraintTop_toTopOf="parent" />
 
