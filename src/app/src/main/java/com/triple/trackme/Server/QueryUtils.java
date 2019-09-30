@@ -10,9 +10,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class Query {
+public final class QueryUtils {
 
-    public static String sendGet(String url) {
+    private QueryUtils() { }
+
+    public static String sendGet(final String url) {
         String response = "";
         HttpClient httpclient = new DefaultHttpClient();
         HttpGet request = new HttpGet(url);
@@ -21,14 +23,14 @@ public class Query {
             InputStream inputStream = httpResponse.getEntity().getContent();
             response = convertStreamToString(inputStream);
             inputStream.close();
-        } catch (Exception exception) {
+        } catch (IOException exception) {
             exception.printStackTrace();
         }
 
         return response;
     }
 
-    private static String convertStreamToString(InputStream stream) {
+    private static String convertStreamToString(final InputStream stream) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
         StringBuilder str = new StringBuilder();
 
