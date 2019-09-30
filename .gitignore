@@ -81,6 +81,9 @@ lint/outputs/
 lint/tmp/
 # lint/reports/
 
+# macOS files
 .DS_Store
 
+# Local files
 src/app/src/main/res/values/google_maps_api.xml
+src/app/src/main/res/values/server.xml
