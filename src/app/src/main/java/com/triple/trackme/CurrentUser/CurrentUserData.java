@@ -10,8 +10,10 @@ import com.triple.trackme.Data.Work.WorkWithDataException;
 
 import java.util.ArrayList;
 
-public class CurrentUserData {
+public final class CurrentUserData {
 
+    private CurrentUserData() { }
+    
     private static String login;
     private static String name;
     private static String surname;
