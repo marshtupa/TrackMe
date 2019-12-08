@@ -34,6 +34,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.triple.trackme.Activity.CompletedTracks.CompletedTracksActivity;
 import com.triple.trackme.Activity.SignIn.SignInActivity;
+import com.triple.trackme.Activity.SignUp.SignUpActivity;
 import com.triple.trackme.CurrentTrack.CurrentTrackView;
 import com.triple.trackme.CurrentUser.CurrentUserData;
 import com.triple.trackme.R;
@@ -80,7 +81,7 @@ public class MainActivity extends FragmentActivity
 
     private void openSignInWindow() {
         Intent completedTracksIntent = new Intent(
-                MainActivity.this, SignInActivity.class);
+                MainActivity.this, SignUpActivity.class);
         startActivity(completedTracksIntent);
         overridePendingTransition(
                 R.anim.activity_slide_left_in, R.anim.activity_slide_left_out);

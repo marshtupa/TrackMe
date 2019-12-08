@@ -16,8 +16,8 @@ public final class CurrentUserData {
     private CurrentUserData() { }
     
     private static String email;
-    private static String name;
-    private static String surname;
+    private static String firstName;
+    private static String secondName;
     private static String photoFilePath;
     private static long countTrack;
     private static ArrayList<String> trackFilePaths;
@@ -37,8 +37,8 @@ public final class CurrentUserData {
         try {
             User user = UserJsonUtils.readUserFromJsonFile();
             email = user.email;
-            name = user.name;
-            surname = user.surname;
+            firstName = user.firstName;
+            secondName = user.secondName;
             photoFilePath = user.photoFilePath;
             countTrack = user.countTrack;
             trackFilePaths = user.trackFilePaths;
@@ -51,8 +51,8 @@ public final class CurrentUserData {
 
     private static void initializeUserEmptyData() {
         email = "";
-        name = "";
-        surname = "";
+        firstName = "";
+        secondName = "";
         photoFilePath = "";
         countTrack = 0;
         trackFilePaths = new ArrayList<String>();
@@ -98,7 +98,7 @@ public final class CurrentUserData {
     }
 
     private static void saveUserData() throws WorkWithDataException {
-        User user = new User(email, name, surname, photoFilePath, countTrack, trackFilePaths);
+        User user = new User(email, firstName, secondName, photoFilePath, countTrack, trackFilePaths);
         UserJsonUtils.writeUserToJsonFile(user);
     }
 
@@ -120,8 +120,8 @@ public final class CurrentUserData {
         Log.i("LocalData",
                 "CURRENT USER INFO" + "\n" +
                         "Email: " + email + "\n" +
-                        "Name: " + name + "\n" +
-                        "Surname: " + surname + "\n" +
+                        "First name: " + firstName + "\n" +
+                        "Second name: " + secondName + "\n" +
                         "Photo file path: " + photoFilePath + "\n" +
                         "Count track: " + countTrack + "\n" +
                         "Track file paths: " + "\n" + userTrackFilePaths.toString());
