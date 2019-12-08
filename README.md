@@ -3,7 +3,7 @@
 > Track your Trainings
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e63152717861408295a5cab3550d5aef)](https://app.codacy.com/app/Triple/TrackMe?utm_source=github.com&utm_medium=referral&utm_content=lmaron-g/TrackMe&utm_campaign=Badge_Grade_Dashboard)
-[![Build Status](https://travis-ci.com/lmaron-g/TrackMe.svg?branch=dev)](https://travis-ci.com/lmaron-g/TrackMe)
+[![Build Status](https://travis-ci.com/marshtupa/TrackMe.svg?branch=dev)](https://travis-ci.com/marshtupa/TrackMe)
 
 ![Header](https://user-images.githubusercontent.com/45558274/61460129-c9e56580-a976-11e9-97e2-5f258c2e06da.png)
 
