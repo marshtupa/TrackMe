@@ -8,11 +8,11 @@ public final class TrackDatabase {
 
     private TrackDatabase() { }
 
-    public static void SaveTrack(final Track track) {
+    public static void SaveTrack(final Track track, final String uid) {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference()
                 .child("users")
-                .child("test")
+                .child(uid)
                 .child("tracks")
                 .child(String.valueOf(track.id));
 

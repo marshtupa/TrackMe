@@ -26,6 +26,7 @@ public final class UserJsonUtils {
         JSONObject userJson = new JSONObject();
 
         try {
+            userJson.put("uid", user.uid);
             userJson.put("email", user.email);
             userJson.put("firstName", user.firstName);
             userJson.put("secondName", user.secondName);
@@ -52,6 +53,7 @@ public final class UserJsonUtils {
             String jsonString = TextFilesUtils.readTextFromFile(USER_JSON_FILE_NAME);
             JSONObject userJson = new JSONObject(jsonString);
 
+            String uid = userJson.getString("uid");
             String email = userJson.getString("email");
             String firstName = userJson.getString("firstName");
             String secondName = userJson.getString("secondName");
@@ -65,7 +67,7 @@ public final class UserJsonUtils {
                 trackFilePaths.add(trackFilePath);
             }
 
-            return new User(email, firstName, secondName, photoFilePath, countTrack, trackFilePaths);
+            return new User(uid, email, firstName, secondName, photoFilePath, countTrack, trackFilePaths);
         }
         catch (IOException | JSONException exception) {
             exception.printStackTrace();
