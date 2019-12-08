@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:background="#FFFFFF"
-        android:text="@string/common_signin_button_text"
+        android:text="@string/sign_in"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordText" />
@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:text="@string/common_signin_button_text"
+        android:text="@string/sign_in"
         android:textSize="36sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

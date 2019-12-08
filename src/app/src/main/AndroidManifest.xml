@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Activity.SignIn.SignInActivity"></activity>
+        <activity android:name=".Activity.SignUp.SignUpActivity"></activity>
+        <activity android:name=".Activity.SignIn.SignInActivity" />
         <activity android:name=".Activity.CompletedTracks.CompletedTracksActivity" />
 
         <meta-data
