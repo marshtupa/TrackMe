@@ -84,7 +84,7 @@ public final class CurrentUserData {
             TrackJsonUtils.writeTrackToJsonFile(fileName, track);
             countTrack++;
             saveUserData();
-            TrackDatabase.SaveTrack(track, email);
+            TrackDatabase.SaveTrack(track);
         }
         catch (WorkWithDataException exception) {
             exception.printStackTrace();

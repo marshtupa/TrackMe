@@ -22,4 +22,6 @@
     <string name="stopTrackDialogPositiveButton">Resume</string>
     <string name="stopTrackDialogNegativeButton">Complete</string>
     <string name="completedTracks">Completed trainings</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
 </resources>
