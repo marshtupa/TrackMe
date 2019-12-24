@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class User {
 
-    public String uid;
+    public String id;
     public String email;
     public String firstName;
     public String secondName;
@@ -12,11 +12,11 @@ public class User {
     public long countTrack;
     public ArrayList<String> trackFilePaths;
 
-    public User(final String uid, final String email, final String firstName,
+    public User(final String id, final String email, final String firstName,
                 final String secondName, final String photoFilePath, final long countTrack,
                 final ArrayList<String> trackFilePaths) {
 
-        this.uid = uid;
+        this.id = id;
         this.email = email;
         this.firstName = firstName;
         this.secondName = secondName;
@@ -26,7 +26,7 @@ public class User {
     }
 
     public User() {
-        this.uid = "";
+        this.id = "";
         this.email = "";
         this.firstName = "";
         this.secondName = "";

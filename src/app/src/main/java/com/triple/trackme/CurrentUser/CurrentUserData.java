@@ -16,7 +16,6 @@ public final class CurrentUserData {
 
     private static User currentUser;
     private static boolean localUserInitialize;
-    private static boolean databaseUserInitialize;
 
     public static void initializeUserData() {
         localUserInitialize = UserJsonUtils.isUserFileInitialize();
@@ -70,7 +69,6 @@ public final class CurrentUserData {
             TrackJsonUtils.writeTrackToJsonFile(fileName, track);
             currentUser.countTrack++;
             saveUserData();
-            TrackDatabase.SaveTrack(track, currentUser.uid);
         }
         catch (WorkWithDataException exception) {
             exception.printStackTrace();
@@ -104,7 +102,7 @@ public final class CurrentUserData {
         }
         Log.i("LocalData",
                 "CURRENT USER INFO" + "\n" +
-                        "Uid: " + currentUser.uid + "\n" +
+                        "Id: " + currentUser.id + "\n" +
                         "Email: " + currentUser.email + "\n" +
                         "First name: " + currentUser.firstName + "\n" +
                         "Second name: " + currentUser.secondName + "\n" +
