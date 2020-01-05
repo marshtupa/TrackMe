@@ -12,10 +12,10 @@ import java.util.ArrayList;
 
 public final class CurrentUserData {
 
-    private CurrentUserData() { }
-
     private static User currentUser;
     private static boolean localUserInitialize;
+    
+    private CurrentUserData() { }
 
     public static void initializeUserData() {
         localUserInitialize = UserJsonUtils.isUserFileInitialize();
