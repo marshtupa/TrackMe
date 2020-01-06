@@ -7,25 +7,20 @@ import com.triple.trackme.Data.Storage.User;
 import com.triple.trackme.Data.Work.TrackJsonUtils;
 import com.triple.trackme.Data.Work.UserJsonUtils;
 import com.triple.trackme.Data.Work.WorkWithDataException;
-import com.triple.trackme.Server.TrackDatabase;
 
 import java.util.ArrayList;
 
 public final class CurrentUserData {
 
-    private CurrentUserData() { }
+    private static User currentUser;
+    private static boolean localUserInitialize;
     
-    private static String email;
-    private static String name;
-    private static String surname;
-    private static String photoFilePath;
-    private static long countTrack;
-    private static ArrayList<String> trackFilePaths;
+    private CurrentUserData() { }
 
     public static void initializeUserData() {
-        boolean isInitialize = UserJsonUtils.isUserFileInitialize();
+        localUserInitialize = UserJsonUtils.isUserFileInitialize();
 
-        if (isInitialize) {
+        if (localUserInitialize) {
             initializeUserDataFromFile();
         }
         else {
@@ -35,13 +30,7 @@ public final class CurrentUserData {
 
     private static void initializeUserDataFromFile() {
         try {
-            User user = UserJsonUtils.readUserFromJsonFile();
-            email = user.email;
-            name = user.name;
-            surname = user.surname;
-            photoFilePath = user.photoFilePath;
-            countTrack = user.countTrack;
-            trackFilePaths = user.trackFilePaths;
+            currentUser = UserJsonUtils.readUserFromJsonFile();
         }
         catch (WorkWithDataException exception) {
             exception.printStackTrace();
@@ -50,23 +39,19 @@ public final class CurrentUserData {
     }
 
     private static void initializeUserEmptyData() {
-        email = "";
-        name = "";
-        surname = "";
-        photoFilePath = "";
-        countTrack = 0;
-        trackFilePaths = new ArrayList<String>();
+        currentUser = new User();
     }
 
     public static long getNewTrackId() {
-        return countTrack;
+        return currentUser.countTrack;
     }
 
     public static ArrayList<Track> getTrackDataAll() {
         ArrayList<Track> trackData = new ArrayList<Track>();
-        for (int i = trackFilePaths.size() - 1; i >= 0; i--) {
+        for (int i = currentUser.trackFilePaths.size() - 1; i >= 0; i--) {
             try {
-                Track track = TrackJsonUtils.readTrackFromJsonFile(trackFilePaths.get(i));
+                Track track = TrackJsonUtils
+                        .readTrackFromJsonFile(currentUser.trackFilePaths.get(i));
                 trackData.add(track);
             }
             catch (WorkWithDataException exception) {
@@ -79,16 +64,15 @@ public final class CurrentUserData {
 
     public static void addTrack(final Track track) {
         String fileName = getTrackFileName(track.id);
-        trackFilePaths.add(fileName);
+        currentUser.trackFilePaths.add(fileName);
         try {
             TrackJsonUtils.writeTrackToJsonFile(fileName, track);
-            countTrack++;
+            currentUser.countTrack++;
             saveUserData();
-            TrackDatabase.SaveTrack(track, email);
         }
         catch (WorkWithDataException exception) {
             exception.printStackTrace();
-            trackFilePaths.remove(trackFilePaths.size() - 1);
+            currentUser.trackFilePaths.remove(currentUser.trackFilePaths.size() - 1);
         }
     }
 
@@ -98,12 +82,11 @@ public final class CurrentUserData {
     }
 
     private static void saveUserData() throws WorkWithDataException {
-        User user = new User(email, name, surname, photoFilePath, countTrack, trackFilePaths);
-        UserJsonUtils.writeUserToJsonFile(user);
+        UserJsonUtils.writeUserToJsonFile(currentUser);
     }
 
     public static void clearAllLocalData() {
-        for (String trackFilePath: trackFilePaths) {
+        for (String trackFilePath: currentUser.trackFilePaths) {
             TrackJsonUtils.deleteTrackFile(trackFilePath);
         }
         UserJsonUtils.deleteUserFile();
@@ -111,22 +94,23 @@ public final class CurrentUserData {
 
     public static void showInLogAllLocalData() {
         StringBuilder userTrackFilePaths = new StringBuilder();
-        for (int i = 0; i < trackFilePaths.size(); i++) {
-            userTrackFilePaths.append(trackFilePaths.get(i));
-            if (i < trackFilePaths.size() - 1) {
+        for (int i = 0; i < currentUser.trackFilePaths.size(); i++) {
+            userTrackFilePaths.append(currentUser.trackFilePaths.get(i));
+            if (i < currentUser.trackFilePaths.size() - 1) {
                 userTrackFilePaths.append('\n');
             }
         }
         Log.i("LocalData",
                 "CURRENT USER INFO" + "\n" +
-                        "Email: " + email + "\n" +
-                        "Name: " + name + "\n" +
-                        "Surname: " + surname + "\n" +
-                        "Photo file path: " + photoFilePath + "\n" +
-                        "Count track: " + countTrack + "\n" +
+                        "Id: " + currentUser.id + "\n" +
+                        "Email: " + currentUser.email + "\n" +
+                        "First name: " + currentUser.firstName + "\n" +
+                        "Second name: " + currentUser.secondName + "\n" +
+                        "Photo file path: " + currentUser.photoFilePath + "\n" +
+                        "Count track: " + currentUser.countTrack + "\n" +
                         "Track file paths: " + "\n" + userTrackFilePaths.toString());
 
-        for (String trackFilePath: trackFilePaths) {
+        for (String trackFilePath: currentUser.trackFilePaths) {
             try {
                 Track track = TrackJsonUtils.readTrackFromJsonFile(trackFilePath);
                 Log.i("LocalData",
