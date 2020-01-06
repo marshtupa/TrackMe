@@ -15,18 +15,6 @@ With `TrackMe` you can track how much you run from day to day. `TrackMe` is your
   <img src="https://user-images.githubusercontent.com/45558274/65374786-7a812580-dc96-11e9-94dd-c06946bda8dd.png" width="48%" />
 </p>
 
-
-## Download
-
-Now `TrackMe` avalible only for Android 6.0
-
-[<img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png"
-      alt="Download from Google Play"
-      height="80">](https://github.com/lmaron-g)
-[<img src="https://try.h.jonasfranz.software/delta/FastTea/raw/commit/bdced29822f50747407b7ccaf2268f4dfe18c09c/.github/assets/direct-apk-download.png"
-      alt="Direct apk download"
-      height="80">](https://github.com/lmaron-g)
-
 ## Contribution
 
 You love `TrackMe`? You want new features or bug fixes?  
