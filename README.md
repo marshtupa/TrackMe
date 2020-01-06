@@ -3,7 +3,7 @@
 > Track your Trainings
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e63152717861408295a5cab3550d5aef)](https://app.codacy.com/app/Triple/TrackMe?utm_source=github.com&utm_medium=referral&utm_content=lmaron-g/TrackMe&utm_campaign=Badge_Grade_Dashboard)
-[![Build Status](https://travis-ci.com/lmaron-g/TrackMe.svg?branch=dev)](https://travis-ci.com/lmaron-g/TrackMe)
+[![Build Status](https://travis-ci.com/marshtupa/TrackMe.svg?branch=dev)](https://travis-ci.com/marshtupa/TrackMe)
 
 ![Header](https://user-images.githubusercontent.com/45558274/61460129-c9e56580-a976-11e9-97e2-5f258c2e06da.png)
 
@@ -14,18 +14,6 @@ With `TrackMe` you can track how much you run from day to day. `TrackMe` is your
   <img src="https://user-images.githubusercontent.com/45558274/65374788-7c4ae900-dc96-11e9-9f3d-2c1eacef7c3b.png" width="48%" align="left"/>
   <img src="https://user-images.githubusercontent.com/45558274/65374786-7a812580-dc96-11e9-94dd-c06946bda8dd.png" width="48%" />
 </p>
-
-
-## Download
-
-Now `TrackMe` avalible only for Android 6.0
-
-[<img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png"
-      alt="Download from Google Play"
-      height="80">](https://github.com/lmaron-g)
-[<img src="https://try.h.jonasfranz.software/delta/FastTea/raw/commit/bdced29822f50747407b7ccaf2268f4dfe18c09c/.github/assets/direct-apk-download.png"
-      alt="Direct apk download"
-      height="80">](https://github.com/lmaron-g)
 
 ## Contribution
 
