@@ -59,8 +59,7 @@ public class MainActivity extends FragmentActivity
 
         showMapLoadProgress();
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         setViewTrackPanelNotClickable();
 
@@ -86,8 +85,7 @@ public class MainActivity extends FragmentActivity
     }
 
     private void updateWindow() {
-        getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false);
         getWindow().setStatusBarColor(Color.TRANSPARENT);
     }
@@ -131,27 +129,19 @@ public class MainActivity extends FragmentActivity
     public void onMapLoaded() {
         loadMapProgressDialog.dismiss();
 
-        int accessCoarsePermission = ContextCompat.checkSelfPermission(
-                this, Manifest.permission.ACCESS_COARSE_LOCATION);
-        int accessFinePermission = ContextCompat.checkSelfPermission(
-                this, Manifest.permission.ACCESS_FINE_LOCATION);
+        int accessCoarsePermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
+        int accessFinePermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
 
-        if (accessCoarsePermission != PackageManager.PERMISSION_GRANTED
-                || accessFinePermission != PackageManager.PERMISSION_GRANTED) {
-            String[] permissions = new String[]{
-                    Manifest.permission.ACCESS_COARSE_LOCATION,
-                    Manifest.permission.ACCESS_FINE_LOCATION };
-            ActivityCompat.requestPermissions(this, permissions,
-                    REQUEST_ID_ACCESS_COURSE_FINE_LOCATION);
+        if (accessCoarsePermission != PackageManager.PERMISSION_GRANTED || accessFinePermission != PackageManager.PERMISSION_GRANTED) {
+            String[] permissions = new String[] { Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION };
+            ActivityCompat.requestPermissions(this, permissions, REQUEST_ID_ACCESS_COURSE_FINE_LOCATION);
             return;
         }
         showMyLocation();
     }
 
     @Override
-    public void onRequestPermissionsResult(final int requestCode, final String permissions[],
-                                           final int[] grantResults) {
-
+    public void onRequestPermissionsResult(final int requestCode, final String permissions[], final int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         if (requestCode == REQUEST_ID_ACCESS_COURSE_FINE_LOCATION) {
@@ -172,8 +162,7 @@ public class MainActivity extends FragmentActivity
         final double DISTANCE_TO_CENTER = 0.005;
 
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        String locationProvider = GoogleMapUtils.getEnabledLocationProvider(
-                locationManager, this);
+        String locationProvider = GoogleMapUtils.getEnabledLocationProvider(locationManager, this);
         if (locationProvider == null) {
             return;
         }
@@ -187,8 +176,7 @@ public class MainActivity extends FragmentActivity
                     MIN_TIME_BW_UPDATES,
                     MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
             myLocation = locationManager.getLastKnownLocation(locationProvider);
-        }
-        catch (SecurityException e) {
+        } catch (SecurityException e) {
             Toast.makeText(this, "Show My Location Error: " + e.getMessage(),
                     Toast.LENGTH_LONG).show();
             Log.i("MapInfo", "Show My Location Error: " + e.getMessage());
@@ -197,8 +185,7 @@ public class MainActivity extends FragmentActivity
         }
 
         if (myLocation != null) {
-            LatLng latLng = new LatLng(myLocation.getLatitude(),
-                    myLocation.getLongitude() - DISTANCE_TO_CENTER);
+            LatLng latLng = new LatLng(myLocation.getLatitude(), myLocation.getLongitude() - DISTANCE_TO_CENTER);
             map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 13));
             CameraPosition cameraPosition = new CameraPosition.Builder()
                     .target(latLng)
@@ -231,41 +218,35 @@ public class MainActivity extends FragmentActivity
 
 
     public void clickStartTrackButton(final View view) {
-        final Animation animScale = AnimationUtils.loadAnimation(
-                this, R.anim.scale_track_button);
+        final Animation animScale = AnimationUtils.loadAnimation(this, R.anim.scale_track_button);
         view.startAnimation(animScale);
         CurrentTrackView.startTrack();
     }
 
     public void clickPauseTrackButton(final View view) {
-        final Animation animScale = AnimationUtils.loadAnimation(
-                this, R.anim.scale_track_button);
+        final Animation animScale = AnimationUtils.loadAnimation(this, R.anim.scale_track_button);
         view.startAnimation(animScale);
         CurrentTrackView.pauseTrack();
     }
 
     public void clickStopTrackButton(final View view) {
-        final Animation animScale = AnimationUtils.loadAnimation(
-                this, R.anim.scale_track_button);
+        final Animation animScale = AnimationUtils.loadAnimation(this, R.anim.scale_track_button);
         view.startAnimation(animScale);
         CurrentTrackView.stopTrack(this);
     }
 
     public void clickCompletedTracksButton(final View view) {
         final int BUTTON_ANIMATION_DELAY = 200;
-        final Animation animScale = AnimationUtils.loadAnimation(
-                this, R.anim.scale_menu_button);
+        final Animation animScale = AnimationUtils.loadAnimation(this, R.anim.scale_menu_button);
         view.startAnimation(animScale);
         view.setClickable(false);
 
         TimerTask changeButtonsTask = new TimerTask() {
             @Override
             public void run() {
-                Intent completedTracksIntent = new Intent(
-                        MainActivity.this, CompletedTracksActivity.class);
+                Intent completedTracksIntent = new Intent(MainActivity.this, CompletedTracksActivity.class);
                 startActivity(completedTracksIntent);
-                overridePendingTransition(
-                        R.anim.activity_slide_left_in, R.anim.activity_slide_left_out);
+                overridePendingTransition(R.anim.activity_slide_left_in, R.anim.activity_slide_left_out);
                 view.setClickable(true);
             }
         };
@@ -274,8 +255,7 @@ public class MainActivity extends FragmentActivity
     }
 
     public void clickCurrentPositionButton(final View view) {
-        final Animation animScale = AnimationUtils.loadAnimation(
-                this, R.anim.scale_menu_button);
+        final Animation animScale = AnimationUtils.loadAnimation(this, R.anim.scale_menu_button);
         view.startAnimation(animScale);
         showMyLocation();
     }
@@ -298,5 +278,4 @@ public class MainActivity extends FragmentActivity
             }
         });
     }
-
 }
