@@ -87,4 +87,3 @@ lint/tmp/
 # Local files
 src/app/src/main/res/values/google_maps_api.xml
 src/app/src/main/res/values/server.xml
-src/app/google-services.json
