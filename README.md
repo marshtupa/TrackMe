@@ -1,7 +1,3 @@
-# TrackMe
-
-> Track your Trainings
-
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e63152717861408295a5cab3550d5aef)](https://app.codacy.com/app/Triple/TrackMe?utm_source=github.com&utm_medium=referral&utm_content=lmaron-g/TrackMe&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.com/marshtupa/TrackMe.svg?branch=dev)](https://travis-ci.com/marshtupa/TrackMe)
 
@@ -17,9 +13,8 @@ With `TrackMe` you can track how much you run from day to day. `TrackMe` is your
 
 ## Contribution
 
-You love `TrackMe`? You want new features or bug fixes?  
-Please **contribute** to the  project either by [_creating a PR_](https://github.com/lmaron-g/TrackMe/compare) or [_submitting an issue_](https://github.com/lmaron-g/TrackMe/issues/new/choose) on GitHub.  
-Read the [**contribution guide**](https://github.com/lmaron-g/TrackMe/blob/dev/CONTRIBUTING.md) for more detailed information.
+You love `TrackMe`? You want new features or bug fixes?
+Please **contribute** to the  project either by [_creating a PR_](https://github.com/lmaron-g/TrackMe/compare) or [_submitting an issue_](https://github.com/lmaron-g/TrackMe/issues/new/choose) on GitHub.
 
 ## License
 
